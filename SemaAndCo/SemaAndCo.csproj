@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F1E58C10-5447-4EEB-8533-8321882DD7B8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SemaAndCo</RootNamespace>
+    <AssemblyName>SemaAndCo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.16.0\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Captcha.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Captcha.Designer.cs">
+      <DependentUpon>Captcha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AdministrationModel.cs" />
+    <Compile Include="Model\ILoginModel.cs" />
+    <Compile Include="Model\IAdministrationModel.cs" />
+    <Compile Include="Model\LoginModel.cs" />
+    <Compile Include="Model\RegistrationModel.cs" />
+    <Compile Include="Model\IRegistrationModel.cs" />
+    <Compile Include="Model\IRecoveryModel.cs" />
+    <Compile Include="Model\RecoveryModel.cs" />
+    <Compile Include="Model\SacModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SacModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SacModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SacModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SacModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SacModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Users.cs">
+      <DependentUpon>SacModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Presenter\AdministrationPresenter.cs" />
+    <Compile Include="Presenter\LoginPresenter.cs" />
+    <Compile Include="Supporting\CurrentUser.cs" />
+    <Compile Include="Supporting\DotNetZipHelper.cs" />
+    <Compile Include="Supporting\RegistrationData.cs" />
+    <Compile Include="Supporting\SendMail.cs" />
+    <Compile Include="View\AccessRecoveryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AccessRecoveryForm.Designer.cs">
+      <DependentUpon>AccessRecoveryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddOrUpdateUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AddOrUpdateUserForm.Designer.cs">
+      <DependentUpon>AddOrUpdateUserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdministrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AdministrationForm.Designer.cs">
+      <DependentUpon>AdministrationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\IAdministrationView.cs" />
+    <Compile Include="View\ILoginView.cs" />
+    <Compile Include="View\IntroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\IntroForm.Designer.cs">
+      <DependentUpon>IntroForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\IRegistrationView.cs" />
+    <Compile Include="Presenter\RecoveryPresenter.cs" />
+    <Compile Include="Presenter\RegistrationPresenter.cs" />
+    <Compile Include="Supporting\Core.cs" />
+    <Compile Include="View\AuthorizationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AuthorizationForm.Designer.cs">
+      <DependentUpon>AuthorizationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\IRecoveryView.cs" />
+    <Compile Include="View\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\RecoveryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\RecoveryForm.Designer.cs">
+      <DependentUpon>RecoveryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\RegistrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\RegistrationForm.Designer.cs">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SelectFolderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SelectFolderForm.Designer.cs">
+      <DependentUpon>SelectFolderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TemplateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TemplateForm.Designer.cs">
+      <DependentUpon>TemplateForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Captcha.resx">
+      <DependentUpon>Captcha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="View\AccessRecoveryForm.resx">
+      <DependentUpon>AccessRecoveryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AdministrationForm.resx">
+      <DependentUpon>AdministrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AuthorizationForm.resx">
+      <DependentUpon>AuthorizationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\IntroForm.resx">
+      <DependentUpon>IntroForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\RecoveryForm.resx">
+      <DependentUpon>RecoveryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\RegistrationForm.resx">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SelectFolderForm.resx">
+      <DependentUpon>SelectFolderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TemplateForm.resx">
+      <DependentUpon>TemplateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EntityDeploy Include="Model\SacModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SacModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ds_brushes.ttf" />
+    <None Include="Model\SacModel.edmx.diagram">
+      <DependentUpon>SacModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\SacModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SacModel.edmx</DependentUpon>
+      <LastGenOutput>SacModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\SacModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SacModel.edmx</DependentUpon>
+      <LastGenOutput>SacModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="logo.ico" />
+    <None Include="Resources\icons8-administration-40.png" />
+    <None Include="Resources\icons8-logout-40ы.png" />
+    <None Include="Resources\icons8-logout-3ф.png" />
+    <None Include="Resources\icons8-administration-32.png" />
+    <None Include="Resources\icons8-папка-архив-321.png" />
+    <None Include="Resources\icons8-папка-архив-481.png" />
+    <None Include="Resources\icons8-папка-архив-32.png" />
+    <None Include="Resources\icons8-папка-архив-48.png" />
+    <None Include="Resources\icons8-папка-архив-96.png" />
+    <None Include="Resources\video %281%29.gif" />
+    <None Include="Resources\video.gif" />
+    <None Include="Resources\Bezymyanny-1_Vosstanovlen.png" />
+    <None Include="Resources\logo.jpg" />
+    <None Include="Resources\avatar.png" />
+    <None Include="Resources\xC6eJvZAUxc.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
