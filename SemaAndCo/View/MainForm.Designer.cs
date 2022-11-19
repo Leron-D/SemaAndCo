@@ -56,7 +56,7 @@
             this.uploadButton.TabIndex = 1;
             this.uploadButton.Text = "Загрузить ↑";
             this.uploadButton.UseVisualStyleBackColor = false;
-            this.uploadButton.Click += new System.EventHandler(this.uploadButton_Click);
+            this.uploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 
             // listView
             // 
@@ -72,7 +72,7 @@
             this.listView.TabIndex = 3;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.List;
-            this.listView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listView_ItemSelectionChanged);
+            this.listView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.ListView_ItemSelectionChanged);
             // 
             // downloadButton
             // 
@@ -87,7 +87,7 @@
             this.downloadButton.TabIndex = 4;
             this.downloadButton.Text = "Скачать ↓";
             this.downloadButton.UseVisualStyleBackColor = false;
-            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
+            this.downloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
             // 
             // deleteButton
             // 
@@ -103,7 +103,7 @@
             this.deleteButton.TabIndex = 5;
             this.deleteButton.Text = "Удалить";
             this.deleteButton.UseVisualStyleBackColor = false;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // renameButton
             // 
@@ -119,7 +119,7 @@
             this.renameButton.TabIndex = 6;
             this.renameButton.Text = "Переименовать";
             this.renameButton.UseVisualStyleBackColor = false;
-            this.renameButton.Click += new System.EventHandler(this.renameButton_Click);
+            this.renameButton.Click += new System.EventHandler(this.RenameButton_Click);
             // 
             // infoButton
             // 
@@ -135,7 +135,7 @@
             this.infoButton.TabIndex = 9;
             this.infoButton.Text = "Информация";
             this.infoButton.UseVisualStyleBackColor = false;
-            this.infoButton.Click += new System.EventHandler(this.infoButton_Click);
+            this.infoButton.Click += new System.EventHandler(this.InfoButton_Click);
             // 
             // imageList
             // 
@@ -163,7 +163,7 @@
             this.administrationButton.Size = new System.Drawing.Size(41, 45);
             this.administrationButton.TabIndex = 12;
             this.administrationButton.UseVisualStyleBackColor = false;
-            this.administrationButton.Click += new System.EventHandler(this.administrationButton_Click);
+            this.administrationButton.Click += new System.EventHandler(this.AdministrationButton_Click);
             // 
             // exitButton
             // 
@@ -179,7 +179,7 @@
             this.exitButton.Size = new System.Drawing.Size(45, 45);
             this.exitButton.TabIndex = 11;
             this.exitButton.UseVisualStyleBackColor = false;
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            this.exitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // pictureBox
             // 
@@ -201,7 +201,7 @@
             this.renameTextBox.Size = new System.Drawing.Size(100, 31);
             this.renameTextBox.TabIndex = 13;
             this.renameTextBox.Visible = false;
-            this.renameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.renameTextBox_KeyDown);
+            this.renameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RenameTextBox_KeyDown);
             // 
             // MainForm
             // 

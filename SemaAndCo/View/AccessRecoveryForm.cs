@@ -83,14 +83,26 @@ namespace SemaAndCo.View
 
         private void saveNewPasswordTextBox_Click(object sender, EventArgs e)
         {
+            SaveNewPassword();
+        }
+
+        private void SaveNewPassword()
+        {
             try
             {
                 var user = Core.Context.Users.FirstOrDefault(u => u.Login == Properties.Settings.Default.login || u.Email == Properties.Settings.Default.login);
                 user.Password = passwordTextBox.Text;
                 Core.Context.SaveChanges();
-                if (!File.Exists($@"C:\TestZip\{user.Login}.zip"))
+                if (File.Exists($@"{Properties.Settings.Default.savingPath}\{user.Login}.zip"))
                 {
-                    DotNetZipHelper.RefreshPassword($@"C:\TestZip\{user.Login}.zip", passwordTextBox.Text);
+                    DotNetZipHelper.RefreshPassword($@"{Properties.Settings.Default.savingPath}\{user.Login}.zip", passwordTextBox.Text);
+                    user.Password = passwordTextBox.Text;
+                    Core.Context.SaveChanges();
+                }
+                else
+                {
+                    user.Password = passwordTextBox.Text;
+                    Core.Context.SaveChanges();
                 }
                 MessageBox.Show("Пароль успешно изменен", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
