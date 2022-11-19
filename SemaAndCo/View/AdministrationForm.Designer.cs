@@ -62,7 +62,6 @@
             // usersGridView
             // 
             this.usersGridView.AllowUserToAddRows = false;
-            this.usersGridView.AllowUserToDeleteRows = false;
             this.usersGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -78,7 +77,6 @@
             this.phoneColumn});
             this.usersGridView.Location = new System.Drawing.Point(12, 55);
             this.usersGridView.Name = "usersGridView";
-            this.usersGridView.ReadOnly = true;
             this.usersGridView.RowHeadersVisible = false;
             this.usersGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.usersGridView.Size = new System.Drawing.Size(1033, 347);
@@ -89,35 +87,30 @@
             this.loginColumn.DataPropertyName = "Login";
             this.loginColumn.HeaderText = "Логин";
             this.loginColumn.Name = "loginColumn";
-            this.loginColumn.ReadOnly = true;
             // 
             // emailColumn
             // 
             this.emailColumn.DataPropertyName = "Email";
             this.emailColumn.HeaderText = "E-mail";
             this.emailColumn.Name = "emailColumn";
-            this.emailColumn.ReadOnly = true;
             // 
             // nameColumn
             // 
             this.nameColumn.DataPropertyName = "Name";
             this.nameColumn.HeaderText = "Имя";
             this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
             // 
             // passwordColumn
             // 
             this.passwordColumn.DataPropertyName = "Password";
             this.passwordColumn.HeaderText = "Пароль";
             this.passwordColumn.Name = "passwordColumn";
-            this.passwordColumn.ReadOnly = true;
             // 
             // phoneColumn
             // 
             this.phoneColumn.DataPropertyName = "Phone";
             this.phoneColumn.HeaderText = "Телефон";
             this.phoneColumn.Name = "phoneColumn";
-            this.phoneColumn.ReadOnly = true;
             // 
             // chooseButton
             // 

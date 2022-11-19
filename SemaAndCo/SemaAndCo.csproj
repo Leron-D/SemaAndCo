@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="Presenter\AdministrationPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
+    <Compile Include="Supporting\CryptoClass.cs" />
     <Compile Include="Supporting\CurrentUser.cs" />
     <Compile Include="Supporting\DotNetZipHelper.cs" />
     <Compile Include="Supporting\RegistrationData.cs" />

@@ -87,6 +87,7 @@
             this.downloadButton.TabIndex = 4;
             this.downloadButton.Text = "Скачать ↓";
             this.downloadButton.UseVisualStyleBackColor = false;
+            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
             // 
             // deleteButton
             // 

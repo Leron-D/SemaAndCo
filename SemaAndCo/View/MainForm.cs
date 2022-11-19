@@ -218,15 +218,16 @@ namespace SemaAndCo.View
         {
             if (listView.SelectedItems.Count == 1)
             {
-                renameButton.Enabled = deleteButton.Enabled = infoButton.Enabled = true;
+                renameButton.Enabled = downloadButton.Enabled = deleteButton.Enabled = infoButton.Enabled = true;
             }
             else if (listView.SelectedItems.Count == 0)
             {
-                renameButton.Enabled = deleteButton.Enabled = infoButton.Enabled = false;
+                renameButton.Enabled = downloadButton.Enabled = deleteButton.Enabled = infoButton.Enabled = false;
             }
             else
             {
                 renameButton.Enabled = infoButton.Enabled = false;
+                downloadButton.Enabled = true;
             }
         }
 
@@ -260,13 +261,42 @@ namespace SemaAndCo.View
                         }
                         LoadData();
                         listView.Enabled = true;
-                        renameButton.Enabled = renameTextBox.Visible = deleteButton.Enabled = infoButton.Enabled = false;
+                        renameButton.Enabled = renameTextBox.Visible = deleteButton.Enabled = infoButton.Enabled = downloadButton.Enabled = false;
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void downloadButton_Click(object sender, EventArgs e)
+        {
+            DownloadMethod();
+        }
+
+        private void DownloadMethod()
+        {
+            try
+            {
+                if (listView.SelectedItems.Count != 0)
+                {
+                    FolderBrowserDialog dialog = new FolderBrowserDialog();
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        for (int i = 0; i < listView.SelectedItems.Count; i++)
+                        {
+                            DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, "SemaAndCo.zip"),
+                                                      $"{CurrentUser.User.Login}.zip", listView.SelectedItems[i].Text, dialog.SelectedPath);
+                        }
+                        MessageBox.Show("Файл успешно сохранён", "Удачно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

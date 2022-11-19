@@ -43,15 +43,51 @@ namespace SemaAndCo.Supporting
             }
         }
 
-        public static void ExtractZip(string archiveName, string outFolder)
+        public static void ExtractZip(string archiveName, string subArchive, string fileName, string outFolder)
         {
             using (var zip = ZipFile.Read(archiveName))
             {
                 foreach (var e in zip)
                 {
-                    e.Extract(outFolder, ExtractExistingFileAction.OverwriteSilently);
+                    if(e.FileName == fileName)
+                        e.Extract(outFolder, ExtractExistingFileAction.OverwriteSilently);
+                }
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    zip.Save(memoryStream);
+                    memoryStream.Position = 0;
+                    using (var outerZip = ReadZip(archiveName))
+                    {
+                        outerZip.UpdateEntry(subArchive, memoryStream);
+                        outerZip.Save();
+                    }
                 }
             }
+        }
+
+        public static void ExtractFiles(string archiveName, string subArchive, string fileName, string outFolder)
+        {
+            using (var zip = ZipFile.Read(archiveName))
+            {
+                foreach (var e in zip)
+                {
+                    if (e.FileName == fileName)
+                    {
+                        zip.AddFile($@"{outFolder}\{fileName}");
+                    }
+                }
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    zip.Save(memoryStream);
+                    memoryStream.Position = 0;
+                    using (var outerZip = ReadZip(archiveName))
+                    {
+                        outerZip.UpdateEntry(subArchive, memoryStream);
+                        outerZip.Save();
+                    }
+                }
+            }
+
         }
 
         public static void DeleteFilesFromZip(string archiveName, string subArchive, List<string> filesToDelete, string password)
