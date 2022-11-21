@@ -203,9 +203,18 @@ namespace SemaAndCo.View
             presenter.Navigation(pageSize, 1);
         }
 
-        private void chooseButton_Click(object sender, EventArgs e)
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
+            addButton.Enabled = true;
+        }
 
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            Core.addingUserVariability = true;
+            RegistrationForm form = new RegistrationForm();
+            form.FormClosed += Form_FormClosed;
+            form.Show();
+            addButton.Enabled = false;
         }
     }
 }

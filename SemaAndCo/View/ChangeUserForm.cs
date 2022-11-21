@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SemaAndCo.View
 {
-    public partial class AddOrUpdateUserForm : Form
+    public partial class ChangeUserForm : TemplateForm
     {
-        public AddOrUpdateUserForm()
+        public ChangeUserForm()
         {
             InitializeComponent();
         }

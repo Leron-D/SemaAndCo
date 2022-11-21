@@ -21,20 +21,18 @@ namespace SemaAndCo.Supporting
             using (var zipFile = new ZipFile())
             {
                 zipFile.CompressionLevel = compressionLevel;
-                zipFile.Save(archiveName);
+                zipFile.Save(Path.Combine(Properties.Settings.Default.savingPath, archiveName));
                 return archiveName;
             }
         }
 
-        public static void ExtractZip(string archiveName, string fileName, string outFolder)
+        public static void ExtractFiles(string archiveName, List<string> fileNames, string outFolder)
         {
             using (var zip = ZipFile.Read(archiveName))
             {
-                foreach (var e in zip)
+                foreach (var e in fileNames)
                 {
-                    if (e.FileName == fileName)
-                        e.Extract(outFolder, ExtractExistingFileAction.OverwriteSilently);
-                    zip.Save();
+                    zip.ExtractSelectedEntries($"name = {e}", null, outFolder, ExtractExistingFileAction.OverwriteSilently);
                 }
             }
         }
@@ -43,11 +41,8 @@ namespace SemaAndCo.Supporting
         {
             using (var zipFile = ZipFile.Read(archiveName))
             {
-                foreach (var e in filesToDelete)
-                {
-                    zipFile.RemoveEntry(e);
-                    zipFile.Save();
-                }
+                zipFile.RemoveEntries(filesToDelete);
+                zipFile.Save();
             }
         }
 
@@ -59,7 +54,7 @@ namespace SemaAndCo.Supporting
             }
         }
 
-        public static void GetInfoFiles(string archiveName, string subFileName, string fileName, string password)
+        public static void GetInfoFiles(string archiveName, string fileName, string password)
         {
             using (var zipFile = ZipFile.Read(archiveName))
             {
@@ -82,12 +77,10 @@ namespace SemaAndCo.Supporting
         {
             using (ZipFile zip = ZipFile.Read(archiveName))
             {
+                zip.AlternateEncodingUsage = ZipOption.Always;
+                zip.AlternateEncoding = Encoding.UTF8;
                 zip.CompressionLevel = Ionic.Zlib.CompressionLevel.Default;
-                foreach (var item in filesName)
-                {
-                    zip.AddFile(item, "");
-                    
-                }
+                zip.AddFiles(filesName, "");
                 zip.Save();
             }
         }
@@ -142,29 +135,5 @@ namespace SemaAndCo.Supporting
         //    fsCrypt.Close();
 
         //}
-
-        private static int saltLengthLimit = 32;
-        private static byte[] GetSalt(int maximumSaltLength)
-        {
-            var salt = new byte[maximumSaltLength];
-            using (var random = new RNGCryptoServiceProvider())
-            {
-                random.GetNonZeroBytes(salt);
-            }
-            return salt;
-        }
-
-        public static void RenameZipEntries(string archiveName, string fileName, string newName)
-        {
-            using (ZipFile zip = ZipFile.Read(archiveName))
-            {
-                foreach (ZipEntry e in zip.ToList())
-                {
-                    if (e.FileName == fileName)
-                        e.FileName = newName;
-                }
-                zip.Save();
-            }
-        }
     }
 }

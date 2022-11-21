@@ -36,7 +36,7 @@
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.titleLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.userNameTextBox = new System.Windows.Forms.TextBox();
             this.emailTextBox = new System.Windows.Forms.TextBox();
@@ -118,16 +118,16 @@
             this.label2.TabIndex = 28;
             this.label2.Text = "Логин*";
             // 
-            // label1
+            // titleLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(277, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(337, 45);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "Добро пожаловать!";
+            this.titleLabel.AutoSize = true;
+            this.titleLabel.Font = new System.Drawing.Font("Calibri", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.titleLabel.Location = new System.Drawing.Point(277, 9);
+            this.titleLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(337, 45);
+            this.titleLabel.TabIndex = 27;
+            this.titleLabel.Text = "Добро пожаловать!";
             // 
             // label5
             // 
@@ -221,6 +221,7 @@
             this.captchaTextBox.Size = new System.Drawing.Size(355, 35);
             this.captchaTextBox.TabIndex = 78;
             this.captchaTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
+            this.captchaTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.captchaTextBox_KeyPress);
             // 
             // label8
             // 
@@ -278,7 +279,7 @@
             this.Controls.Add(this.loginTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.titleLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "RegistrationForm";
@@ -298,7 +299,7 @@
         private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox userNameTextBox;
         private System.Windows.Forms.TextBox emailTextBox;

@@ -110,11 +110,11 @@
     <Compile Include="View\AccessRecoveryForm.Designer.cs">
       <DependentUpon>AccessRecoveryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\AddOrUpdateUserForm.cs">
+    <Compile Include="View\ChangeUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\AddOrUpdateUserForm.Designer.cs">
-      <DependentUpon>AddOrUpdateUserForm.cs</DependentUpon>
+    <Compile Include="View\ChangeUserForm.Designer.cs">
+      <DependentUpon>ChangeUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\AdministrationForm.cs">
       <SubType>Form</SubType>
@@ -188,6 +188,9 @@
     </Compile>
     <EmbeddedResource Include="View\AccessRecoveryForm.resx">
       <DependentUpon>AccessRecoveryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ChangeUserForm.resx">
+      <DependentUpon>ChangeUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\AdministrationForm.resx">
       <DependentUpon>AdministrationForm.cs</DependentUpon>

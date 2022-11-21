@@ -35,7 +35,7 @@
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.passwordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chooseButton = new System.Windows.Forms.Button();
+            this.changeButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.currentPageNumeric = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
@@ -47,6 +47,8 @@
             this.firstPageButton = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.resultsAmountLabel = new System.Windows.Forms.Label();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.usersGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentPageNumeric)).BeginInit();
             this.SuspendLayout();
@@ -112,20 +114,19 @@
             this.phoneColumn.HeaderText = "Телефон";
             this.phoneColumn.Name = "phoneColumn";
             // 
-            // chooseButton
+            // changeButton
             // 
-            this.chooseButton.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.chooseButton.FlatAppearance.BorderSize = 0;
-            this.chooseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chooseButton.Font = new System.Drawing.Font("Calibri", 14.25F);
-            this.chooseButton.Location = new System.Drawing.Point(493, 12);
-            this.chooseButton.Margin = new System.Windows.Forms.Padding(5);
-            this.chooseButton.Name = "chooseButton";
-            this.chooseButton.Size = new System.Drawing.Size(106, 31);
-            this.chooseButton.TabIndex = 2;
-            this.chooseButton.Text = "Выбрать";
-            this.chooseButton.UseVisualStyleBackColor = false;
-            this.chooseButton.Click += new System.EventHandler(this.chooseButton_Click);
+            this.changeButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.changeButton.FlatAppearance.BorderSize = 0;
+            this.changeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.changeButton.Font = new System.Drawing.Font("Calibri", 14.25F);
+            this.changeButton.Location = new System.Drawing.Point(609, 11);
+            this.changeButton.Margin = new System.Windows.Forms.Padding(5);
+            this.changeButton.Name = "changeButton";
+            this.changeButton.Size = new System.Drawing.Size(106, 31);
+            this.changeButton.TabIndex = 2;
+            this.changeButton.Text = "Изменить";
+            this.changeButton.UseVisualStyleBackColor = false;
             // 
             // searchButton
             // 
@@ -259,11 +260,42 @@
             this.resultsAmountLabel.TabIndex = 38;
             this.resultsAmountLabel.Text = "0";
             // 
+            // deleteButton
+            // 
+            this.deleteButton.BackColor = System.Drawing.Color.Tomato;
+            this.deleteButton.FlatAppearance.BorderSize = 0;
+            this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteButton.Font = new System.Drawing.Font("Calibri", 14.25F);
+            this.deleteButton.Location = new System.Drawing.Point(725, 11);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(5);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(106, 31);
+            this.deleteButton.TabIndex = 40;
+            this.deleteButton.Text = "Удалить";
+            this.deleteButton.UseVisualStyleBackColor = false;
+            // 
+            // addButton
+            // 
+            this.addButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.addButton.FlatAppearance.BorderSize = 0;
+            this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addButton.Font = new System.Drawing.Font("Calibri", 14.25F);
+            this.addButton.Location = new System.Drawing.Point(493, 11);
+            this.addButton.Margin = new System.Windows.Forms.Padding(5);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(106, 31);
+            this.addButton.TabIndex = 41;
+            this.addButton.Text = "Добавить";
+            this.addButton.UseVisualStyleBackColor = false;
+            this.addButton.Click += new System.EventHandler(this.AddButton_Click);
+            // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 444);
+            this.Controls.Add(this.addButton);
+            this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.resultsAmountLabel);
             this.Controls.Add(this.currentPageNumeric);
@@ -274,7 +306,7 @@
             this.Controls.Add(this.rightPageButton);
             this.Controls.Add(this.leftPageButton);
             this.Controls.Add(this.firstPageButton);
-            this.Controls.Add(this.chooseButton);
+            this.Controls.Add(this.changeButton);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.usersGridView);
@@ -293,7 +325,7 @@
         #endregion
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.DataGridView usersGridView;
-        private System.Windows.Forms.Button chooseButton;
+        private System.Windows.Forms.Button changeButton;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.NumericUpDown currentPageNumeric;
         private System.Windows.Forms.Label label14;
@@ -310,5 +342,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn passwordColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneColumn;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button addButton;
     }
 }

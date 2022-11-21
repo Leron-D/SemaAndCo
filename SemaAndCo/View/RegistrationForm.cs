@@ -22,6 +22,18 @@ namespace SemaAndCo.View
             IntroForm form = new IntroForm();
             form.ShowDialog();
             InitializeComponent();
+            if (Core.CheckAddingUserVariability())
+            {
+                Text = "Добавление нового пользователя";
+                titleLabel.Text = "Добавление пользователя";
+                registrationButton.Text = "Создать";
+            }
+            else
+            {
+                Text = "Регистрация";
+                titleLabel.Text = "Добро пожаловать!";
+                registrationButton.Text = "Зарегистрироваться";
+            }
             presenter = new RegistrationPresenter(this);
             captcha.Renew();
         }
@@ -128,10 +140,13 @@ namespace SemaAndCo.View
 
         private void RegistrationForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Hide();
-            AuthorizationForm authorizationForm = new AuthorizationForm();
-            authorizationForm.ShowDialog();
-            Close();
+            if (!Core.CheckAddingUserVariability())
+            {
+                Hide();
+                AuthorizationForm authorizationForm = new AuthorizationForm();
+                authorizationForm.ShowDialog();
+                Close();
+            }
         }
 
         private void renewButton_Click(object sender, EventArgs e)
@@ -145,6 +160,11 @@ namespace SemaAndCo.View
             {
                 RegistrateMethod();
             }
+        }
+
+        private void captchaTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
         }
     }
 }

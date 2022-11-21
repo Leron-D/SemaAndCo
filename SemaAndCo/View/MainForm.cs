@@ -20,6 +20,7 @@ namespace SemaAndCo.View
             IntroForm form = new IntroForm();
             form.ShowDialog();
             InitializeComponent();
+            CreateZip();
             LoadData();
         }
 
@@ -54,6 +55,14 @@ namespace SemaAndCo.View
             }
         }
 
+        void CreateZip()
+        {
+            if(!File.Exists(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.Login}.zip")))
+            {
+                DotNetZipHelper.CreateArchive($"{CurrentUser.User.Login}.zip");
+            }
+        }
+
         void LoadData()
         {
             listView.Items.Clear();
@@ -62,6 +71,7 @@ namespace SemaAndCo.View
                 foreach (ZipEntry e in zip.Entries)
                 {
                     ListViewItem item = new ListViewItem(Path.GetFileName(e.FileName));
+                    listView.SmallImageList = imageList;
                     item.Tag = e;
                     int index = GetIndex(e.FileName);
                     item.ImageIndex = index;
@@ -70,42 +80,40 @@ namespace SemaAndCo.View
             }
         }
 
-        private async void UploadButton_Click(object sender, EventArgs e)
+        private void UploadButton_Click(object sender, EventArgs e)
         {
+
             pictureBox.Visible = true;
-            await UploadDataAsync();
+            UploadDataAsync();
             pictureBox.Visible = false;
         }
 
-        public async Task UploadDataAsync()
+        public void UploadDataAsync()
         {
             List<string> filesToAppend = new List<string>();
             try
             {
-                using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.Login}.zip")))
+                OpenFileDialog openFileDialog = new OpenFileDialog()
                 {
-                    OpenFileDialog openFileDialog = new OpenFileDialog()
+                    Multiselect = true,
+                    Title = "Выберите файлы"
+                };
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    foreach (string file in openFileDialog.FileNames)
                     {
-                        Multiselect = true,
-                        Title = "Выберите файлы"
-                    };
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        foreach (string file in openFileDialog.FileNames)
+                        try
                         {
-                            try
-                            {
-                                filesToAppend.Add(file);
-                            }
-                            catch (ArgumentException ex)
-                            {
-                                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
+                            filesToAppend.Add(file);
                         }
-                        await Task.Run(() => DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.Login}.zip"), filesToAppend));
+                        catch (ArgumentException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    LoadData();
+                    DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.Login}.zip"), filesToAppend);
                 }
+                LoadData();
             }
             catch (Exception ex)
             {
@@ -115,6 +123,11 @@ namespace SemaAndCo.View
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
+            DeleteMethod();
+        }
+
+        private void DeleteMethod()
+        {
             List<string> filesToDelete = new List<string>();
             try
             {
@@ -122,7 +135,8 @@ namespace SemaAndCo.View
                 {
                     filesToDelete.Add(item.Text);
                 }
-                DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, "SemaAndCo.zip"), filesToDelete);
+                DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.Login}.zip"), filesToDelete);
+                MessageBox.Show("Файлы успешно удалены", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadData();
             }
             catch (Exception ex)
@@ -133,11 +147,16 @@ namespace SemaAndCo.View
 
         private void InfoButton_Click(object sender, EventArgs e)
         {
+            GetFileInfo();
+        }
+
+        private void GetFileInfo()
+        {
             try
             {
                 if (listView.SelectedItems.Count == 1)
                 {
-                    DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, "SemaAndCo.zip"), $"{CurrentUser.User.Login}.zip", listView.SelectedItems[0].Text, CurrentUser.User.Password);
+                    DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.Login}.zip"), listView.SelectedItems[0].Text, CurrentUser.User.Password);
                 }
             }
             catch (Exception ex)
@@ -169,18 +188,31 @@ namespace SemaAndCo.View
 
         private void RenameButton_Click(object sender, EventArgs e)
         {
-            saveText = listView.SelectedItems[0].Text;
-            extension = saveText.Split('.').Last();
-            listView.SelectedItems[0].Text = "";
-            var position = listView.SelectedItems[0].Position;
-            int x = position.X + 63;
-            int y = position.Y + 90;
-            renameTextBox.Visible = true;
-            renameTextBox.Width = saveText.Length * 9 + 30;
-            renameTextBox.Text = saveText.Remove(saveText.Length - extension.Length - 1);
-            renameTextBox.Location = new Point(x, y);
-            renameTextBox.Focus();
-            renameButton.Enabled = deleteButton.Enabled = infoButton.Enabled = listView.Enabled = false;
+            RenameMethod();
+        }
+
+        private void RenameMethod()
+        {
+            try
+            {
+                saveText = listView.SelectedItems[0].Text;
+                extension = saveText.Split('.').Last();
+                listView.SelectedItems[0].Text = "";
+                var position = listView.SelectedItems[0].Position;
+                int x = position.X + 63;
+                int y = position.Y + 90;
+                renameTextBox.Visible = true;
+                renameTextBox.Width = saveText.Length * 9 + 30;
+                renameTextBox.Text = saveText.Remove(saveText.Length - extension.Length - 1);
+                renameTextBox.Location = new Point(x, y);
+                renameTextBox.Focus();
+                renameButton.Enabled = deleteButton.Enabled = infoButton.Enabled = listView.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void ListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -210,7 +242,7 @@ namespace SemaAndCo.View
         {
             try
             {
-                using (ZipFile zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.Login}.zip")))
+                using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.Login}.zip")))
                 {
                     var zipEntry = zip.Entries.FirstOrDefault(z => z.FileName == $"{renameTextBox.Text}.{extension}");
                     if (e.KeyCode == Keys.Enter)
@@ -223,7 +255,12 @@ namespace SemaAndCo.View
                             }
                             else
                             {
-                                DotNetZipHelper.RenameZipEntries(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.Login}.zip"), saveText, $"{renameTextBox.Text}.{extension}");
+                                foreach (ZipEntry entry in zip.ToList())
+                                {
+                                    if (entry.FileName == saveText)
+                                        entry.FileName = $"{renameTextBox.Text}.{extension}";
+                                    zip.Save();
+                                }
                             }
                         }
                         LoadData();
@@ -240,23 +277,25 @@ namespace SemaAndCo.View
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
-            //DownloadMethod();
+            DownloadMethod();
         }
 
         private void DownloadMethod()
         {
             try
             {
+                List<string> fileNames = new List<string>();
                 if (listView.SelectedItems.Count != 0)
                 {
+                    for(int i = 0; i < listView.SelectedItems.Count; i++)
+                    {
+                        fileNames.Add(listView.SelectedItems[i].Text);
+                    }
                     FolderBrowserDialog dialog = new FolderBrowserDialog();
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {
-                        for (int i = 0; i < listView.SelectedItems.Count; i++)
-                        {
-                            DotNetZipHelper.ExtractZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.Login}.zip"), listView.SelectedItems[i].Text, dialog.SelectedPath);
-                        }
-                        MessageBox.Show("Файл успешно сохранён", "Удачно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.Login}.zip"), fileNames, dialog.SelectedPath);
+                        MessageBox.Show("Файлы успешно загружены", "Удачно", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }

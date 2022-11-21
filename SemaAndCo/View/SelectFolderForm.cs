@@ -63,14 +63,6 @@ namespace SemaAndCo.View
                 {
                     Properties.Settings.Default.savingPath = folderTextBox.Text;
                     Properties.Settings.Default.Save();
-                    if (!File.Exists($@"{path}\SemaAndCo.zip"))
-                    {
-                        DotNetZipHelper.CreateArchive(Path.Combine(folderTextBox.Text, "SemaAndCo.zip"));
-                    }
-                    else
-                    {
-                        File.Move(Path.Combine(path, "SemaAndCo.zip"), Path.Combine(folderTextBox.Text, "SemaAndCo.zip"));
-                    }
                     MessageBox.Show("Путь успешно сохранен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Hide();
                     AuthorizationForm form = new AuthorizationForm();

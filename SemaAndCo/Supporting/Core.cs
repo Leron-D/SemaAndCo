@@ -14,6 +14,7 @@ namespace SemaAndCo.Supporting
         private static SacEntities context;
 
         public static bool mailVariability;
+        public static bool addingUserVariability;
         public static bool admClosed;
 
         public static SacEntities Context
@@ -46,9 +47,13 @@ namespace SemaAndCo.Supporting
             return admClosed;
         }
 
-        public static bool CheckVariability()
+        public static bool CheckMailVariability()
         {
             return mailVariability;
+        }
+        public static bool CheckAddingUserVariability()
+        {
+            return addingUserVariability;
         }
     }
 }

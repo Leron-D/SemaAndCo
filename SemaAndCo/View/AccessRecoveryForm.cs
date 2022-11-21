@@ -23,7 +23,7 @@ namespace SemaAndCo.View
             IntroForm form = new IntroForm();
             form.ShowDialog();
             InitializeComponent();
-            if (Core.CheckVariability())
+            if (Core.CheckMailVariability())
             {
                 Text = "Проверка почты";
                 descriptionLabel.Text = "Код подтверждения";
@@ -40,7 +40,7 @@ namespace SemaAndCo.View
             {
                 if (Convert.ToInt32(recoveryCodeTextBox.Text) == Properties.Settings.Default.code)
                 {
-                    if (!Core.CheckVariability())
+                    if (!Core.CheckMailVariability())
                     {
                         tabControl.SelectedTab = enterCodePage;
                     }

@@ -60,6 +60,7 @@ namespace SemaAndCo.Presenter
                                 {
                                     view.Hide();
                                     Core.mailVariability = false;
+                                    Core.addingUserVariability = false;
                                     AccessRecoveryForm form = new AccessRecoveryForm();
                                     form.ShowDialog();
                                     view.Close();
