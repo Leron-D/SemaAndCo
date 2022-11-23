@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.uploadButton = new System.Windows.Forms.Button();
-            this.listView = new System.Windows.Forms.ListView();
+            this.localListView = new System.Windows.Forms.ListView();
             this.downloadButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.renameButton = new System.Windows.Forms.Button();
@@ -58,21 +58,21 @@
             this.uploadButton.UseVisualStyleBackColor = false;
             this.uploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 
-            // listView
+            // localListView
             // 
-            this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.localListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView.BackColor = System.Drawing.SystemColors.Window;
-            this.listView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listView.HideSelection = false;
-            this.listView.Location = new System.Drawing.Point(-2, 73);
-            this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(1087, 534);
-            this.listView.TabIndex = 3;
-            this.listView.UseCompatibleStateImageBehavior = false;
-            this.listView.View = System.Windows.Forms.View.List;
-            this.listView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.ListView_ItemSelectionChanged);
+            this.localListView.BackColor = System.Drawing.SystemColors.Window;
+            this.localListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.localListView.HideSelection = false;
+            this.localListView.Location = new System.Drawing.Point(-2, 73);
+            this.localListView.Name = "localListView";
+            this.localListView.Size = new System.Drawing.Size(1087, 534);
+            this.localListView.TabIndex = 3;
+            this.localListView.UseCompatibleStateImageBehavior = false;
+            this.localListView.View = System.Windows.Forms.View.List;
+            this.localListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.ListView_ItemSelectionChanged);
             // 
             // downloadButton
             // 
@@ -216,7 +216,7 @@
             this.Controls.Add(this.renameButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.downloadButton);
-            this.Controls.Add(this.listView);
+            this.Controls.Add(this.localListView);
             this.Controls.Add(this.uploadButton);
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.MinimumSize = new System.Drawing.Size(770, 260);
@@ -230,7 +230,7 @@
 
         #endregion
         private System.Windows.Forms.Button uploadButton;
-        private System.Windows.Forms.ListView listView;
+        private System.Windows.Forms.ListView localListView;
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button renameButton;

@@ -4,16 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SemaAndCo.Model
 {
     class LoginModel : ILoginModel
     {
+        Core context = new Core(Core.StrConnection());
         public bool CheckConnection()
         {
             try
             {
-                if (Core.Context.Users.AsNoTracking().ToList() != null)
+                if (context.semaandcouser.AsNoTracking().ToList() != null)
                     return true;
                 return false;
             }
@@ -23,17 +25,15 @@ namespace SemaAndCo.Model
             }
         }
 
-        public Users LoginMethod(string login, string password)
+        public FtpUser.semaandcouser LoginMethod(string login, string password)
         {
             try
             {
-                Core.Context.Users.AsNoTracking().ToList();
-                CurrentUser.User = Core.Context.Users.FirstOrDefault(c => c.Login == login && c.Password == password);
+                
+                context.semaandcouser.AsNoTracking().ToList();
+                CurrentUser.User = context.semaandcouser.FirstOrDefault(c => c.userid == login && c.passwd == password);
                 if (CurrentUser.User != null)
-                {
-                    CurrentUser.User = Core.Context.Users.FirstOrDefault(c => c.Login == login && c.Password == password);
                     return CurrentUser.User;
-                }
                 else
                     return CurrentUser.User;
             }

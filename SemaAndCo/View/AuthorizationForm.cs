@@ -22,7 +22,7 @@ namespace SemaAndCo
 
         public AuthorizationForm()
         {
-            IntroForm introForm = new IntroForm();
+            IntroForm introForm = new IntroForm(533);
             introForm.ShowDialog();
             InitializeComponent();
             presenter = new LoginPresenter(this);

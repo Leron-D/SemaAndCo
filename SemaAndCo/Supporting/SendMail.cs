@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Entity.Infrastructure.Interception;
 using System.Net.Sockets;
+using System.Runtime.Remoting.Contexts;
 
 namespace SemaAndCo.Supporting
 {
     public class SendMail
     {
+        Core context = new Core(Core.StrConnection());
         int code;
         bool success;
-        public void EnterMail(string loginOrEmail)
+        public void EnterMail(string loginOrEmail, bool modif)
         {
             try
             {
@@ -38,7 +40,10 @@ namespace SemaAndCo.Supporting
                 // логин и пароль
                 smtp.Credentials = new NetworkCredential("sememshot2@yandex.ru", "Mamo4ka228");
                 smtp.Send(m);
-                MessageBox.Show("Письмо с восстановлением пароля отправлено на ваш email. Проверьте почту.");
+                if(modif)
+                    MessageBox.Show("Письмо с восстановлением пароля отправлено на ваш email. Проверьте почту.");
+                else
+                    MessageBox.Show("Письмо с подтверждением пароля отправлено на ваш email. Проверьте почту.");
                 Properties.Settings.Default.code = code;
                 Properties.Settings.Default.Save();
                 success = true;
@@ -50,23 +55,23 @@ namespace SemaAndCo.Supporting
             }
 
         }
-        public bool SendOnMail(string loginOrEmail)
+        public bool SendOnMail(string loginOrEmail, bool modif)
         {
             try
             {
-                var log = Core.Context.Users.FirstOrDefault(u => u.Login == loginOrEmail);
-                var email = Core.Context.Users.FirstOrDefault(e => e.Email == loginOrEmail);
+                var log = context.semaandcouser.FirstOrDefault(u => u.userid == loginOrEmail);
+                var email = context.semaandcouser.FirstOrDefault(e => e.email == loginOrEmail);
                 Random rand = new Random();
                 code = rand.Next(10000, 99999);
                 if (log != null)
                 {
-                    loginOrEmail = log.Email;
-                    EnterMail(loginOrEmail);
+                    loginOrEmail = log.email;
+                    EnterMail(loginOrEmail, modif);
                     return success;
                 }
                 else if (email != null)
                 {
-                    EnterMail(loginOrEmail);
+                    EnterMail(loginOrEmail, modif);
                     return success;
                 }
                 else
@@ -79,13 +84,13 @@ namespace SemaAndCo.Supporting
             }
         }
 
-        public bool SendRegCode(string email)
+        public bool SendRegCode(string email, bool modif)
         {
             try
             {
                 Random rand = new Random();
                 code = rand.Next(10000, 99999);
-                EnterMail(email);
+                EnterMail(email, modif);
                 return success;
             }
             catch (Exception ex)

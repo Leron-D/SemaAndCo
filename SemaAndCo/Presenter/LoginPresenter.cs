@@ -26,8 +26,7 @@ namespace SemaAndCo.Presenter
         {
             try
             {
-                var user = model.LoginMethod(view.Login, view.Password);
-
+                var user = model.LoginMethod(view.Login, view.Password.EncryptString());
                 if (user != null)
                 {
                     SaveAuthOptions();
@@ -42,7 +41,7 @@ namespace SemaAndCo.Presenter
             }
             catch (Exception)
             {
-                if (view.Login == CurrentUser.User.Login && view.Password == CurrentUser.User.Password)
+                if (view.Login == CurrentUser.User.userid && CryptoClass.EncryptString(view.Password) == CryptoClass.EncryptString(CurrentUser.User.passwd))
                 {
                     MessageBox.Show("Проблемы с подключением к БД. \nПопробуйте сменить параметры подключения", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     //ConnectionForm connection = new ConnectionForm();

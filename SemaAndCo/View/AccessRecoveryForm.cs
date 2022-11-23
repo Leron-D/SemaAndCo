@@ -18,12 +18,13 @@ namespace SemaAndCo.View
 {
     public partial class AccessRecoveryForm : TemplateForm
     {
+        Core context = new Core(Core.StrConnection());
         public AccessRecoveryForm()
         {
-            IntroForm form = new IntroForm();
+            IntroForm form = new IntroForm(533);
             form.ShowDialog();
             InitializeComponent();
-            if (Core.CheckMailVariability())
+            if (!Core.CheckMailVariability())
             {
                 Text = "Проверка почты";
                 descriptionLabel.Text = "Код подтверждения";
@@ -40,7 +41,7 @@ namespace SemaAndCo.View
             {
                 if (Convert.ToInt32(recoveryCodeTextBox.Text) == Properties.Settings.Default.code)
                 {
-                    if (!Core.CheckMailVariability())
+                    if (Core.CheckMailVariability())
                     {
                         tabControl.SelectedTab = enterCodePage;
                     }
@@ -90,19 +91,19 @@ namespace SemaAndCo.View
         {
             try
             {
-                var user = Core.Context.Users.FirstOrDefault(u => u.Login == Properties.Settings.Default.login || u.Email == Properties.Settings.Default.login);
-                user.Password = passwordTextBox.Text;
-                Core.Context.SaveChanges();
-                if (File.Exists($@"{Properties.Settings.Default.savingPath}\{user.Login}.zip"))
+                var user = context.semaandcouser.FirstOrDefault(u => u.userid == Properties.Settings.Default.login || u.email == Properties.Settings.Default.login);
+                user.passwd = passwordTextBox.Text;
+                context.SaveChanges();
+                if (File.Exists($@"{Properties.Settings.Default.savingPath}\{user.userid}.zip"))
                 {
-                    DotNetZipHelper.RefreshPassword($@"{Properties.Settings.Default.savingPath}\{user.Login}.zip", passwordTextBox.Text);
-                    user.Password = passwordTextBox.Text;
-                    Core.Context.SaveChanges();
+                    DotNetZipHelper.RefreshPassword($@"{Properties.Settings.Default.savingPath}\{user.userid}.zip", passwordTextBox.Text);
+                    user.passwd = passwordTextBox.Text;
+                    context.SaveChanges();
                 }
                 else
                 {
-                    user.Password = passwordTextBox.Text;
-                    Core.Context.SaveChanges();
+                    user.passwd = passwordTextBox.Text;
+                    context.SaveChanges();
                 }
                 MessageBox.Show("Пароль успешно изменен", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();

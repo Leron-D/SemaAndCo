@@ -5,32 +5,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SemaAndCo.View;
+using System.Runtime.Remoting.Contexts;
+using System.Windows.Forms;
 
 namespace SemaAndCo.Model
 {
     class AdministrationModel : IAdministrationModel
     {
-        List<Users> users;
-        public List<Users> SearchUsersOrderBy(int skip, int pageSize)
+        Core context = new Core(Core.StrConnection());
+        List<FtpUser.semaandcouser> users;
+        public List<FtpUser.semaandcouser> SearchUsersOrderBy(int skip, int pageSize)
         {
-            return users.OrderBy(o => o.Login).Skip(skip).Take(pageSize).ToList();
+            return users.OrderBy(o => o.userid).Skip(skip).Take(pageSize).ToList();
         }
-        public List<Users> SearchUsers(string search)
+        public List<FtpUser.semaandcouser> SearchUsers(string search)
         {
             if (search == "")
             {
                 return UsersLoad();
             }
-            return users = users.Where(c => c.Login.Contains(search) || c.Email.Contains(search) ||
-                                       c.Name.Contains(search) || c.Phone.Contains(search)).ToList();
+            return users = users.Where(c => c.userid.Contains(search) || c.email.Contains(search) ||
+                                       c.username.Contains(search) || c.phone.Contains(search)).ToList();
         }
-        public List<Users> ReturnUsers()
+        public List<FtpUser.semaandcouser> ReturnUsers()
         {
             return users;
         }
-        public List<Users> UsersLoad()
+        public List<FtpUser.semaandcouser> UsersLoad()
         {
-            users = Core.Context.Users.AsNoTracking().ToList();
+            users = context.semaandcouser.AsNoTracking().ToList();
             return users;
         }
     }

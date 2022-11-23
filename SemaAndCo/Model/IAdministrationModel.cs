@@ -8,9 +8,9 @@ namespace SemaAndCo.Model
 {
     interface IAdministrationModel
     {
-        List<Users> ReturnUsers();
-        List<Users> SearchUsersOrderBy(int skip, int pageSize);
-        List<Users> UsersLoad();
-        List<Users> SearchUsers(string search);
+        List<FtpUser.semaandcouser> ReturnUsers();
+        List<FtpUser.semaandcouser> SearchUsersOrderBy(int skip, int pageSize);
+        List<FtpUser.semaandcouser> UsersLoad();
+        List<FtpUser.semaandcouser> SearchUsers(string search);
     }
 }

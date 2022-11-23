@@ -30,11 +30,6 @@
         {
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.usersGridView = new System.Windows.Forms.DataGridView();
-            this.loginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.passwordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.changeButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.currentPageNumeric = new System.Windows.Forms.NumericUpDown();
@@ -49,6 +44,11 @@
             this.resultsAmountLabel = new System.Windows.Forms.Label();
             this.deleteButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
+            this.loginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.passwordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.usersGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentPageNumeric)).BeginInit();
             this.SuspendLayout();
@@ -83,36 +83,6 @@
             this.usersGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.usersGridView.Size = new System.Drawing.Size(1033, 347);
             this.usersGridView.TabIndex = 3;
-            // 
-            // loginColumn
-            // 
-            this.loginColumn.DataPropertyName = "Login";
-            this.loginColumn.HeaderText = "Логин";
-            this.loginColumn.Name = "loginColumn";
-            // 
-            // emailColumn
-            // 
-            this.emailColumn.DataPropertyName = "Email";
-            this.emailColumn.HeaderText = "E-mail";
-            this.emailColumn.Name = "emailColumn";
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.DataPropertyName = "Name";
-            this.nameColumn.HeaderText = "Имя";
-            this.nameColumn.Name = "nameColumn";
-            // 
-            // passwordColumn
-            // 
-            this.passwordColumn.DataPropertyName = "Password";
-            this.passwordColumn.HeaderText = "Пароль";
-            this.passwordColumn.Name = "passwordColumn";
-            // 
-            // phoneColumn
-            // 
-            this.phoneColumn.DataPropertyName = "Phone";
-            this.phoneColumn.HeaderText = "Телефон";
-            this.phoneColumn.Name = "phoneColumn";
             // 
             // changeButton
             // 
@@ -289,6 +259,36 @@
             this.addButton.UseVisualStyleBackColor = false;
             this.addButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
+            // loginColumn
+            // 
+            this.loginColumn.DataPropertyName = "userid";
+            this.loginColumn.HeaderText = "Логин";
+            this.loginColumn.Name = "loginColumn";
+            // 
+            // emailColumn
+            // 
+            this.emailColumn.DataPropertyName = "email";
+            this.emailColumn.HeaderText = "E-mail";
+            this.emailColumn.Name = "emailColumn";
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.DataPropertyName = "username";
+            this.nameColumn.HeaderText = "Имя";
+            this.nameColumn.Name = "nameColumn";
+            // 
+            // passwordColumn
+            // 
+            this.passwordColumn.DataPropertyName = "passwd";
+            this.passwordColumn.HeaderText = "Пароль";
+            this.passwordColumn.Name = "passwordColumn";
+            // 
+            // phoneColumn
+            // 
+            this.phoneColumn.DataPropertyName = "phone";
+            this.phoneColumn.HeaderText = "Телефон";
+            this.phoneColumn.Name = "phoneColumn";
+            // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
@@ -337,12 +337,12 @@
         private System.Windows.Forms.Button firstPageButton;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label resultsAmountLabel;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn loginColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn emailColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn passwordColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneColumn;
-        private System.Windows.Forms.Button deleteButton;
-        private System.Windows.Forms.Button addButton;
     }
 }

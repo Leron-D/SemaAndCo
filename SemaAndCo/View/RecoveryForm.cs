@@ -22,7 +22,7 @@ namespace SemaAndCo.View
         SendMail sendMail;
         public RecoveryForm()
         {
-            IntroForm form = new IntroForm();
+            IntroForm form = new IntroForm(533);
             form.ShowDialog();
             InitializeComponent();
             presenter = new RecoveryPresenter(this);
@@ -32,7 +32,7 @@ namespace SemaAndCo.View
 
         public void Splash()
         {
-            Application.Run(new IntroForm());
+            Application.Run(new IntroForm(533));
         }
 
         private void loginOrEmailTextBox_Validating(object sender, CancelEventArgs e)
@@ -64,7 +64,7 @@ namespace SemaAndCo.View
         {
             if (captcha.CheckText(captchaTextBox.Text))
             {
-                if(sendMail.SendOnMail(loginOrEmailTextBox.Text))
+                if(sendMail.SendOnMail(loginOrEmailTextBox.Text, true))
                 {
                     presenter.GetLoginOrEmail(loginOrEmailTextBox.Text);
                     Hide();

@@ -13,10 +13,10 @@ namespace SemaAndCo.View
 {
     public partial class IntroForm : Form
     {
-        public IntroForm()
+        public IntroForm(int interval)
         {
             InitializeComponent();
-            timer.Interval = 533;
+            timer.Interval = interval;
             timer.Start();
         }
 

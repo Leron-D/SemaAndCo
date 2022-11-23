@@ -9,11 +9,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Xml.Linq;
 using SemaAndCo.Supporting;
 using SemaAndCo.View;
+using System.Runtime.Remoting.Contexts;
 
 namespace SemaAndCo.Presenter
 {
     class RegistrationPresenter
     {
+        Core context = new Core(Core.StrConnection());
         IRegistrationModel model;
         IRegistrationView view;
         SendMail sendMail;
@@ -45,18 +47,19 @@ namespace SemaAndCo.Presenter
                 {
                     if (login != "" && password != "" && password == repeatPassword && login.Length > 4 && password.Length > 4)
                     {
-                        var resultLog = Core.Context.Users.FirstOrDefault(u => u.Login == login);
-                        var resultEmail = Core.Context.Users.FirstOrDefault(r => r.Email == email);
+                        var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
+                        var resultEmail = context.semaandcouser.FirstOrDefault(r => r.email == email);
                         if (resultLog == null)
                         {
                             if (resultEmail == null)
                             {
                                 RegistrationData.login = login;
+                                RegistrationData.hash = "0f2ce17f1f5af3212ffde44976734c6b";
                                 RegistrationData.email = email;
                                 RegistrationData.name = name;
                                 RegistrationData.phone = phone;
-                                RegistrationData.password = password;
-                                if (sendMail.SendRegCode(email))
+                                RegistrationData.password = CryptoClass.EncryptString(password);
+                                if (sendMail.SendRegCode(email, false))
                                 {
                                     view.Hide();
                                     Core.mailVariability = false;

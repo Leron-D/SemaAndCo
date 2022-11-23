@@ -8,6 +8,6 @@ namespace SemaAndCo.Model
 {
     interface ILoginModel
     {
-        Users LoginMethod(string login, string password);
+        FtpUser.semaandcouser LoginMethod(string login, string password);
     }
 }

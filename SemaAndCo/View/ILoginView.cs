@@ -10,6 +10,7 @@ namespace SemaAndCo.View
     {
         void Hide();
         void Close();
+        void Show();
 
         string Login { set; get; }
         string Password { set; get; }
