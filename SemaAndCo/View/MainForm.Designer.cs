@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.uploadButton = new System.Windows.Forms.Button();
-            this.localListView = new System.Windows.Forms.ListView();
+            this.listView = new System.Windows.Forms.ListView();
             this.downloadButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.renameButton = new System.Windows.Forms.Button();
@@ -41,6 +41,8 @@
             this.exitButton = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.renameTextBox = new System.Windows.Forms.TextBox();
+            this.localRadioButton = new System.Windows.Forms.RadioButton();
+            this.serverRadioButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,21 +60,21 @@
             this.uploadButton.UseVisualStyleBackColor = false;
             this.uploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 
-            // localListView
+            // listView
             // 
-            this.localListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.localListView.BackColor = System.Drawing.SystemColors.Window;
-            this.localListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.localListView.HideSelection = false;
-            this.localListView.Location = new System.Drawing.Point(-2, 73);
-            this.localListView.Name = "localListView";
-            this.localListView.Size = new System.Drawing.Size(1087, 534);
-            this.localListView.TabIndex = 3;
-            this.localListView.UseCompatibleStateImageBehavior = false;
-            this.localListView.View = System.Windows.Forms.View.List;
-            this.localListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.ListView_ItemSelectionChanged);
+            this.listView.BackColor = System.Drawing.SystemColors.Window;
+            this.listView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listView.HideSelection = false;
+            this.listView.Location = new System.Drawing.Point(-2, 73);
+            this.listView.Name = "listView";
+            this.listView.Size = new System.Drawing.Size(1210, 534);
+            this.listView.TabIndex = 3;
+            this.listView.UseCompatibleStateImageBehavior = false;
+            this.listView.View = System.Windows.Forms.View.List;
+            this.listView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.ListView_ItemSelectionChanged);
             // 
             // downloadButton
             // 
@@ -157,7 +159,7 @@
             this.administrationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.administrationButton.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.administrationButton.Image = global::SemaAndCo.Properties.Resources.icons8_administration_40;
-            this.administrationButton.Location = new System.Drawing.Point(974, 14);
+            this.administrationButton.Location = new System.Drawing.Point(1097, 14);
             this.administrationButton.Margin = new System.Windows.Forms.Padding(5);
             this.administrationButton.Name = "administrationButton";
             this.administrationButton.Size = new System.Drawing.Size(41, 45);
@@ -173,7 +175,7 @@
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitButton.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.exitButton.Image = global::SemaAndCo.Properties.Resources.icons8_logout_40ы;
-            this.exitButton.Location = new System.Drawing.Point(1025, 14);
+            this.exitButton.Location = new System.Drawing.Point(1148, 14);
             this.exitButton.Margin = new System.Windows.Forms.Padding(5);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(45, 45);
@@ -203,11 +205,37 @@
             this.renameTextBox.Visible = false;
             this.renameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RenameTextBox_KeyDown);
             // 
+            // localRadioButton
+            // 
+            this.localRadioButton.AutoSize = true;
+            this.localRadioButton.Checked = true;
+            this.localRadioButton.Location = new System.Drawing.Point(630, 23);
+            this.localRadioButton.Name = "localRadioButton";
+            this.localRadioButton.Size = new System.Drawing.Size(210, 27);
+            this.localRadioButton.TabIndex = 14;
+            this.localRadioButton.TabStop = true;
+            this.localRadioButton.Text = "Локальное хранилище";
+            this.localRadioButton.UseVisualStyleBackColor = true;
+            this.localRadioButton.CheckedChanged += new System.EventHandler(this.localRadioButton_CheckedChanged);
+            // 
+            // serverRadioButton
+            // 
+            this.serverRadioButton.AutoSize = true;
+            this.serverRadioButton.Location = new System.Drawing.Point(856, 23);
+            this.serverRadioButton.Name = "serverRadioButton";
+            this.serverRadioButton.Size = new System.Drawing.Size(208, 27);
+            this.serverRadioButton.TabIndex = 15;
+            this.serverRadioButton.Text = "Серверное хранилище";
+            this.serverRadioButton.UseVisualStyleBackColor = true;
+            this.serverRadioButton.CheckedChanged += new System.EventHandler(this.serverRadioButton_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 605);
+            this.ClientSize = new System.Drawing.Size(1207, 605);
+            this.Controls.Add(this.serverRadioButton);
+            this.Controls.Add(this.localRadioButton);
             this.Controls.Add(this.renameTextBox);
             this.Controls.Add(this.administrationButton);
             this.Controls.Add(this.exitButton);
@@ -216,7 +244,7 @@
             this.Controls.Add(this.renameButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.downloadButton);
-            this.Controls.Add(this.localListView);
+            this.Controls.Add(this.listView);
             this.Controls.Add(this.uploadButton);
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.MinimumSize = new System.Drawing.Size(770, 260);
@@ -230,7 +258,7 @@
 
         #endregion
         private System.Windows.Forms.Button uploadButton;
-        private System.Windows.Forms.ListView localListView;
+        private System.Windows.Forms.ListView listView;
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button renameButton;
@@ -240,5 +268,7 @@
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Button administrationButton;
         private System.Windows.Forms.TextBox renameTextBox;
+        private System.Windows.Forms.RadioButton localRadioButton;
+        private System.Windows.Forms.RadioButton serverRadioButton;
     }
 }

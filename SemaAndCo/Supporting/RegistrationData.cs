@@ -12,6 +12,7 @@ namespace SemaAndCo.Supporting
     class RegistrationData
     {
         public static string hash;
+        public static string homedir;
         public static string login;
         public static string name;
         public static string email;
@@ -26,6 +27,7 @@ namespace SemaAndCo.Supporting
                 Core context = new Core(Core.StrConnection());
                 user.userid = login;
                 user.hash = hash;
+                user.homedir = homedir;
                 user.email = email;
                 user.username = name;
                 user.phone = phone;

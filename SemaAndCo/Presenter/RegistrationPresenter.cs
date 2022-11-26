@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using SemaAndCo.Supporting;
 using SemaAndCo.View;
 using System.Runtime.Remoting.Contexts;
+using static System.Net.WebRequestMethods;
 
 namespace SemaAndCo.Presenter
 {
@@ -55,10 +56,11 @@ namespace SemaAndCo.Presenter
                             {
                                 RegistrationData.login = login;
                                 RegistrationData.hash = "0f2ce17f1f5af3212ffde44976734c6b";
+                                RegistrationData.homedir = $"/srv/ftp/semaandco/{login}";
                                 RegistrationData.email = email;
                                 RegistrationData.name = name;
                                 RegistrationData.phone = phone;
-                                RegistrationData.password = CryptoClass.EncryptString(password);
+                                RegistrationData.password = password;
                                 if (sendMail.SendRegCode(email, false))
                                 {
                                     view.Hide();

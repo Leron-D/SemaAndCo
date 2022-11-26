@@ -21,7 +21,7 @@ namespace SemaAndCo.View
         Core context = new Core(Core.StrConnection());
         public AccessRecoveryForm()
         {
-            IntroForm form = new IntroForm(533);
+            IntroForm form = new IntroForm();
             form.ShowDialog();
             InitializeComponent();
             if (!Core.CheckMailVariability())
@@ -37,6 +37,11 @@ namespace SemaAndCo.View
 
         private void enterButton_Click(object sender, EventArgs e)
         {
+            EnterButtonMethod();
+        }
+
+        private void EnterButtonMethod()
+        {
             try
             {
                 if (Convert.ToInt32(recoveryCodeTextBox.Text) == Properties.Settings.Default.code)
@@ -48,7 +53,6 @@ namespace SemaAndCo.View
                     else
                     {
                         RegistrationData.Registrate();
-                        //DotNetZipHelper.CreateZip($@"{Properties.Settings.Default.savingPath}\SemaAndCo.zip", RegistrationData.password);
                         MessageBox.Show("Вы успешно зарегистрированы", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Close();
                     }
@@ -70,7 +74,16 @@ namespace SemaAndCo.View
                 {
                     if (Convert.ToInt32(recoveryCodeTextBox.Text) == Properties.Settings.Default.code)
                     {
-                        tabControl.SelectedTab = enterCodePage;
+                        if (Core.CheckMailVariability())
+                        {
+                            tabControl.SelectedTab = enterCodePage;
+                        }
+                        else
+                        {
+                            RegistrationData.Registrate();
+                            MessageBox.Show("Вы успешно зарегистрированы", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Close();
+                        }
                     }
                     else
                         throw new Exception();

@@ -41,15 +41,7 @@ namespace SemaAndCo.Presenter
             }
             catch (Exception)
             {
-                if (view.Login == CurrentUser.User.userid && CryptoClass.EncryptString(view.Password) == CryptoClass.EncryptString(CurrentUser.User.passwd))
-                {
-                    MessageBox.Show("Проблемы с подключением к БД. \nПопробуйте сменить параметры подключения", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //ConnectionForm connection = new ConnectionForm();
-                    //connection.Show();
-                    view.Hide();
-                }
-                else
-                    MessageBox.Show("Отсутствует подключение к БД. \nОбратитесь к администратору", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Отсутствует подключение к БД", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public void SaveAuthOptions()

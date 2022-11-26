@@ -14,6 +14,7 @@ namespace SemaAndCo.Model
         {
             public int id { get; set; }
             public string hash { get; set; }
+            public string homedir { get; set; }
             public string userid { get; set; }
             public string email { get; set; }
             public string passwd { get; set; }

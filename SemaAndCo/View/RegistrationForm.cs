@@ -19,7 +19,7 @@ namespace SemaAndCo.View
         RegistrationPresenter presenter;
         public RegistrationForm()
         {
-            IntroForm form = new IntroForm(533);
+            IntroForm form = new IntroForm();
             form.ShowDialog();
             InitializeComponent();
             if (Core.CheckAddingUserVariability())

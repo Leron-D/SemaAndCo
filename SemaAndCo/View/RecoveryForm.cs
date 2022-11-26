@@ -22,7 +22,7 @@ namespace SemaAndCo.View
         SendMail sendMail;
         public RecoveryForm()
         {
-            IntroForm form = new IntroForm(533);
+            IntroForm form = new IntroForm();
             form.ShowDialog();
             InitializeComponent();
             presenter = new RecoveryPresenter(this);
@@ -32,7 +32,7 @@ namespace SemaAndCo.View
 
         public void Splash()
         {
-            Application.Run(new IntroForm(533));
+            Application.Run(new IntroForm());
         }
 
         private void loginOrEmailTextBox_Validating(object sender, CancelEventArgs e)
