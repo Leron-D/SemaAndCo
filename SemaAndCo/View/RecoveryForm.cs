@@ -22,17 +22,12 @@ namespace SemaAndCo.View
         SendMail sendMail;
         public RecoveryForm()
         {
-            IntroForm form = new IntroForm();
+            IntroForm form = new IntroForm(533);
             form.ShowDialog();
             InitializeComponent();
             presenter = new RecoveryPresenter(this);
             sendMail = new SendMail();
             captcha.Renew();
-        }
-
-        public void Splash()
-        {
-            Application.Run(new IntroForm());
         }
 
         private void loginOrEmailTextBox_Validating(object sender, CancelEventArgs e)

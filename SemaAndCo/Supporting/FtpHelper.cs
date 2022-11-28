@@ -1,15 +1,20 @@
-﻿using System;
+﻿using Ionic.Zip;
+using Org.BouncyCastle.Ocsp;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SemaAndCo.Supporting
 {
     public static class FtpHelper
     {
+        public static string message;
         public static FtpStatusCode DownloadFile(string filename, string address, string login, string password)
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
@@ -26,6 +31,43 @@ namespace SemaAndCo.Supporting
                 }
                 return response.StatusCode;
             }
+        }
+
+        public static void RenameFile(string filename, string address, string login, string password)
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
+            request.Credentials = new NetworkCredential(login, password);
+            request.Proxy = null;
+            request.Method = WebRequestMethods.Ftp.Rename;
+            request.RenameTo = filename;
+            request.GetResponse().Close();
+        }
+        public static void GetFileNameAndSize(string filename, string address, string login, string password)
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
+            request.Credentials = new NetworkCredential(login, password);
+            request.Method = WebRequestMethods.Ftp.GetFileSize;
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            string size = "";
+            if (response.ContentLength < 1024)
+                size = $"Размер файла: {response.ContentLength} Б";
+            if (response.ContentLength >= 1024)
+                size = $"Размер файла: {Math.Round(response.ContentLength / 1024d)} КБ";
+            if ((response.ContentLength / 1024) > 1024)
+                size = $"Размер файла: {Math.Round(response.ContentLength / 1024 / 1024d)} МБ";
+            message = $"Название файла: {filename}\nРазмер файла: {size}\n";
+            GetFileLastModificated(address, login, password);
+            MessageBox.Show(message, "Информация о файле", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            request.GetResponse();
+        }
+
+        public static void GetFileLastModificated(string address, string login, string password)
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
+            request.Credentials = new NetworkCredential(login, password);
+            request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+            FtpWebResponse ftpResponse = (FtpWebResponse)request.GetResponse();
+            message += $"Последнее изменение: {ftpResponse.LastModified}";
         }
 
         public static FtpStatusCode UploadFile(string filename, string address, string login, string password)

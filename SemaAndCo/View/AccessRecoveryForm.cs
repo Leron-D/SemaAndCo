@@ -21,7 +21,7 @@ namespace SemaAndCo.View
         Core context = new Core(Core.StrConnection());
         public AccessRecoveryForm()
         {
-            IntroForm form = new IntroForm();
+            IntroForm form = new IntroForm(533);
             form.ShowDialog();
             InitializeComponent();
             if (!Core.CheckMailVariability())

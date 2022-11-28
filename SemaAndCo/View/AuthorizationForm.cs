@@ -19,10 +19,12 @@ namespace SemaAndCo
     public partial class AuthorizationForm : Form, ILoginView
     {
         LoginPresenter presenter;
+        BackgroundWorker worker = new BackgroundWorker();
+        static IntroForm introForm = new IntroForm();
 
         public AuthorizationForm()
         {
-            IntroForm introForm = new IntroForm();
+            IntroForm introForm = new IntroForm(533);
             introForm.ShowDialog();
             InitializeComponent();
             presenter = new LoginPresenter(this);
@@ -82,6 +84,29 @@ namespace SemaAndCo
             RecoveryForm recoveryForm = new RecoveryForm();
             recoveryForm.ShowDialog();
             this.Close();
+        }
+
+        void LoginMethod()
+        {
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+            worker.DoWork += new DoWorkEventHandler(HandleDoWork);
+            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(HandleEndWork);
+            worker.RunWorkerAsync();
+            worker.CancelAsync();
+        }
+
+        private void HandleEndWork(object sender, RunWorkerCompletedEventArgs e)
+        {
+            introForm.Close();
+        }
+
+        private void HandleDoWork(object sender, DoWorkEventArgs e)
+        {
+            if(!worker.CancellationPending)
+                introForm.ShowDialog();
+            else
+                e.Cancel = true;
         }
 
         private void LoginButton_Click(object sender, EventArgs e)

@@ -19,7 +19,7 @@ namespace SemaAndCo.View
         string path;
         public SelectFolderForm()
         {
-            IntroForm form = new IntroForm();
+            IntroForm form = new IntroForm(533);
             form.ShowDialog();
             InitializeComponent();
             folderTextBox.Text = Properties.Settings.Default.savingPath;

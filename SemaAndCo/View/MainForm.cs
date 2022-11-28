@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.WebRequestMethods;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SemaAndCo.View
@@ -15,10 +16,9 @@ namespace SemaAndCo.View
     {
         string saveText;
         string extension;
+        string fileToRename = "";
         public MainForm()
         {
-            IntroForm form = new IntroForm();
-            form.ShowDialog();
             InitializeComponent();
             CreateZip();
             LoadData();
@@ -57,7 +57,7 @@ namespace SemaAndCo.View
 
         void CreateZip()
         {
-            if(!File.Exists(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip")))
+            if(!System.IO.File.Exists(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip")))
             {
                 DotNetZipHelper.CreateArchive($"{CurrentUser.User.userid}.zip");
             }
@@ -212,9 +212,19 @@ namespace SemaAndCo.View
         {
             try
             {
-                if (listView.SelectedItems.Count == 1)
+                if (localRadioButton.Checked)
                 {
-                    DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip"), listView.SelectedItems[0].Text, CurrentUser.User.passwd);
+                    if (listView.SelectedItems.Count == 1)
+                    {
+                        DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip"), listView.SelectedItems[0].Text, CurrentUser.User.passwd);
+                    }
+                }
+                else
+                {
+                    if (listView.SelectedItems.Count == 1)
+                    {
+                        FtpHelper.GetFileNameAndSize(listView.SelectedItems[0].Text, $"ftp://91.122.211.144:50021/{listView.SelectedItems[0].Text}", CurrentUser.User.userid, CurrentUser.User.passwd);
+                    }
                 }
             }
             catch (Exception ex)
@@ -246,13 +256,14 @@ namespace SemaAndCo.View
 
         private void RenameButton_Click(object sender, EventArgs e)
         {
-            RenameMethod();
+            CreateTextBoxToRename();
         }
 
-        private void RenameMethod()
+        private void CreateTextBoxToRename()
         {
             try
             {
+                fileToRename = listView.SelectedItems[0].Text;
                 saveText = listView.SelectedItems[0].Text;
                 extension = saveText.Split('.').Last();
                 listView.SelectedItems[0].Text = "";
@@ -298,18 +309,19 @@ namespace SemaAndCo.View
         private void RenameTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             renameTextBox.Width = renameTextBox.Text.Length * 9 + 30;
-            RenameMethod(e);
+            if(e.KeyCode == Keys.Enter)
+                RenameMethod(e);
         }
 
         private void RenameMethod(KeyEventArgs e)
         {
             try
             {
-                using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip")))
+                if (localRadioButton.Checked)
                 {
-                    var zipEntry = zip.Entries.FirstOrDefault(z => z.FileName == $"{renameTextBox.Text}.{extension}");
-                    if (e.KeyCode == Keys.Enter)
+                    using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip")))
                     {
+                        var zipEntry = zip.Entries.FirstOrDefault(z => z.FileName == $"{renameTextBox.Text}.{extension}");
                         if (!String.IsNullOrEmpty(renameTextBox.Text) && renameTextBox.Text != saveText.Remove(saveText.Length - extension.Length - 1))
                         {
                             if (zip.Contains(zipEntry))
@@ -326,17 +338,24 @@ namespace SemaAndCo.View
                                 }
                             }
                         }
-                        LoadData();
-                        listView.Enabled = true;
-                        renameButton.Enabled = renameTextBox.Visible = deleteButton.Enabled = infoButton.Enabled = downloadButton.Enabled = false;
                     }
                 }
-            }
+                else
+                {
+                    if (!String.IsNullOrEmpty(renameTextBox.Text) && renameTextBox.Text != saveText.Remove(saveText.Length - extension.Length - 1))
+                    {
+                        FtpHelper.RenameFile($"{renameTextBox.Text}.{extension}", $"ftp://91.122.211.144:50021/{saveText}", CurrentUser.User.userid, CurrentUser.User.passwd);
+                    }
+                }
+                LoadData();
+                listView.Enabled = true;
+                renameButton.Enabled = renameTextBox.Visible = deleteButton.Enabled = infoButton.Enabled = downloadButton.Enabled = false;
+        }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+}
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
