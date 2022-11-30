@@ -22,26 +22,27 @@ namespace SemaAndCo.Presenter
             this.view = view;
         }
 
-        public void LoginMethod()
+        public bool LoginMethod(string login, string password)
         {
             try
             {
-                var user = model.LoginMethod(view.Login, view.Password.EncryptString());
+                var user = model.LoginMethod(login, password.EncryptString());
                 if (user != null)
                 {
                     SaveAuthOptions();
-                    CurrentUser.User = user;
-                    view.Hide();
-                    MainForm form = new MainForm();
-                    form.ShowDialog();
-                    view.Close();
+                    CurrentUser.FtpUser = user;
+                    return true;
                 }
                 else
+                {
                     MessageBox.Show("Проверьте правильность ввода логина и пароля", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
             }
             catch (Exception)
             {
-                MessageBox.Show("Отсутствует подключение к БД", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Отсутствует соединение с сервером", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
         public void SaveAuthOptions()

@@ -18,6 +18,7 @@ namespace SemaAndCo.Supporting
         public static bool mailVariability;
         public static bool addingUserVariability;
         public static bool admClosed;
+        public static string hash = "0f2ce17f1f5af3212ffde44976734c6b";
         static public string StrConnection()
         {
             MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();

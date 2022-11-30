@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySqlX.XDevAPI.Common;
 using SemaAndCo.Model;
 using SemaAndCo.Presenter;
 using SemaAndCo.Supporting;
@@ -19,14 +21,14 @@ namespace SemaAndCo
     public partial class AuthorizationForm : Form, ILoginView
     {
         LoginPresenter presenter;
-        BackgroundWorker worker = new BackgroundWorker();
-        static IntroForm introForm = new IntroForm();
+        bool result;
 
         public AuthorizationForm()
         {
             IntroForm introForm = new IntroForm(533);
             introForm.ShowDialog();
             InitializeComponent();
+            CurrentUser.FtpUser = null;
             presenter = new LoginPresenter(this);
             if (Properties.Settings.Default.authLogin != "" && Properties.Settings.Default.password != "")
             {
@@ -86,47 +88,74 @@ namespace SemaAndCo
             this.Close();
         }
 
-        void LoginMethod()
+        private async void LoginButton_Click(object sender, EventArgs e)
         {
-            worker.WorkerReportsProgress = true;
-            worker.WorkerSupportsCancellation = true;
-            worker.DoWork += new DoWorkEventHandler(HandleDoWork);
-            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(HandleEndWork);
-            worker.RunWorkerAsync();
-            worker.CancelAsync();
+            await LoginMethodAsync();
+            if (result)
+            {
+                Hide();
+                MainForm form = new MainForm();
+                form.ShowDialog();
+                Close();
+            }
         }
 
-        private void HandleEndWork(object sender, RunWorkerCompletedEventArgs e)
+        private async Task LoginMethodAsync()
         {
-            introForm.Close();
+            introPictureBox.Dock = DockStyle.Fill;
+            introPictureBox.Visible = true;
+            await Task.Run(() =>
+            {
+                if(presenter.LoginMethod(Login, Password))
+                {
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+            });
+            introPictureBox.Dock = DockStyle.None;
+            introPictureBox.Visible = false;
         }
 
-        private void HandleDoWork(object sender, DoWorkEventArgs e)
-        {
-            if(!worker.CancellationPending)
-                introForm.ShowDialog();
-            else
-                e.Cancel = true;
-        }
-
-        private void LoginButton_Click(object sender, EventArgs e)
-        {
-            presenter.LoginMethod();
-        }
-
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        private async void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                presenter.LoginMethod();
+                await LoginMethodAsync();
+                if (result)
+                {
+                    Hide();
+                    MainForm form = new MainForm();
+                    form.Show();
+                    Close();
+                }
             }
-
         }
 
         private void SavingPathButton_Click(object sender, EventArgs e)
         {
             Hide();
             SelectFolderForm form = new SelectFolderForm();
+            form.ShowDialog();
+            Close();
+        }
+
+        private void autoButton_Click(object sender, EventArgs e)
+        {
+            AutomaticEnter();
+        }
+
+        private void AutomaticEnter()
+        {
+            if (!System.IO.File.Exists(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip")))
+            {
+                DotNetZipHelper.CreateArchive("autonom.zip");
+            }
+            new LocalUser("autonom", "autonom");
+            Hide();
+            MainForm form = new MainForm();
             form.ShowDialog();
             Close();
         }

@@ -8,6 +8,7 @@ namespace SemaAndCo.Model
 {
     interface ILoginModel
     {
+        bool CheckConnection();
         FtpUser.semaandcouser LoginMethod(string login, string password);
     }
 }

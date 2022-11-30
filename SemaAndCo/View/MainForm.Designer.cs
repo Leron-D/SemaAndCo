@@ -37,12 +37,12 @@
             this.renameButton = new System.Windows.Forms.Button();
             this.infoButton = new System.Windows.Forms.Button();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.administrationButton = new System.Windows.Forms.Button();
-            this.exitButton = new System.Windows.Forms.Button();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.renameTextBox = new System.Windows.Forms.TextBox();
             this.localRadioButton = new System.Windows.Forms.RadioButton();
             this.serverRadioButton = new System.Windows.Forms.RadioButton();
+            this.administrationButton = new System.Windows.Forms.Button();
+            this.exitButton = new System.Windows.Forms.Button();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,6 +150,41 @@
             this.imageList.Images.SetKeyName(4, "Excel.png");
             this.imageList.Images.SetKeyName(5, "Archive.png");
             this.imageList.Images.SetKeyName(6, "File.png");
+            this.imageList.Images.SetKeyName(7, "pdf.png");
+            // 
+            // renameTextBox
+            // 
+            this.renameTextBox.Location = new System.Drawing.Point(42, 371);
+            this.renameTextBox.MaxLength = 64;
+            this.renameTextBox.Name = "renameTextBox";
+            this.renameTextBox.Size = new System.Drawing.Size(100, 31);
+            this.renameTextBox.TabIndex = 13;
+            this.renameTextBox.Visible = false;
+            this.renameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RenameTextBox_KeyDown);
+            // 
+            // localRadioButton
+            // 
+            this.localRadioButton.AutoSize = true;
+            this.localRadioButton.Checked = true;
+            this.localRadioButton.Location = new System.Drawing.Point(630, 23);
+            this.localRadioButton.Name = "localRadioButton";
+            this.localRadioButton.Size = new System.Drawing.Size(210, 27);
+            this.localRadioButton.TabIndex = 14;
+            this.localRadioButton.TabStop = true;
+            this.localRadioButton.Text = "Локальное хранилище";
+            this.localRadioButton.UseVisualStyleBackColor = true;
+            this.localRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
+            // 
+            // serverRadioButton
+            // 
+            this.serverRadioButton.AutoSize = true;
+            this.serverRadioButton.Location = new System.Drawing.Point(856, 23);
+            this.serverRadioButton.Name = "serverRadioButton";
+            this.serverRadioButton.Size = new System.Drawing.Size(208, 27);
+            this.serverRadioButton.TabIndex = 15;
+            this.serverRadioButton.Text = "Серверное хранилище";
+            this.serverRadioButton.UseVisualStyleBackColor = true;
+            this.serverRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // administrationButton
             // 
@@ -174,7 +209,7 @@
             this.exitButton.FlatAppearance.BorderSize = 0;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitButton.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.exitButton.Image = global::SemaAndCo.Properties.Resources.icons8_logout_40ы;
+            this.exitButton.Image = global::SemaAndCo.Properties.Resources.icons8_logout_40ы1;
             this.exitButton.Location = new System.Drawing.Point(1148, 14);
             this.exitButton.Margin = new System.Windows.Forms.Padding(5);
             this.exitButton.Name = "exitButton";
@@ -194,40 +229,6 @@
             this.pictureBox.TabIndex = 10;
             this.pictureBox.TabStop = false;
             this.pictureBox.Visible = false;
-            // 
-            // renameTextBox
-            // 
-            this.renameTextBox.Location = new System.Drawing.Point(42, 371);
-            this.renameTextBox.MaxLength = 64;
-            this.renameTextBox.Name = "renameTextBox";
-            this.renameTextBox.Size = new System.Drawing.Size(100, 31);
-            this.renameTextBox.TabIndex = 13;
-            this.renameTextBox.Visible = false;
-            this.renameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RenameTextBox_KeyDown);
-            // 
-            // localRadioButton
-            // 
-            this.localRadioButton.AutoSize = true;
-            this.localRadioButton.Checked = true;
-            this.localRadioButton.Location = new System.Drawing.Point(630, 23);
-            this.localRadioButton.Name = "localRadioButton";
-            this.localRadioButton.Size = new System.Drawing.Size(210, 27);
-            this.localRadioButton.TabIndex = 14;
-            this.localRadioButton.TabStop = true;
-            this.localRadioButton.Text = "Локальное хранилище";
-            this.localRadioButton.UseVisualStyleBackColor = true;
-            this.localRadioButton.CheckedChanged += new System.EventHandler(this.localRadioButton_CheckedChanged);
-            // 
-            // serverRadioButton
-            // 
-            this.serverRadioButton.AutoSize = true;
-            this.serverRadioButton.Location = new System.Drawing.Point(856, 23);
-            this.serverRadioButton.Name = "serverRadioButton";
-            this.serverRadioButton.Size = new System.Drawing.Size(208, 27);
-            this.serverRadioButton.TabIndex = 15;
-            this.serverRadioButton.Text = "Серверное хранилище";
-            this.serverRadioButton.UseVisualStyleBackColor = true;
-            this.serverRadioButton.CheckedChanged += new System.EventHandler(this.serverRadioButton_CheckedChanged);
             // 
             // MainForm
             // 

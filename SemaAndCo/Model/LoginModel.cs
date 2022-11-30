@@ -31,11 +31,11 @@ namespace SemaAndCo.Model
             {
                 
                 context.semaandcouser.AsNoTracking().ToList();
-                CurrentUser.User = context.semaandcouser.FirstOrDefault(c => c.userid == login && c.passwd == password);
-                if (CurrentUser.User != null)
-                    return CurrentUser.User;
+                CurrentUser.FtpUser = context.semaandcouser.FirstOrDefault(c => c.userid == login && c.passwd == password);
+                if (CurrentUser.FtpUser != null)
+                    return CurrentUser.FtpUser;
                 else
-                    return CurrentUser.User;
+                    return CurrentUser.FtpUser;
             }
             catch (Exception ex)
             {

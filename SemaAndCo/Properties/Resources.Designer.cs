@@ -123,6 +123,16 @@ namespace SemaAndCo.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_logout_40ы1 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-logout-40ы1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_папка_архив_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8-папка-архив-32", resourceCulture);

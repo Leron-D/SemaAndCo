@@ -40,8 +40,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.autoButton = new System.Windows.Forms.Button();
             this.savingPathButton = new System.Windows.Forms.Button();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.logoPictureBox = new System.Windows.Forms.PictureBox();
+            this.introPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.introPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // rememberCheckBox
@@ -162,6 +164,7 @@
             this.autoButton.TabIndex = 21;
             this.autoButton.Text = "Работать автономно";
             this.autoButton.UseVisualStyleBackColor = false;
+            this.autoButton.Click += new System.EventHandler(this.autoButton_Click);
             // 
             // savingPathButton
             // 
@@ -177,16 +180,27 @@
             this.savingPathButton.UseVisualStyleBackColor = false;
             this.savingPathButton.Click += new System.EventHandler(this.SavingPathButton_Click);
             // 
-            // pictureBox
+            // logoPictureBox
             // 
-            this.pictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox.Image = global::SemaAndCo.Properties.Resources.Bezymyanny_1_Vosstanovlen;
-            this.pictureBox.Location = new System.Drawing.Point(129, 3);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(117, 101);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox.TabIndex = 20;
-            this.pictureBox.TabStop = false;
+            this.logoPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.logoPictureBox.Image = global::SemaAndCo.Properties.Resources.Bezymyanny_1_Vosstanovlen;
+            this.logoPictureBox.Location = new System.Drawing.Point(129, 3);
+            this.logoPictureBox.Name = "logoPictureBox";
+            this.logoPictureBox.Size = new System.Drawing.Size(117, 101);
+            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logoPictureBox.TabIndex = 20;
+            this.logoPictureBox.TabStop = false;
+            // 
+            // introPictureBox
+            // 
+            this.introPictureBox.Image = global::SemaAndCo.Properties.Resources.video__1_;
+            this.introPictureBox.Location = new System.Drawing.Point(274, 3);
+            this.introPictureBox.Name = "introPictureBox";
+            this.introPictureBox.Size = new System.Drawing.Size(110, 101);
+            this.introPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.introPictureBox.TabIndex = 23;
+            this.introPictureBox.TabStop = false;
+            this.introPictureBox.Visible = false;
             // 
             // AuthorizationForm
             // 
@@ -195,9 +209,10 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Snow;
             this.ClientSize = new System.Drawing.Size(387, 522);
+            this.Controls.Add(this.introPictureBox);
             this.Controls.Add(this.savingPathButton);
             this.Controls.Add(this.autoButton);
-            this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.logoPictureBox);
             this.Controls.Add(this.rememberCheckBox);
             this.Controls.Add(this.forgotPasswordLabel);
             this.Controls.Add(this.toRegistrationButton);
@@ -213,7 +228,8 @@
             this.Name = "AuthorizationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Авторизация";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.introPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,8 +245,9 @@
         private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Button autoButton;
         private System.Windows.Forms.Button savingPathButton;
+        private System.Windows.Forms.PictureBox introPictureBox;
     }
 }

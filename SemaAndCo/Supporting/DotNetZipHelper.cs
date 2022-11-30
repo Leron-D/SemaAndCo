@@ -26,13 +26,18 @@ namespace SemaAndCo.Supporting
             }
         }
 
-        public static void ExtractFiles(string archiveName, List<string> fileNames, string outFolder)
+        public static void ExtractFiles(string archiveName, string fileName, string outFolder)
         {
             using (var zip = ZipFile.Read(archiveName))
             {
-                foreach (var e in fileNames)
+                zip.AlternateEncodingUsage = ZipOption.Always;
+                zip.AlternateEncoding = Encoding.UTF8;
+                foreach (ZipEntry e in zip)
                 {
-                    zip.ExtractSelectedEntries($"name = {e}", null, outFolder, ExtractExistingFileAction.OverwriteSilently);
+                    if (e.FileName == fileName)
+                    {
+                        e.Extract(outFolder, ExtractExistingFileAction.OverwriteSilently);
+                    }
                 }
             }
         }
@@ -46,15 +51,7 @@ namespace SemaAndCo.Supporting
             }
         }
 
-        public static void RefreshPassword(string archiveName, string password)
-        {
-            using (var zipFile = ZipFile.Read(archiveName))
-            {
-                zipFile.Password = password;
-            }
-        }
-
-        public static void GetInfoFiles(string archiveName, string fileName, string password)
+        public static void GetInfoFiles(string archiveName, string fileName)
         {
             using (var zipFile = ZipFile.Read(archiveName))
             {
@@ -73,18 +70,17 @@ namespace SemaAndCo.Supporting
             }
         }
 
-        public static void AppendFilesToZip(string archiveName, List<string> filesName)
+        public static void AppendFilesToZip(string archiveName, string fileName)
         {
             using (ZipFile zip = ZipFile.Read(archiveName))
             {
                 zip.AlternateEncodingUsage = ZipOption.Always;
                 zip.AlternateEncoding = Encoding.UTF8;
                 zip.CompressionLevel = Ionic.Zlib.CompressionLevel.Default;
-                zip.AddFiles(filesName, "");
+                zip.AddFile(fileName, "");
                 zip.Save();
             }
         }
-
         //private void EncryptFile(string inputFile, string outputFile, string password)
         //{
         //    UnicodeEncoding UE = new UnicodeEncoding();

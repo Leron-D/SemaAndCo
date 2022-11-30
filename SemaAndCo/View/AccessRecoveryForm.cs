@@ -105,19 +105,8 @@ namespace SemaAndCo.View
             try
             {
                 var user = context.semaandcouser.FirstOrDefault(u => u.userid == Properties.Settings.Default.login || u.email == Properties.Settings.Default.login);
-                user.passwd = passwordTextBox.Text;
+                user.passwd = passwordTextBox.Text.EncryptString();
                 context.SaveChanges();
-                if (File.Exists($@"{Properties.Settings.Default.savingPath}\{user.userid}.zip"))
-                {
-                    DotNetZipHelper.RefreshPassword($@"{Properties.Settings.Default.savingPath}\{user.userid}.zip", passwordTextBox.Text);
-                    user.passwd = passwordTextBox.Text;
-                    context.SaveChanges();
-                }
-                else
-                {
-                    user.passwd = passwordTextBox.Text;
-                    context.SaveChanges();
-                }
                 MessageBox.Show("Пароль успешно изменен", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
             }

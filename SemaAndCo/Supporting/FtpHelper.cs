@@ -19,7 +19,7 @@ namespace SemaAndCo.Supporting
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
             request.Method = WebRequestMethods.Ftp.DownloadFile;
-            request.Credentials = new NetworkCredential(login, password);
+            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
             using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
             {
                 using (Stream responseStream = response.GetResponseStream())
@@ -36,7 +36,7 @@ namespace SemaAndCo.Supporting
         public static void RenameFile(string filename, string address, string login, string password)
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
-            request.Credentials = new NetworkCredential(login, password);
+            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
             request.Proxy = null;
             request.Method = WebRequestMethods.Ftp.Rename;
             request.RenameTo = filename;
@@ -45,7 +45,7 @@ namespace SemaAndCo.Supporting
         public static void GetFileNameAndSize(string filename, string address, string login, string password)
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
-            request.Credentials = new NetworkCredential(login, password);
+            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
             request.Method = WebRequestMethods.Ftp.GetFileSize;
             FtpWebResponse response = (FtpWebResponse)request.GetResponse();
             string size = "";
@@ -64,7 +64,7 @@ namespace SemaAndCo.Supporting
         public static void GetFileLastModificated(string address, string login, string password)
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
-            request.Credentials = new NetworkCredential(login, password);
+            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
             request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
             FtpWebResponse ftpResponse = (FtpWebResponse)request.GetResponse();
             message += $"Последнее изменение: {ftpResponse.LastModified}";
@@ -74,7 +74,7 @@ namespace SemaAndCo.Supporting
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
             request.Method = WebRequestMethods.Ftp.UploadFile;
-            request.Credentials = new NetworkCredential(login, password);
+            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
             using (FileStream fs = new FileStream(filename, FileMode.Open))
             {
                 using (Stream requestStream = request.GetRequestStream())
@@ -94,7 +94,7 @@ namespace SemaAndCo.Supporting
             List<string> lines = new List<string>();
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
             request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-            request.Credentials = new NetworkCredential(login, password);
+            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
 
             using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
             {
@@ -127,7 +127,7 @@ namespace SemaAndCo.Supporting
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
 
             request.Method = WebRequestMethods.Ftp.MakeDirectory;
-            request.Credentials = new NetworkCredential(login, password);
+            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
 
             using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
             {
@@ -139,7 +139,7 @@ namespace SemaAndCo.Supporting
         {
             var listRequest = (FtpWebRequest)WebRequest.Create(address);
             listRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-            var credentials = new NetworkCredential(login, password);
+            var credentials = new NetworkCredential($"{login}.{Core.hash}", password);
             listRequest.Credentials = credentials;
 
             List<string> lines = new List<string>();
@@ -192,7 +192,7 @@ namespace SemaAndCo.Supporting
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
 
             request.Method = WebRequestMethods.Ftp.DeleteFile;
-            request.Credentials = new NetworkCredential(login, password);
+            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
 
             using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
             {

@@ -9,6 +9,6 @@ namespace SemaAndCo.Supporting
 {
     class CurrentUser
     {
-        public static FtpUser.semaandcouser User { get; set; }
+        public static FtpUser.semaandcouser FtpUser { get; set; }
     }
 }

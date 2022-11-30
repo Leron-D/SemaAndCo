@@ -32,7 +32,10 @@ namespace SemaAndCo.Presenter
         {
             try
             {
-                RegistrationUserMethod(login, email, name, phone, password, repeatPassword);
+                if (Core.CheckAddingUserVariability())
+                    AddNewUserMethod(login, email, name, phone, password, repeatPassword);
+                else
+                    RegistrationUserMethod(login, email, name, phone, password, repeatPassword);
             }
             catch (Exception ex)
             {
@@ -55,7 +58,6 @@ namespace SemaAndCo.Presenter
                             if (resultEmail == null)
                             {
                                 RegistrationData.login = login;
-                                RegistrationData.hash = "0f2ce17f1f5af3212ffde44976734c6b";
                                 RegistrationData.homedir = $"/srv/ftp/semaandco/{login}";
                                 RegistrationData.email = email;
                                 RegistrationData.name = name;
@@ -70,6 +72,47 @@ namespace SemaAndCo.Presenter
                                     form.ShowDialog();
                                     view.Close();
                                 }
+                            }
+                            else
+                                throw new Exception("Введенный Email уже существует в системе");
+                        }
+                        else
+                            throw new Exception("Такой пользователь уже существует");
+                    }
+                    else
+                        throw new Exception("Проверьте правильность ввода логина и пароля");
+                }
+                else
+                    throw new Exception("Номер телефона введён некорректно");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void AddNewUserMethod(string login, string email, string name, string phone, string password, string repeatPassword)
+        {
+            try
+            {
+                if (phone.Length == 11)
+                {
+                    if (login != "" && password != "" && password == repeatPassword && login.Length > 4 && password.Length > 4)
+                    {
+                        var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
+                        var resultEmail = context.semaandcouser.FirstOrDefault(r => r.email == email);
+                        if (resultLog == null)
+                        {
+                            if (resultEmail == null)
+                            {
+                                RegistrationData.login = login;
+                                RegistrationData.homedir = $"/srv/ftp/semaandco/{login}";
+                                RegistrationData.email = email;
+                                RegistrationData.name = name;
+                                RegistrationData.phone = phone;
+                                RegistrationData.password = password;
+                                RegistrationData.Registrate();
+                                MessageBox.Show("Пользователь успешно добавлен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
                                 throw new Exception("Введенный Email уже существует в системе");

@@ -1,4 +1,5 @@
 ﻿using Ionic.Zip;
+using SemaAndCo.Model;
 using SemaAndCo.Supporting;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.WebRequestMethods;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace SemaAndCo.View
 {
@@ -16,11 +19,18 @@ namespace SemaAndCo.View
     {
         string saveText;
         string extension;
-        string fileToRename = "";
+        bool fileResult;
         public MainForm()
         {
             InitializeComponent();
-            CreateZip();
+            if (CurrentUser.FtpUser == null)
+                serverRadioButton.Visible = false;
+            else
+                serverRadioButton.Visible = true;
+            if (CurrentUser.FtpUser != null)
+            {
+                CreateZip();
+            }
             LoadData();
         }
 
@@ -57,9 +67,9 @@ namespace SemaAndCo.View
 
         void CreateZip()
         {
-            if(!System.IO.File.Exists(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip")))
+            if (!System.IO.File.Exists(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
             {
-                DotNetZipHelper.CreateArchive($"{CurrentUser.User.userid}.zip");
+                DotNetZipHelper.CreateArchive($"{CurrentUser.FtpUser.userid}.zip");
             }
         }
 
@@ -68,22 +78,40 @@ namespace SemaAndCo.View
             listView.Items.Clear();
             if (localRadioButton.Checked)
             {
-                using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip")))
+                if (CurrentUser.FtpUser != null)
                 {
-                    foreach (ZipEntry e in zip.Entries)
+                    using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
                     {
-                        ListViewItem item = new ListViewItem(Path.GetFileName(e.FileName));
-                        listView.SmallImageList = imageList;
-                        item.Tag = e;
-                        int index = GetIndex(e.FileName);
-                        item.ImageIndex = index;
-                        listView.Items.Add(item);
+                        foreach (ZipEntry e in zip.Entries)
+                        {
+                            ListViewItem item = new ListViewItem(Path.GetFileName(e.FileName));
+                            listView.SmallImageList = imageList;
+                            item.Tag = e;
+                            int index = GetIndex(e.FileName);
+                            item.ImageIndex = index;
+                            listView.Items.Add(item);
+                        }
+                    }
+                }
+                else
+                {
+                    using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip")))
+                    {
+                        foreach (ZipEntry e in zip.Entries)
+                        {
+                            ListViewItem item = new ListViewItem(Path.GetFileName(e.FileName));
+                            listView.SmallImageList = imageList;
+                            item.Tag = e;
+                            int index = GetIndex(e.FileName);
+                            item.ImageIndex = index;
+                            listView.Items.Add(item);
+                        }
                     }
                 }
             }
             else
             {
-                List<string> filesFromServer = FtpHelper.GetFilesList(@"ftp://91.122.211.144:50021/", CurrentUser.User.userid, CurrentUser.User.passwd);
+                List<string> filesFromServer = FtpHelper.GetFilesList(@"ftp://91.122.211.144:50021/", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                 foreach (var item in filesFromServer)
                 {
                     ListViewItem listItem = new ListViewItem(Path.GetFileName(item));
@@ -106,7 +134,6 @@ namespace SemaAndCo.View
 
         public void UploadData()
         {
-            List<string> filesToAppend = new List<string>();
             try
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog()
@@ -118,18 +145,59 @@ namespace SemaAndCo.View
                 {
                     if (localRadioButton.Checked)
                     {
-                        foreach (string file in openFileDialog.FileNames)
+                        try
                         {
-                            try
+                            List<string> filesForReplace = new List<string>();
+                            foreach (string file in openFileDialog.FileNames)
                             {
-                                filesToAppend.Add(file);
+                                if (LocalUser.LocalUsers == null)
+                                {
+                                    using (ZipFile zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
+                                    {
+                                        fileResult = zip.Any(entry => entry.FileName == Path.GetFileName(file));
+                                    }
+                                }
+                                else
+                                {
+                                    using (ZipFile zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip")))
+                                    {
+                                        fileResult = zip.Any(entry => entry.FileName == Path.GetFileName(file));
+                                    }
+                                }
+                                if (fileResult)
+                                {
+                                    var messageResult = MessageBox.Show($"Файл с именем {Path.GetFileName(file)} уже существует. Вы хотите заменить его?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                    if (messageResult == DialogResult.Yes)
+                                    {
+                                        filesForReplace.Clear();
+                                        filesForReplace.Add(Path.GetFileName(file));
+                                        if (LocalUser.LocalUsers == null)
+                                        {
+                                            DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), filesForReplace);
+                                            DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), file);
+                                        }
+                                        else
+                                        {
+                                            DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), filesForReplace);
+                                            DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), file);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if(LocalUser.LocalUsers != null)
+                                        DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), file);
+                                    else
+                                        DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), file);
+                                }
+                                    
                             }
-                            catch (ArgumentException ex)
-                            {
-                                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
+                            MessageBox.Show("Файлы успешно загружены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip"), filesToAppend);
+                        catch (ArgumentException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
@@ -137,18 +205,17 @@ namespace SemaAndCo.View
                         {
                             try
                             {
-                                if (!FtpHelper.GetFilesList(@"ftp://91.122.211.144:50021/", CurrentUser.User.userid, CurrentUser.User.passwd).Contains(Path.GetFileName(file)))
+                                if (!FtpHelper.GetFilesList(@"ftp://91.122.211.144:50021/", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd).Contains(Path.GetFileName(file)))
                                 {
-                                    FtpHelper.UploadFile(file, $"ftp://91.122.211.144:50021/{Path.GetFileName(file)}", CurrentUser.User.userid, CurrentUser.User.passwd);
-                                    MessageBox.Show("Файлы успешно загружены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    FtpHelper.UploadFile(file, $"ftp://91.122.211.144:50021/{Path.GetFileName(file)}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                                 }
                                 else
                                 {
                                     var message = MessageBox.Show($"Файл с именем {Path.GetFileName(file)} уже существует. Вы хотите заменить его?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                                     if(message == DialogResult.Yes)
                                     {
-                                        FtpHelper.DeleteFile($"ftp://91.122.211.144:50021/{Path.GetFileName(file)}", CurrentUser.User.userid, CurrentUser.User.passwd);
-                                        FtpHelper.UploadFile(file, $"ftp://91.122.211.144:50021/{Path.GetFileName(file)}", CurrentUser.User.userid, CurrentUser.User.passwd);
+                                        FtpHelper.DeleteFile($"ftp://91.122.211.144:50021/{Path.GetFileName(file)}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                                        FtpHelper.UploadFile(file, $"ftp://91.122.211.144:50021/{Path.GetFileName(file)}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                                         MessageBox.Show("Файл успешно заменён", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     }
                                 }
@@ -158,6 +225,7 @@ namespace SemaAndCo.View
                                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
+                        MessageBox.Show("Файлы успешно загружены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 LoadData();
@@ -170,7 +238,11 @@ namespace SemaAndCo.View
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
+            pictureBox.Visible = true;
             DeleteMethod();
+            pictureBox.Visible = false;
+            ChangeEnabledButtons();
+
         }
 
         private void DeleteMethod()
@@ -184,17 +256,21 @@ namespace SemaAndCo.View
                     {
                         filesToDelete.Add(item.Text);
                     }
-                    DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip"), filesToDelete);
+                    if(LocalUser.LocalUsers == null)
+                        DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), filesToDelete);
+                    else
+                        DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), filesToDelete);
                     MessageBox.Show("Файлы успешно удалены", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     foreach (ListViewItem item in listView.SelectedItems)
                     {
-                        FtpHelper.DeleteFile($"ftp://91.122.211.144:50021/{item.Text}", CurrentUser.User.userid, CurrentUser.User.passwd);
-                        MessageBox.Show("Файлы успешно удалены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                        FtpHelper.DeleteFile($"ftp://91.122.211.144:50021/{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                    }                
+                    MessageBox.Show("Файлы успешно удалены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
                 LoadData();
             }
             catch (Exception ex)
@@ -216,14 +292,17 @@ namespace SemaAndCo.View
                 {
                     if (listView.SelectedItems.Count == 1)
                     {
-                        DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip"), listView.SelectedItems[0].Text, CurrentUser.User.passwd);
+                        if(LocalUser.LocalUsers == null)
+                            DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), listView.SelectedItems[0].Text);
+                        else
+                            DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, $"autonom.zip"), listView.SelectedItems[0].Text);
                     }
                 }
                 else
                 {
                     if (listView.SelectedItems.Count == 1)
                     {
-                        FtpHelper.GetFileNameAndSize(listView.SelectedItems[0].Text, $"ftp://91.122.211.144:50021/{listView.SelectedItems[0].Text}", CurrentUser.User.userid, CurrentUser.User.passwd);
+                        FtpHelper.GetFileNameAndSize(listView.SelectedItems[0].Text, $"ftp://91.122.211.144:50021/{listView.SelectedItems[0].Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                     }
                 }
             }
@@ -235,10 +314,9 @@ namespace SemaAndCo.View
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
             AuthorizationForm form = new AuthorizationForm();
             form.ShowDialog();
-            this.Close();
         }
 
         private void AdministrationButton_Click(object sender, EventArgs e)
@@ -263,7 +341,6 @@ namespace SemaAndCo.View
         {
             try
             {
-                fileToRename = listView.SelectedItems[0].Text;
                 saveText = listView.SelectedItems[0].Text;
                 extension = saveText.Split('.').Last();
                 listView.SelectedItems[0].Text = "";
@@ -310,16 +387,18 @@ namespace SemaAndCo.View
         {
             renameTextBox.Width = renameTextBox.Text.Length * 9 + 30;
             if(e.KeyCode == Keys.Enter)
-                RenameMethod(e);
+            {
+                RenameMethod(renameTextBox.Text, extension);
+            }
         }
 
-        private void RenameMethod(KeyEventArgs e)
+        private void RenameMethod(string fileName, string ext)
         {
             try
             {
                 if (localRadioButton.Checked)
                 {
-                    using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip")))
+                    using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
                     {
                         var zipEntry = zip.Entries.FirstOrDefault(z => z.FileName == $"{renameTextBox.Text}.{extension}");
                         if (!String.IsNullOrEmpty(renameTextBox.Text) && renameTextBox.Text != saveText.Remove(saveText.Length - extension.Length - 1))
@@ -333,7 +412,7 @@ namespace SemaAndCo.View
                                 foreach (ZipEntry entry in zip.ToList())
                                 {
                                     if (entry.FileName == saveText)
-                                        entry.FileName = $"{renameTextBox.Text}.{extension}";
+                                        entry.FileName = $"{fileName}.{ext}";
                                     zip.Save();
                                 }
                             }
@@ -342,9 +421,9 @@ namespace SemaAndCo.View
                 }
                 else
                 {
-                    if (!String.IsNullOrEmpty(renameTextBox.Text) && renameTextBox.Text != saveText.Remove(saveText.Length - extension.Length - 1))
+                    if (!String.IsNullOrEmpty(fileName) && fileName != saveText.Remove(saveText.Length - extension.Length - 1))
                     {
-                        FtpHelper.RenameFile($"{renameTextBox.Text}.{extension}", $"ftp://91.122.211.144:50021/{saveText}", CurrentUser.User.userid, CurrentUser.User.passwd);
+                        FtpHelper.RenameFile($"{fileName}.{ext}", $"ftp://91.122.211.144:50021/{saveText}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                     }
                 }
                 LoadData();
@@ -359,7 +438,10 @@ namespace SemaAndCo.View
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
+            pictureBox.Visible = true;
             DownloadMethod();
+            pictureBox.Visible = false;
+            ChangeEnabledButtons();
         }
 
         private void DownloadMethod()
@@ -371,15 +453,30 @@ namespace SemaAndCo.View
                     List<string> fileNames = new List<string>();
                     if (listView.SelectedItems.Count != 0)
                     {
-                        for (int i = 0; i < listView.SelectedItems.Count; i++)
-                        {
-                            fileNames.Add(listView.SelectedItems[i].Text);
-                        }
                         FolderBrowserDialog dialog = new FolderBrowserDialog();
                         if (dialog.ShowDialog() == DialogResult.OK)
                         {
-                            DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.User.userid}.zip"), fileNames, dialog.SelectedPath);
-                            MessageBox.Show("Файлы успешно скачены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            for (int i = 0; i < listView.SelectedItems.Count; i++)
+                            {
+                                if (System.IO.File.Exists($@"{dialog.SelectedPath}\{listView.SelectedItems[i].Text}"))
+                                {
+                                    var messageResult = MessageBox.Show($"Файл с именем {listView.SelectedItems[i].Text} уже существует. Вы хотите заменить его?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                    if (messageResult == DialogResult.Yes)
+                                    {
+                                        fileNames.Add(listView.SelectedItems[i].Text);
+                                        DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), listView.SelectedItems[i].Text, dialog.SelectedPath);
+                                    }
+                                }
+                                else
+                                {
+                                    fileNames.Add(listView.SelectedItems[i].Text);
+                                    DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), listView.SelectedItems[i].Text, dialog.SelectedPath);
+                                }
+                            }
+                            if (fileNames.Count > 0)
+                            {
+                                MessageBox.Show("Файлы успешно скачены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                         }
                     }
                 }
@@ -388,11 +485,27 @@ namespace SemaAndCo.View
                     FolderBrowserDialog dialog = new FolderBrowserDialog();
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {
+                        List<string> listItems = new List<string>();
                         foreach (ListViewItem item in listView.SelectedItems)
                         {
-                            FtpHelper.DownloadFile($@"{dialog.SelectedPath}\{item.Text}", $"ftp://91.122.211.144:50021/{item.Text}", CurrentUser.User.userid, CurrentUser.User.passwd);
+                            if(System.IO.File.Exists($@"{dialog.SelectedPath}\{item.Text}"))
+                            {
+                                var messageResult = MessageBox.Show($"Файл с именем {item.Text} уже существует. Вы хотите заменить его?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                if (messageResult == DialogResult.Yes)
+                                {
+                                    listItems.Add(item.Text);
+                                    FtpHelper.DownloadFile($@"{dialog.SelectedPath}\{item.Text}", $"ftp://91.122.211.144:50021/{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                                }
+                            }
+                            else
+                            {
+                                listItems.Add(item.Text);
+                                FtpHelper.DownloadFile($@"{dialog.SelectedPath}\{item.Text}", $"ftp://91.122.211.144:50021/{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                            }
+
                         }
-                        MessageBox.Show("Файлы успешно скачены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if(listItems.Count > 0)
+                            MessageBox.Show("Файлы успешно скачены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
 
@@ -403,16 +516,12 @@ namespace SemaAndCo.View
             }
         }
 
-        private void serverRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
+            pictureBox.Visible = true;
             LoadData();
             ChangeEnabledButtons();
-        }
-
-        private void localRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            LoadData();
-            ChangeEnabledButtons();
+            pictureBox.Visible = false;
         }
     }
 }

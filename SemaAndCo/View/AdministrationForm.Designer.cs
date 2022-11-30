@@ -30,6 +30,11 @@
         {
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.usersGridView = new System.Windows.Forms.DataGridView();
+            this.loginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.passwordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.changeButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.currentPageNumeric = new System.Windows.Forms.NumericUpDown();
@@ -44,11 +49,6 @@
             this.resultsAmountLabel = new System.Windows.Forms.Label();
             this.deleteButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
-            this.loginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.passwordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.usersGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentPageNumeric)).BeginInit();
             this.SuspendLayout();
@@ -64,6 +64,7 @@
             // usersGridView
             // 
             this.usersGridView.AllowUserToAddRows = false;
+            this.usersGridView.AllowUserToDeleteRows = false;
             this.usersGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -79,10 +80,46 @@
             this.phoneColumn});
             this.usersGridView.Location = new System.Drawing.Point(12, 55);
             this.usersGridView.Name = "usersGridView";
+            this.usersGridView.ReadOnly = true;
             this.usersGridView.RowHeadersVisible = false;
             this.usersGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.usersGridView.Size = new System.Drawing.Size(1033, 347);
             this.usersGridView.TabIndex = 3;
+            // 
+            // loginColumn
+            // 
+            this.loginColumn.DataPropertyName = "userid";
+            this.loginColumn.HeaderText = "Логин";
+            this.loginColumn.Name = "loginColumn";
+            this.loginColumn.ReadOnly = true;
+            // 
+            // emailColumn
+            // 
+            this.emailColumn.DataPropertyName = "email";
+            this.emailColumn.HeaderText = "E-mail";
+            this.emailColumn.Name = "emailColumn";
+            this.emailColumn.ReadOnly = true;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.DataPropertyName = "username";
+            this.nameColumn.HeaderText = "Имя";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            // 
+            // passwordColumn
+            // 
+            this.passwordColumn.DataPropertyName = "passwd";
+            this.passwordColumn.HeaderText = "Пароль";
+            this.passwordColumn.Name = "passwordColumn";
+            this.passwordColumn.ReadOnly = true;
+            // 
+            // phoneColumn
+            // 
+            this.phoneColumn.DataPropertyName = "phone";
+            this.phoneColumn.HeaderText = "Телефон";
+            this.phoneColumn.Name = "phoneColumn";
+            this.phoneColumn.ReadOnly = true;
             // 
             // changeButton
             // 
@@ -258,36 +295,6 @@
             this.addButton.Text = "Добавить";
             this.addButton.UseVisualStyleBackColor = false;
             this.addButton.Click += new System.EventHandler(this.AddButton_Click);
-            // 
-            // loginColumn
-            // 
-            this.loginColumn.DataPropertyName = "userid";
-            this.loginColumn.HeaderText = "Логин";
-            this.loginColumn.Name = "loginColumn";
-            // 
-            // emailColumn
-            // 
-            this.emailColumn.DataPropertyName = "email";
-            this.emailColumn.HeaderText = "E-mail";
-            this.emailColumn.Name = "emailColumn";
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.DataPropertyName = "username";
-            this.nameColumn.HeaderText = "Имя";
-            this.nameColumn.Name = "nameColumn";
-            // 
-            // passwordColumn
-            // 
-            this.passwordColumn.DataPropertyName = "passwd";
-            this.passwordColumn.HeaderText = "Пароль";
-            this.passwordColumn.Name = "passwordColumn";
-            // 
-            // phoneColumn
-            // 
-            this.phoneColumn.DataPropertyName = "phone";
-            this.phoneColumn.HeaderText = "Телефон";
-            this.phoneColumn.Name = "phoneColumn";
             // 
             // AdministrationForm
             // 

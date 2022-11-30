@@ -128,6 +128,7 @@
     <Compile Include="Model\FtpUser.cs" />
     <Compile Include="Model\ILoginModel.cs" />
     <Compile Include="Model\IAdministrationModel.cs" />
+    <Compile Include="Model\LocalUser.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\RegistrationModel.cs" />
     <Compile Include="Model\IRegistrationModel.cs" />
@@ -153,6 +154,11 @@
     </Compile>
     <Compile Include="Presenter\AdministrationPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Supporting\CryptoClass.cs" />
     <Compile Include="Supporting\CurrentUser.cs" />
     <Compile Include="Supporting\DotNetZipHelper.cs" />
@@ -233,14 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="View\AccessRecoveryForm.resx">
       <DependentUpon>AccessRecoveryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -275,6 +276,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SacModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
     <None Include="ds_brushes.ttf" />
     <None Include="Model\SacModel.edmx.diagram">
       <DependentUpon>SacModel.edmx</DependentUpon>
@@ -309,8 +311,8 @@
       <LastGenOutput>SacModel.cs</LastGenOutput>
     </Content>
     <Content Include="logo.ico" />
+    <None Include="Resources\icons8-logout-40ы1.png" />
     <None Include="Resources\icons8-administration-40.png" />
-    <None Include="Resources\icons8-logout-40ы.png" />
     <None Include="Resources\icons8-logout-3ф.png" />
     <None Include="Resources\icons8-administration-32.png" />
     <None Include="Resources\icons8-папка-архив-321.png" />
