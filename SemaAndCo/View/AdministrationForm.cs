@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
@@ -116,6 +117,18 @@ namespace SemaAndCo.View
         }
         #endregion
 
+        public void ChangeEnableButtons()
+        {
+            if(usersGridView.SelectedCells.Count == 0)
+            {
+                changeButton.Enabled = deleteButton.Enabled = false;
+            }
+            else
+            {
+                changeButton.Enabled = deleteButton.Enabled = true;
+            }  
+        }
+
         public string SearchTextBox
         {
             set
@@ -205,7 +218,8 @@ namespace SemaAndCo.View
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
-            addButton.Enabled = true;
+            addButton.Enabled = changeButton.Enabled = deleteButton.Enabled = true;
+            presenter.UsersLoad();
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -214,7 +228,57 @@ namespace SemaAndCo.View
             RegistrationForm form = new RegistrationForm();
             form.FormClosed += Form_FormClosed;
             form.Show();
-            addButton.Enabled = false;
+            addButton.Enabled = changeButton.Enabled = deleteButton.Enabled = false;
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            DeleteUserMEthod();
+        }
+
+        private void DeleteUserMEthod()
+        {
+            try
+            {                
+                var message = MessageBox.Show($"Удалить выбранного(-ых) пользователя(-ей)?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);                
+                if (message == DialogResult.Yes)
+                {
+                    Core context = new Core(Core.StrConnection());
+                    string loginOfUser;                    
+                    FtpUser.semaandcouser user = new FtpUser.semaandcouser();
+                    for (int i = 0; i < usersGridView.SelectedRows.Count; i++)
+                    {
+                        loginOfUser = usersGridView.SelectedRows[i].Cells[0].Value.ToString();
+                        user = context.semaandcouser.Where(u => u.userid == loginOfUser).FirstOrDefault();
+                        context.semaandcouser.Remove(user);
+                        context.SaveChanges();
+                    }
+                    MessageBox.Show($"Пользователь(-и) успешно удалён(-ены)", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    presenter.UsersLoad();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void UsersGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            ChangeEnableButtons();
+        }
+
+        private void ChangeButton_Click(object sender, EventArgs e)
+        {
+            ChangeUserMethod();
+        }
+
+        private void ChangeUserMethod()
+        {
+            ChangeUserForm form = new ChangeUserForm(usersGridView.SelectedRows[0].Cells[0].Value.ToString());
+            form.FormClosed += Form_FormClosed;
+            form.Show();
+            addButton.Enabled = changeButton.Enabled = deleteButton.Enabled = false;
         }
     }
 }

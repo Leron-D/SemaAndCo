@@ -17,7 +17,7 @@ namespace SemaAndCo.Supporting
         Core context = new Core(Core.StrConnection());
         int code;
         bool success;
-        public void EnterMail(string loginOrEmail, bool modif)
+        public void EnterMailToRecoveryOrRegistration(string loginOrEmail, bool modif)
         {
             try
             {
@@ -53,9 +53,38 @@ namespace SemaAndCo.Supporting
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
-        public bool SendOnMail(string loginOrEmail, bool modif)
+
+        public void EnterMailWithChangesOfUser(string email, string message)
+        {
+            try
+            {
+                // отправитель - устанавливаем адрес и отображаемое в письме имя
+                MailAddress from = new MailAddress("sememshot2@yandex.ru", "Администрация приложения SaC");
+                // кому отправляем
+                MailAddress to = new MailAddress(email);
+                // создаем объект сообщения
+                MailMessage m = new MailMessage(from, to);
+                // тема письма
+                m.Subject = "Your data has been changed";
+                // текст письма
+                m.Body = $"{message}";
+                // письмо представляет код html
+                m.IsBodyHtml = true;
+                // адрес smtp-сервера и порт, с которого будем отправлять письмо
+                SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 587);
+                smtp.EnableSsl = true;
+                // логин и пароль
+                smtp.Credentials = new NetworkCredential("sememshot2@yandex.ru", "Mamo4ka228");
+                smtp.Send(m);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public bool SendMessageWithConfirmOnMail(string loginOrEmail, bool modif)
         {
             try
             {
@@ -66,12 +95,12 @@ namespace SemaAndCo.Supporting
                 if (log != null)
                 {
                     loginOrEmail = log.email;
-                    EnterMail(loginOrEmail, modif);
+                    EnterMailToRecoveryOrRegistration(loginOrEmail, modif);
                     return success;
                 }
                 else if (email != null)
                 {
-                    EnterMail(loginOrEmail, modif);
+                    EnterMailToRecoveryOrRegistration(loginOrEmail, modif);
                     return success;
                 }
                 else
@@ -90,7 +119,7 @@ namespace SemaAndCo.Supporting
             {
                 Random rand = new Random();
                 code = rand.Next(10000, 99999);
-                EnterMail(email, modif);
+                EnterMailToRecoveryOrRegistration(email, modif);
                 return success;
             }
             catch (Exception ex)

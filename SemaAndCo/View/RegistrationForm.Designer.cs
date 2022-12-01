@@ -188,7 +188,7 @@
             // 
             this.phoneNumberTextBox.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.phoneNumberTextBox.Location = new System.Drawing.Point(459, 93);
-            this.phoneNumberTextBox.Mask = "80000000000";
+            this.phoneNumberTextBox.Mask = "8(000)-000-00-00";
             this.phoneNumberTextBox.Name = "phoneNumberTextBox";
             this.phoneNumberTextBox.Size = new System.Drawing.Size(355, 33);
             this.phoneNumberTextBox.TabIndex = 37;

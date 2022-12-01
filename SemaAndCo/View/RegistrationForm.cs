@@ -54,8 +54,22 @@ namespace SemaAndCo.View
         {
             if (captcha.CheckText(captchaTextBox.Text))
             {
-                presenter.RegistrationMethod(loginTextBox.Text, emailTextBox.Text, userNameTextBox.Text, phoneNumberTextBox.Text,
+                string phone = phoneNumberTextBox.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
+                if (phone.Length == 1)
+                {
+                    phone = null;
+                    presenter.RegistrationMethod(loginTextBox.Text, emailTextBox.Text, userNameTextBox.Text, phone,
                                         passwordTextBox.Text, repeatPasswordTextBox.Text);
+                }
+                else if(phone.Length != 11)
+                {
+                    MessageBox.Show("Номер телефона введён некорректно", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    presenter.RegistrationMethod(loginTextBox.Text, emailTextBox.Text, userNameTextBox.Text, phone,
+                                        passwordTextBox.Text, repeatPasswordTextBox.Text);
+                }
             }
             else
             {
@@ -128,14 +142,14 @@ namespace SemaAndCo.View
 
         private void userNameTextBox_Validating(object sender, CancelEventArgs e)
         {
-            if (userNameTextBox.Text.Length < 5 || userNameTextBox.Text.Length > 30)
-            {
-                regErrorProvider.SetError(userNameTextBox, "Имя пользователя должно быть длиной от 5 до 30 символов");
-            }
-            else
-            {
-                regErrorProvider.Clear();
-            }
+            //if (userNameTextBox.Text.Length < 5 || userNameTextBox.Text.Length > 30)
+            //{
+            //    regErrorProvider.SetError(userNameTextBox, "Имя пользователя должно быть длиной от 5 до 30 символов");
+            //}
+            //else
+            //{
+            //    regErrorProvider.Clear();
+            //}
         }
 
         private void RegistrationForm_FormClosed(object sender, FormClosedEventArgs e)

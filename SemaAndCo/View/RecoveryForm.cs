@@ -59,7 +59,7 @@ namespace SemaAndCo.View
         {
             if (captcha.CheckText(captchaTextBox.Text))
             {
-                if(sendMail.SendOnMail(loginOrEmailTextBox.Text, true))
+                if(sendMail.SendMessageWithConfirmOnMail(loginOrEmailTextBox.Text, true))
                 {
                     presenter.GetLoginOrEmail(loginOrEmailTextBox.Text);
                     Hide();

@@ -512,7 +512,6 @@ namespace SemaAndCo.View
                             MessageBox.Show("Файлы успешно скачены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
-
             }
             catch(Exception ex)
             {

@@ -83,8 +83,10 @@
             this.usersGridView.ReadOnly = true;
             this.usersGridView.RowHeadersVisible = false;
             this.usersGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.usersGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.usersGridView.Size = new System.Drawing.Size(1033, 347);
             this.usersGridView.TabIndex = 3;
+            this.usersGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.UsersGridView_CellMouseClick);
             // 
             // loginColumn
             // 
@@ -134,6 +136,7 @@
             this.changeButton.TabIndex = 2;
             this.changeButton.Text = "Изменить";
             this.changeButton.UseVisualStyleBackColor = false;
+            this.changeButton.Click += new System.EventHandler(this.ChangeButton_Click);
             // 
             // searchButton
             // 
@@ -280,6 +283,7 @@
             this.deleteButton.TabIndex = 40;
             this.deleteButton.Text = "Удалить";
             this.deleteButton.UseVisualStyleBackColor = false;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // addButton
             // 

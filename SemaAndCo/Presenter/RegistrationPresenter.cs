@@ -47,43 +47,38 @@ namespace SemaAndCo.Presenter
         {
             try
             {
-                if (phone.Length == 11)
+                if (login != "" && password != "" && password == repeatPassword && login.Length > 4 && password.Length > 4)
                 {
-                    if (login != "" && password != "" && password == repeatPassword && login.Length > 4 && password.Length > 4)
+                    var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
+                    var resultEmail = context.semaandcouser.FirstOrDefault(r => r.email == email);
+                    if (resultLog == null)
                     {
-                        var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
-                        var resultEmail = context.semaandcouser.FirstOrDefault(r => r.email == email);
-                        if (resultLog == null)
+                        if (resultEmail == null)
                         {
-                            if (resultEmail == null)
+                            RegistrationData.login = login;
+                            RegistrationData.homedir = $"/srv/ftp/semaandco/{login}";
+                            RegistrationData.email = email;
+                            RegistrationData.name = name;
+                            RegistrationData.phone = phone;
+                            RegistrationData.password = password;
+                            if (sendMail.SendRegCode(email, false))
                             {
-                                RegistrationData.login = login;
-                                RegistrationData.homedir = $"/srv/ftp/semaandco/{login}";
-                                RegistrationData.email = email;
-                                RegistrationData.name = name;
-                                RegistrationData.phone = phone;
-                                RegistrationData.password = password;
-                                if (sendMail.SendRegCode(email, false))
-                                {
-                                    view.Hide();
-                                    Core.mailVariability = false;
-                                    Core.addingUserVariability = false;
-                                    AccessRecoveryForm form = new AccessRecoveryForm();
-                                    form.ShowDialog();
-                                    view.Close();
-                                }
+                                view.Hide();
+                                Core.mailVariability = false;
+                                Core.addingUserVariability = false;
+                                AccessRecoveryForm form = new AccessRecoveryForm();
+                                form.ShowDialog();
+                                view.Close();
                             }
-                            else
-                                throw new Exception("Введенный Email уже существует в системе");
                         }
                         else
-                            throw new Exception("Такой пользователь уже существует");
+                            throw new Exception("Введенный Email уже существует в системе");
                     }
                     else
-                        throw new Exception("Проверьте правильность ввода логина и пароля");
+                        throw new Exception("Такой пользователь уже существует");
                 }
                 else
-                    throw new Exception("Номер телефона введён некорректно");
+                    throw new Exception("Проверьте правильность ввода логина и пароля");
             }
             catch (Exception ex)
             {
@@ -95,36 +90,31 @@ namespace SemaAndCo.Presenter
         {
             try
             {
-                if (phone.Length == 11)
+                if (login != "" && password != "" && password == repeatPassword && login.Length > 4 && password.Length > 4)
                 {
-                    if (login != "" && password != "" && password == repeatPassword && login.Length > 4 && password.Length > 4)
+                    var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
+                    var resultEmail = context.semaandcouser.FirstOrDefault(r => r.email == email);
+                    if (resultLog == null)
                     {
-                        var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
-                        var resultEmail = context.semaandcouser.FirstOrDefault(r => r.email == email);
-                        if (resultLog == null)
+                        if (resultEmail == null)
                         {
-                            if (resultEmail == null)
-                            {
-                                RegistrationData.login = login;
-                                RegistrationData.homedir = $"/srv/ftp/semaandco/{login}";
-                                RegistrationData.email = email;
-                                RegistrationData.name = name;
-                                RegistrationData.phone = phone;
-                                RegistrationData.password = password;
-                                RegistrationData.Registrate();
-                                MessageBox.Show("Пользователь успешно добавлен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            else
-                                throw new Exception("Введенный Email уже существует в системе");
+                            RegistrationData.login = login;
+                            RegistrationData.homedir = $"/srv/ftp/semaandco/{login}";
+                            RegistrationData.email = email;
+                            RegistrationData.name = name;
+                            RegistrationData.phone = phone;
+                            RegistrationData.password = password;
+                            RegistrationData.Registrate();
+                            MessageBox.Show("Пользователь успешно добавлен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
-                            throw new Exception("Такой пользователь уже существует");
+                            throw new Exception("Введенный Email уже существует в системе");
                     }
                     else
-                        throw new Exception("Проверьте правильность ввода логина и пароля");
+                        throw new Exception("Такой пользователь уже существует");
                 }
                 else
-                    throw new Exception("Номер телефона введён некорректно");
+                    throw new Exception("Проверьте правильность ввода логина и пароля");
             }
             catch (Exception ex)
             {
