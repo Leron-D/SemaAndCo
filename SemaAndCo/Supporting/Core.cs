@@ -17,7 +17,6 @@ namespace SemaAndCo.Supporting
     {   
         public static bool mailVariability;
         public static bool addingUserVariability;
-        public static bool admClosed;
         public static string hash = "0f2ce17f1f5af3212ffde44976734c6b";
         static public string StrConnection()
         {
@@ -32,10 +31,6 @@ namespace SemaAndCo.Supporting
         public Core(string conStr) : base(new MySqlConnection(conStr), true)
         { }
         public DbSet<semaandcouser> semaandcouser { get; set; }
-        public static bool CheckClosed()
-        {
-            return admClosed;
-        }
 
         public static bool CheckMailVariability()
         {
