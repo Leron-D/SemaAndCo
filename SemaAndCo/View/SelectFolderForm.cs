@@ -59,19 +59,29 @@ namespace SemaAndCo.View
         {
             try
             {
-                if (Directory.Exists(folderTextBox.Text))
+                string oldPath = Properties.Settings.Default.savingPath;
+                if (!String.IsNullOrEmpty(oldPath))
                 {
-                    Properties.Settings.Default.savingPath = folderTextBox.Text;
-                    Properties.Settings.Default.Save();
-                    MessageBox.Show("Путь успешно сохранен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Hide();
-                    AuthorizationForm form = new AuthorizationForm();
-                    form.ShowDialog();
-                    Close();
+                    if (Directory.Exists(folderTextBox.Text))
+                    {
+                        Properties.Settings.Default.savingPath = folderTextBox.Text;
+                        Properties.Settings.Default.Save();
+                        foreach (var file in Directory.GetFiles(oldPath))
+                        {
+                            File.Move(file, $@"{Properties.Settings.Default.savingPath}\{Path.GetFileName(file)}");
+                        }
+                        OpenAuthorizationFormMethod();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Данной папки несуществует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Данной папки несуществует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Properties.Settings.Default.savingPath = folderTextBox.Text;
+                    Properties.Settings.Default.Save();
+                    OpenAuthorizationFormMethod();
                 }
             }
             catch (Exception ex)
@@ -79,6 +89,15 @@ namespace SemaAndCo.View
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        private void OpenAuthorizationFormMethod()
+        {
+            MessageBox.Show("Путь успешно сохранен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Hide();
+            AuthorizationForm form = new AuthorizationForm();
+            form.ShowDialog();
+            Close();
         }
 
         private void ChoosePathButton_Click(object sender, EventArgs e)

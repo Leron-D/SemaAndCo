@@ -250,7 +250,7 @@
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.MinimumSize = new System.Drawing.Size(770, 260);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "Главная";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

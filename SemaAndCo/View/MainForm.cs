@@ -12,6 +12,7 @@ using static System.Net.WebRequestMethods;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using ToolTip = System.Windows.Forms.ToolTip;
 
 namespace SemaAndCo.View
 {
@@ -23,6 +24,9 @@ namespace SemaAndCo.View
         public MainForm()
         {
             InitializeComponent();
+            ToolTip tool = new ToolTip();
+            tool.SetToolTip(administrationButton, "Выход из аккаунта");
+            tool.SetToolTip(exitButton, "Выход из аккаунта");
             if (CurrentUser.FtpUser == null)
                 serverRadioButton.Visible = false;
             else

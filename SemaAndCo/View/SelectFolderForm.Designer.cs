@@ -96,7 +96,7 @@
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.Name = "SelectFolderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SelectNameFolderForm";
+            this.Text = "Выбор пути сохранения";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SelectFolderForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();

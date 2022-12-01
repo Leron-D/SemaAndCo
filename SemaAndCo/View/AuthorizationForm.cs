@@ -28,6 +28,8 @@ namespace SemaAndCo
             IntroForm introForm = new IntroForm(533);
             introForm.ShowDialog();
             InitializeComponent();
+            ToolTip tool = new ToolTip();
+            tool.SetToolTip(savingPathButton, "Выход из аккаунта");
             CurrentUser.FtpUser = null;
             presenter = new LoginPresenter(this);
             if (Properties.Settings.Default.authLogin != "" && Properties.Settings.Default.password != "")
