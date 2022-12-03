@@ -29,7 +29,7 @@ namespace SemaAndCo
             introForm.ShowDialog();
             InitializeComponent();
             ToolTip tool = new ToolTip();
-            tool.SetToolTip(savingPathButton, "Выход из аккаунта");
+            tool.SetToolTip(savingPathButton, "Выбор папки для сохранения");
             CurrentUser.FtpUser = null;
             presenter = new LoginPresenter(this);
             if (Properties.Settings.Default.authLogin != "" && Properties.Settings.Default.password != "")
@@ -104,21 +104,33 @@ namespace SemaAndCo
 
         private async Task LoginMethodAsync()
         {
+            //try
+            //{
+            //Hide();
+            //IntroForm form = new IntroForm();
+            //form.Show();
             introPictureBox.Dock = DockStyle.Fill;
             introPictureBox.Visible = true;
-            await Task.Run(() =>
-            {
-                if(presenter.LoginMethod(Login, Password))
+                await Task.Run(() =>
                 {
-                    result = true;
-                }
-                else
-                {
-                    result = false;
-                }
-            });
+                    if (presenter.LoginMethod(Login, Password))
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                });
             introPictureBox.Dock = DockStyle.None;
             introPictureBox.Visible = false;
+            //form.Close();
+            //Show();
+            //}
+            //catch (Exception)
+            //{
+            //    Show();
+            //}
         }
 
         private async void TextBox_KeyDown(object sender, KeyEventArgs e)

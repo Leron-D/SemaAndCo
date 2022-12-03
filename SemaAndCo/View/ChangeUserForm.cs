@@ -44,7 +44,7 @@ namespace SemaAndCo.View
             SaveChangesMethod();
         }
 
-        private void SendMessageToUser()
+        private void SendMessageToUser(string password)
         {
             if (user.userid != oldLogin)
                 messageToEmail += $"Ваш логин был изменён на <b>{user.userid}</b>";
@@ -53,7 +53,7 @@ namespace SemaAndCo.View
             if (user.username != oldName)
                 messageToEmail += $"<br>Ваше имя было изменено на <b>{user.username}</b>";
             if (user.passwd != oldPassword)
-                messageToEmail += $"<br>Ваш пароль был изменён";
+                messageToEmail += $"<br>Ваш пароль был изменён на <b>{password}</b>";
             if (String.IsNullOrEmpty(user.phone))
                 messageToEmail += "<br>Ваш телефон был удалён";
             else if (user.phone != oldPhone)
@@ -83,9 +83,12 @@ namespace SemaAndCo.View
                     user.username = nameTextBox.Text;
                     if(passwordTextBox.Text != oldPassword)
                         user.passwd = passwordTextBox.Text.EncryptString();
-                    user.phone = phoneTextBox.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
+                    if (phoneTextBox.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Length == 1)
+                        user.phone = null;
+                    else
+                        user.phone = phoneTextBox.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
                     context.SaveChanges();
-                    SendMessageToUser();
+                    SendMessageToUser(passwordTextBox.Text);
                 }
                 Close();
             }

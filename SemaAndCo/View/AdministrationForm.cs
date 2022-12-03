@@ -20,6 +20,7 @@ namespace SemaAndCo.View
         int pageSize = 1;
         int currentPage = 1;
         AdministrationPresenter presenter;
+        SendMail sendMail = new SendMail();
 
         public AdministrationForm()
         {
@@ -252,6 +253,7 @@ namespace SemaAndCo.View
                         user = context.semaandcouser.Where(u => u.userid == loginOfUser).FirstOrDefault();
                         context.semaandcouser.Remove(user);
                         context.SaveChanges();
+                        sendMail.EnterMailWithChangesOfUser(user.email, "Ваш аккаунт был удалён");
                     }
                     MessageBox.Show($"Пользователь(-и) успешно удалён(-ены)", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     presenter.UsersLoad();

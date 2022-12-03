@@ -68,7 +68,8 @@ namespace SemaAndCo.View
                         Properties.Settings.Default.Save();
                         foreach (var file in Directory.GetFiles(oldPath))
                         {
-                            File.Move(file, $@"{Properties.Settings.Default.savingPath}\{Path.GetFileName(file)}");
+                            if(file.Split('.').Last() == "zip")
+                                File.Move(file, $@"{Properties.Settings.Default.savingPath}\{Path.GetFileName(file)}");
                         }
                         OpenAuthorizationFormMethod();
                     }

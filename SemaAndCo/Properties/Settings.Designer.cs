@@ -94,5 +94,29 @@ namespace SemaAndCo.Properties {
                 this["archivePassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Mamo4ka228")]
+        public string adminPassword {
+            get {
+                return ((string)(this["adminPassword"]));
+            }
+            set {
+                this["adminPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("admin")]
+        public string adminLogin {
+            get {
+                return ((string)(this["adminLogin"]));
+            }
+            set {
+                this["adminLogin"] = value;
+            }
+        }
     }
 }

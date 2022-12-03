@@ -194,9 +194,9 @@
             // introPictureBox
             // 
             this.introPictureBox.Image = global::SemaAndCo.Properties.Resources.video__1_;
-            this.introPictureBox.Location = new System.Drawing.Point(274, 3);
+            this.introPictureBox.Location = new System.Drawing.Point(275, 3);
             this.introPictureBox.Name = "introPictureBox";
-            this.introPictureBox.Size = new System.Drawing.Size(110, 101);
+            this.introPictureBox.Size = new System.Drawing.Size(109, 101);
             this.introPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.introPictureBox.TabIndex = 23;
             this.introPictureBox.TabStop = false;

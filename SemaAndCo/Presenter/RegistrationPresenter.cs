@@ -56,7 +56,6 @@ namespace SemaAndCo.Presenter
                         if (resultEmail == null)
                         {
                             RegistrationData.login = login;
-                            RegistrationData.homedir = $"/srv/ftp/semaandco/{login}";
                             RegistrationData.email = email;
                             RegistrationData.name = name;
                             RegistrationData.phone = phone;
@@ -99,7 +98,6 @@ namespace SemaAndCo.Presenter
                         if (resultEmail == null)
                         {
                             RegistrationData.login = login;
-                            RegistrationData.homedir = $"/srv/ftp/semaandco/{login}";
                             RegistrationData.email = email;
                             RegistrationData.name = name;
                             RegistrationData.phone = phone;
