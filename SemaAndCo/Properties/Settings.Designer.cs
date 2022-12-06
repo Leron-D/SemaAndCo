@@ -109,13 +109,13 @@ namespace SemaAndCo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("admin")]
-        public string adminLogin {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool adminIntro {
             get {
-                return ((string)(this["adminLogin"]));
+                return ((bool)(this["adminIntro"]));
             }
             set {
-                this["adminLogin"] = value;
+                this["adminIntro"] = value;
             }
         }
     }

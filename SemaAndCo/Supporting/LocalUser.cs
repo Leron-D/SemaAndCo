@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsFormsApp1.Model
+namespace SemaAndCo.Model
 {
-    interface IRecoveryModel
+    public class LocalUser
     {
-
+        public static bool Automatic { get; set; }
     }
 }

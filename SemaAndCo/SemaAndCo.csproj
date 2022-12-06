@@ -128,12 +128,9 @@
     <Compile Include="Model\FtpUser.cs" />
     <Compile Include="Model\ILoginModel.cs" />
     <Compile Include="Model\IAdministrationModel.cs" />
-    <Compile Include="Model\LocalUser.cs" />
+    <Compile Include="Supporting\LocalUser.cs" />
     <Compile Include="Model\LoginModel.cs" />
-    <Compile Include="Model\RegistrationModel.cs" />
     <Compile Include="Model\IRegistrationModel.cs" />
-    <Compile Include="Model\IRecoveryModel.cs" />
-    <Compile Include="Model\RecoveryModel.cs" />
     <Compile Include="Model\SacModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -216,6 +213,12 @@
     <Compile Include="View\RecoveryForm.Designer.cs">
       <DependentUpon>RecoveryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\ReferenceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ReferenceForm.Designer.cs">
+      <DependentUpon>ReferenceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\RegistrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,6 +266,9 @@
     <EmbeddedResource Include="View\RecoveryForm.resx">
       <DependentUpon>RecoveryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\ReferenceForm.resx">
+      <DependentUpon>ReferenceForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -277,6 +283,7 @@
       <LastGenOutput>SacModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="ds_brushes.ttf" />
     <None Include="Model\SacModel.edmx.diagram">
       <DependentUpon>SacModel.edmx</DependentUpon>

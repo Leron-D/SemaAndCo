@@ -27,9 +27,17 @@ namespace SemaAndCo.View
             InitializeComponent();
             usersGridView.AutoGenerateColumns = false;
             presenter = new AdministrationPresenter(this);
-            pageSize = presenter.AutoSize(pageSize, usersGridView.Size.Height);
-            presenter.UsersLoad();
-            presenter.Navigation(pageSize, currentPage);
+            try
+            {
+                pageSize = presenter.AutoSize(pageSize, usersGridView.Size.Height);
+                presenter.UsersLoad();
+                presenter.Navigation(pageSize, currentPage);
+                Properties.Settings.Default.adminIntro = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         #region Pages
@@ -262,6 +270,7 @@ namespace SemaAndCo.View
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
             }
         }
 

@@ -14,12 +14,10 @@ namespace SemaAndCo.Presenter
 {
     class RecoveryPresenter
     {
-        RecoveryModel model;
         IRecoveryView view;
 
         public RecoveryPresenter(IRecoveryView view)
         {
-            this.model = new RecoveryModel();
             this.view = view;
         }
 

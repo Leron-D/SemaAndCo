@@ -15,12 +15,13 @@ namespace SemaAndCo.Supporting
 {
     public static class DotNetZipHelper
     {
-        public static string CreateArchive(string archiveName,
+        public static string CreateArchive(string archiveName, string password,
         CompressionLevel compressionLevel = CompressionLevel.Default)
         {
             using (var zipFile = new ZipFile())
             {
                 zipFile.CompressionLevel = compressionLevel;
+                zipFile.Password = password;
                 zipFile.Save(Path.Combine(Properties.Settings.Default.savingPath, archiveName));
                 return archiveName;
             }
@@ -70,13 +71,14 @@ namespace SemaAndCo.Supporting
             }
         }
 
-        public static void AppendFilesToZip(string archiveName, string fileName)
+        public static void AppendFilesToZip(string archiveName, string fileName, string password)
         {
             using (ZipFile zip = ZipFile.Read(archiveName))
             {
                 zip.AlternateEncodingUsage = ZipOption.Always;
                 zip.AlternateEncoding = Encoding.UTF8;
                 zip.CompressionLevel = Ionic.Zlib.CompressionLevel.Default;
+                zip.Password = password;
                 zip.AddFile(fileName, "");
                 zip.Save();
             }

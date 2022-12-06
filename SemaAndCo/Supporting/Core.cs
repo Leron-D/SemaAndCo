@@ -17,7 +17,10 @@ namespace SemaAndCo.Supporting
     {   
         public static bool mailVariability;
         public static bool addingUserVariability;
+        public static bool goAdministration;
+        public static bool access;
         public static string hash = "0f2ce17f1f5af3212ffde44976734c6b";
+
         static public string StrConnection()
         {
             MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
@@ -32,6 +35,11 @@ namespace SemaAndCo.Supporting
         { }
         public DbSet<semaandcouser> semaandcouser { get; set; }
 
+        public static bool CheckAccess()
+        {
+            return access;
+        }
+
         public static bool CheckMailVariability()
         {
             return mailVariability;
@@ -40,5 +48,6 @@ namespace SemaAndCo.Supporting
         {
             return addingUserVariability;
         }
+
     }
 }

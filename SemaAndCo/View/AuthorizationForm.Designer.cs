@@ -42,6 +42,7 @@
             this.savingPathButton = new System.Windows.Forms.Button();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.introPictureBox = new System.Windows.Forms.PictureBox();
+            this.administrationButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.introPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -193,14 +194,31 @@
             // 
             // introPictureBox
             // 
+            this.introPictureBox.Enabled = false;
             this.introPictureBox.Image = global::SemaAndCo.Properties.Resources.video__1_;
-            this.introPictureBox.Location = new System.Drawing.Point(275, 3);
+            this.introPictureBox.Location = new System.Drawing.Point(325, 3);
             this.introPictureBox.Name = "introPictureBox";
-            this.introPictureBox.Size = new System.Drawing.Size(109, 101);
+            this.introPictureBox.Size = new System.Drawing.Size(50, 45);
             this.introPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.introPictureBox.TabIndex = 23;
             this.introPictureBox.TabStop = false;
             this.introPictureBox.Visible = false;
+            // 
+            // administrationButton
+            // 
+            this.administrationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.administrationButton.BackColor = System.Drawing.Color.Transparent;
+            this.administrationButton.FlatAppearance.BorderSize = 0;
+            this.administrationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.administrationButton.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.administrationButton.Image = global::SemaAndCo.Properties.Resources.icons8_administration_40;
+            this.administrationButton.Location = new System.Drawing.Point(10, 38);
+            this.administrationButton.Margin = new System.Windows.Forms.Padding(5);
+            this.administrationButton.Name = "administrationButton";
+            this.administrationButton.Size = new System.Drawing.Size(41, 40);
+            this.administrationButton.TabIndex = 24;
+            this.administrationButton.UseVisualStyleBackColor = false;
+            this.administrationButton.Click += new System.EventHandler(this.AdministrationButton_Click);
             // 
             // AuthorizationForm
             // 
@@ -209,6 +227,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Snow;
             this.ClientSize = new System.Drawing.Size(387, 522);
+            this.Controls.Add(this.administrationButton);
             this.Controls.Add(this.introPictureBox);
             this.Controls.Add(this.savingPathButton);
             this.Controls.Add(this.autoButton);
@@ -249,5 +268,6 @@
         private System.Windows.Forms.Button autoButton;
         private System.Windows.Forms.Button savingPathButton;
         private System.Windows.Forms.PictureBox introPictureBox;
+        private System.Windows.Forms.Button administrationButton;
     }
 }

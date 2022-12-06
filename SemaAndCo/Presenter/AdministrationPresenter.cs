@@ -28,7 +28,7 @@ namespace SemaAndCo.Presenter
             }
             catch (Exception)
             {
-                MessageBox.Show("Проблемы с подключением к БД. \nПопробуйте сменить параметры подключения", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Отсутствует соединение с сервером", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

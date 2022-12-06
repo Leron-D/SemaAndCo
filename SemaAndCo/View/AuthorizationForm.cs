@@ -28,16 +28,23 @@ namespace SemaAndCo
             IntroForm introForm = new IntroForm(533);
             introForm.ShowDialog();
             InitializeComponent();
-            ToolTip tool = new ToolTip();
-            tool.SetToolTip(savingPathButton, "Выбор папки для сохранения");
-            CurrentUser.FtpUser = null;
             presenter = new LoginPresenter(this);
+            LoadForm();
+
             if (Properties.Settings.Default.authLogin != "" && Properties.Settings.Default.password != "")
             {
                 loginTextBox.Text = Properties.Settings.Default.authLogin;
                 passwordTextBox.Text = Properties.Settings.Default.password;
                 rememberCheckBox.Checked = true;
             }
+        }
+
+        private void LoadForm()
+        {
+            ToolTip tool = new ToolTip();
+            tool.SetToolTip(savingPathButton, "Выбор папки для сохранения");
+            tool.SetToolTip(administrationButton, "Администрирование");
+            CurrentUser.FtpUser = null;
         }
 
         public string Login
@@ -104,13 +111,12 @@ namespace SemaAndCo
 
         private async Task LoginMethodAsync()
         {
-            //try
-            //{
-            //Hide();
-            //IntroForm form = new IntroForm();
-            //form.Show();
-            introPictureBox.Dock = DockStyle.Fill;
-            introPictureBox.Visible = true;
+            try
+            {
+                administrationButton.Visible = false;
+                introPictureBox.Dock = DockStyle.Fill;
+                introPictureBox.Enabled = true;
+                introPictureBox.Visible = true;
                 await Task.Run(() =>
                 {
                     if (presenter.LoginMethod(Login, Password))
@@ -122,15 +128,15 @@ namespace SemaAndCo
                         result = false;
                     }
                 });
-            introPictureBox.Dock = DockStyle.None;
-            introPictureBox.Visible = false;
-            //form.Close();
-            //Show();
-            //}
-            //catch (Exception)
-            //{
-            //    Show();
-            //}
+                administrationButton.Visible = true;
+                introPictureBox.Dock = DockStyle.None;
+                introPictureBox.Visible = false;
+                introPictureBox.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void TextBox_KeyDown(object sender, KeyEventArgs e)
@@ -142,7 +148,7 @@ namespace SemaAndCo
                 {
                     Hide();
                     MainForm form = new MainForm();
-                    form.Show();
+                    form.ShowDialog();
                     Close();
                 }
             }
@@ -163,15 +169,40 @@ namespace SemaAndCo
 
         private void AutomaticEnter()
         {
-            if (!System.IO.File.Exists(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip")))
+            if (!File.Exists(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip")))
             {
-                DotNetZipHelper.CreateArchive("autonom.zip");
+                DotNetZipHelper.CreateArchive("autonom.zip", "autonom".EncryptString());
             }
-            new LocalUser("autonom", "autonom");
+            LocalUser.Automatic = true;
             Hide();
             MainForm form = new MainForm();
             form.ShowDialog();
             Close();
+        }
+
+        private void AdministrationButton_Click(object sender, EventArgs e)
+        {
+            introPictureBox.Dock = DockStyle.Fill;
+            introPictureBox.Visible = true;
+            GoToAdministration();
+            introPictureBox.Dock = DockStyle.None;
+            introPictureBox.Visible = false;
+        }
+
+        private void GoToAdministration()
+        {
+            try
+            {
+                Core.goAdministration = true;
+                AccessRecoveryForm form = new AccessRecoveryForm();
+                Hide();
+                form.ShowDialog();
+                Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

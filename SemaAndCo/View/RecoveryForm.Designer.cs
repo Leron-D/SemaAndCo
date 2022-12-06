@@ -154,6 +154,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "RecoveryForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Восстановление доступа";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RecoveryForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.recErrorProvider)).EndInit();

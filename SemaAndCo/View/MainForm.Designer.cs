@@ -40,7 +40,6 @@
             this.renameTextBox = new System.Windows.Forms.TextBox();
             this.localRadioButton = new System.Windows.Forms.RadioButton();
             this.serverRadioButton = new System.Windows.Forms.RadioButton();
-            this.administrationButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -186,22 +185,6 @@
             this.serverRadioButton.UseVisualStyleBackColor = true;
             this.serverRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
-            // administrationButton
-            // 
-            this.administrationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.administrationButton.BackColor = System.Drawing.Color.Transparent;
-            this.administrationButton.FlatAppearance.BorderSize = 0;
-            this.administrationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.administrationButton.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.administrationButton.Image = global::SemaAndCo.Properties.Resources.icons8_administration_40;
-            this.administrationButton.Location = new System.Drawing.Point(1097, 14);
-            this.administrationButton.Margin = new System.Windows.Forms.Padding(5);
-            this.administrationButton.Name = "administrationButton";
-            this.administrationButton.Size = new System.Drawing.Size(41, 45);
-            this.administrationButton.TabIndex = 12;
-            this.administrationButton.UseVisualStyleBackColor = false;
-            this.administrationButton.Click += new System.EventHandler(this.AdministrationButton_Click);
-            // 
             // exitButton
             // 
             this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -238,7 +221,6 @@
             this.Controls.Add(this.serverRadioButton);
             this.Controls.Add(this.localRadioButton);
             this.Controls.Add(this.renameTextBox);
-            this.Controls.Add(this.administrationButton);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.infoButton);
@@ -250,7 +232,9 @@
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.MinimumSize = new System.Drawing.Size(770, 260);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главная";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -267,7 +251,6 @@
         private System.Windows.Forms.ImageList imageList;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Button exitButton;
-        private System.Windows.Forms.Button administrationButton;
         private System.Windows.Forms.TextBox renameTextBox;
         private System.Windows.Forms.RadioButton localRadioButton;
         private System.Windows.Forms.RadioButton serverRadioButton;

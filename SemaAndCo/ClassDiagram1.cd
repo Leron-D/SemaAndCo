@@ -1,39 +1,76 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="SemaAndCo.View.AccessRecoveryForm">
-    <Position X="6.75" Y="5.5" Width="1.5" />
+  <Class Name="SemaAndCo.View.TemplateForm">
+    <Position X="6" Y="0.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAiAAAIACCAQBAAQHCAQAAiEgNAAAAAAgAAAgQAAAA=</HashCode>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\TemplateForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SemaAndCo.View.SelectFolderForm">
+    <Position X="6" Y="3.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BAACAICAACIACBAAAACCAAACAACIAAAAAAAAAAABAAA=</HashCode>
+      <FileName>View\SelectFolderForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SemaAndCo.View.AccessRecoveryForm">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAAiAAAIACCAQhCAQHCAQAAiEgNEAAAAAgCAAAQAAAI=</HashCode>
       <FileName>View\AccessRecoveryForm.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SemaAndCo.View.AdministrationForm">
-    <Position X="9" Y="5.5" Width="1.5" />
+    <Position X="10.25" Y="0.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Properties" Collapsed="true" />
     </Compartments>
+    <InheritanceLine Type="SemaAndCo.View.TemplateForm" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="0.75" />
+        <Point X="6.75" Y="0.321" />
+        <Point X="10.029" Y="0.321" />
+        <Point X="10.029" Y="2.387" />
+        <Point X="10.25" Y="2.387" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>gwNBAg4AASAEBAAAUAiAggCCAAAhgKAAhFCAIgIANJM=</HashCode>
+      <HashCode>gwNBAg4BASAMDEAQUAiAggCCAAAhgKAAhFDAIgIANJM=</HashCode>
       <FileName>View\AdministrationForm.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SemaAndCo.View.ChangeUserForm">
-    <Position X="11.25" Y="5.5" Width="1.5" />
+    <Position X="4" Y="0.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
+    <InheritanceLine Type="SemaAndCo.View.TemplateForm" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6" Y="1.875" />
+        <Point X="5.625" Y="1.875" />
+        <Point X="5.625" Y="1.875" />
+        <Point X="5.5" Y="1.875" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAABAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ESACAEACgCEAAhAAACCAAAACAAAIAARBAIQAQCAAAQA=</HashCode>
       <FileName>View\ChangeUserForm.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SemaAndCo.View.IntroForm">
-    <Position X="20.75" Y="2.75" Width="1.5" />
+    <Position X="11.25" Y="6" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -43,17 +80,26 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SemaAndCo.View.MainForm">
-    <Position X="15.75" Y="5.5" Width="1.5" />
+    <Position X="4" Y="3.25" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
+    <InheritanceLine Type="SemaAndCo.View.TemplateForm" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="2.627" />
+        <Point X="6.5" Y="2.867" />
+        <Point X="5.74" Y="2.867" />
+        <Point X="5.74" Y="3.938" />
+        <Point X="5.5" Y="3.938" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AQREAACAAiCQADAZIgCIAAAGAiAMCgAAAAHABYEAJAE=</HashCode>
+      <HashCode>AQREEACAAiCwADAZIgCIAAAGAiAMCgAAAAEABYEAJAE=</HashCode>
       <FileName>View\MainForm.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SemaAndCo.View.RecoveryForm" BaseTypeListCollapsed="true">
-    <Position X="18.75" Y="2.75" Width="1.5" />
+    <Position X="12.25" Y="0.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -63,110 +109,60 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="SemaAndCo.View.RegistrationForm" BaseTypeListCollapsed="true">
-    <Position X="24.5" Y="3" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>ACCABEAIAKBALFAAAWDAAQACAACiEBAAAAEAAAAgAAA=</HashCode>
-      <FileName>View\RegistrationForm.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
-  <Class Name="SemaAndCo.View.SelectFolderForm">
-    <Position X="13.75" Y="3" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>BAACAICAACIACBAAAACCAAACAAAIAAAAAAAAAAABAAA=</HashCode>
-      <FileName>View\SelectFolderForm.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SemaAndCo.View.TemplateForm">
-    <Position X="11" Y="2.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>View\TemplateForm.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="SemaAndCo.AuthorizationForm" BaseTypeListCollapsed="true">
-    <Position X="22.5" Y="3" Width="1.5" />
+    <Position X="14.25" Y="0.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Properties" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAABAECAgSAABBSABCCAAAACABAkAIACAICQACAAAAA=</HashCode>
+      <HashCode>EAABAECAgSAABBSABCCAAAACChCkAIACAIDQACAAAAA=</HashCode>
       <FileName>View\AuthorizationForm.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="SemaAndCo.Supporting.SendMail">
-    <Position X="13.5" Y="7.5" Width="1.5" />
+  <Class Name="SemaAndCo.Presenter.RegistrationPresenter">
+    <Position X="7.75" Y="6.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAABAAAAAAIAAAAAIAAAAAAgAIAAA=</HashCode>
-      <FileName>Supporting\SendMail.cs</FileName>
+      <HashCode>AQACAAAAAAAAAAAAAAAAAAAACAAAAIAAAQAAAAAAgAA=</HashCode>
+      <FileName>Presenter\RegistrationPresenter.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SemaAndCo.Supporting.CryptoClass">
-    <Position X="14.75" Y="1" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ACAAAAAAAAAAAAAAIAAAAAQAAAAAAAAAAAAAAAAAACA=</HashCode>
-      <FileName>Supporting\CryptoClass.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SemaAndCo.Supporting.CurrentUser">
-    <Position X="16.5" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAABAAAA=</HashCode>
-      <FileName>Supporting\CurrentUser.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SemaAndCo.Supporting.DotNetZipHelper">
-    <Position X="12.75" Y="1" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAIAAAAAAEAAAACAAAIAAAAAACAAAAAA=</HashCode>
-      <FileName>Supporting\DotNetZipHelper.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SemaAndCo.Supporting.FtpHelper">
-    <Position X="5" Y="5.5" Width="1.5" />
+  <Class Name="SemaAndCo.Presenter.AdministrationPresenter">
+    <Position X="6" Y="6.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ACAAAAAAAAAAAAAAQCKAAAAAAAQAAAAAAAEgAAAAASA=</HashCode>
-      <FileName>Supporting\FtpHelper.cs</FileName>
+      <HashCode>AAACAAAAAAAAAACgAAAAAAAAAAAAAAAAAQAAAAAIQBA=</HashCode>
+      <FileName>Presenter\AdministrationPresenter.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SemaAndCo.Supporting.RegistrationData" Collapsed="true">
-    <Position X="16.5" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAiAAAAAAAAAAAEAAAgAAAAAgkAEAA=</HashCode>
-      <FileName>Supporting\RegistrationData.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SemaAndCo.Supporting.Core">
-    <Position X="16.5" Y="0.5" Width="1.5" />
+  <Class Name="SemaAndCo.Presenter.LoginPresenter">
+    <Position X="8.25" Y="4.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
-      <Compartment Name="Properties" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>EAEAACAAAAgAAAAAAACIAAAAgAAAAAACAAAAAAAAAAA=</HashCode>
-      <FileName>Supporting\Core.cs</FileName>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAQAAAAAIAAA=</HashCode>
+      <FileName>Presenter\LoginPresenter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SemaAndCo.Presenter.RecoveryPresenter">
+    <Position X="9.5" Y="6.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
+      <FileName>Presenter\RecoveryPresenter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SemaAndCo.Model.AdministrationModel" BaseTypeListCollapsed="true">
-    <Position X="4.25" Y="0.5" Width="1.5" />
+    <Position X="12.25" Y="4" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -176,84 +172,22 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="SemaAndCo.Model.LoginModel" BaseTypeListCollapsed="true">
-    <Position X="6" Y="0.5" Width="1.5" />
+  <Class Name="SemaAndCo.Model.FtpUser">
+    <Position X="14.25" Y="5" Width="1.5" />
     <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
+    <NestedTypes>
+      <Class Name="SemaAndCo.Model.FtpUser.semaandcouser">
+        <TypeIdentifier>
+          <NewMemberFileName>Model\FtpUser.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
-      <FileName>Model\LoginModel.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
-  <Class Name="SemaAndCo.Model.SacEntities">
-    <Position X="4.25" Y="3" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Properties" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Model\SacModel.Context.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\FtpUser.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SemaAndCo.Model.Users">
-    <Position X="7.75" Y="0.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Properties" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAAAAAAACCAAAAAAAAAAAAQAAAAAAAACAAAQIAAAAAA=</HashCode>
-      <FileName>Model\Users.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Interface Name="SemaAndCo.View.IAdministrationView">
-    <Position X="20.75" Y="8.25" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Properties" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAABAgQAAAAEAAAAAAAAAgCAAAAAAAAAABAAIAAAMAI=</HashCode>
-      <FileName>View\IAdministrationView.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SemaAndCo.View.ILoginView">
-    <Position X="20.75" Y="5.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Properties" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAFAAAAAAAAAAEAAACAAAQAACAAAA=</HashCode>
-      <FileName>View\ILoginView.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SemaAndCo.View.IRecoveryView">
-    <Position X="16.5" Y="4" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
-      <FileName>View\IRecoveryView.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SemaAndCo.Presenter.IRegistrationView">
-    <Position X="18.75" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
-      <FileName>View\IRegistrationView.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SemaAndCo.Model.IAdministrationModel">
-    <Position X="6" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAACAEAAAAABAAAAAAACAAAAAAAAAAAA=</HashCode>
-      <FileName>Model\IAdministrationModel.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="SemaAndCo.Model.ILoginModel">
-    <Position X="7.75" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Model\ILoginModel.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

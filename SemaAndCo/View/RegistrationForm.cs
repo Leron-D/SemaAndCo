@@ -52,28 +52,36 @@ namespace SemaAndCo.View
 
         private void RegistrateMethod()
         {
-            if (captcha.CheckText(captchaTextBox.Text))
+            try
             {
-                string phone = phoneNumberTextBox.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
-                if (phone.Length == 1)
+                if (captcha.CheckText(captchaTextBox.Text))
                 {
-                    phone = null;
-                    presenter.RegistrationMethod(loginTextBox.Text, emailTextBox.Text, userNameTextBox.Text, phone,
-                                        passwordTextBox.Text, repeatPasswordTextBox.Text);
-                }
-                else if(phone.Length != 11)
-                {
-                    MessageBox.Show("Номер телефона введён некорректно", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string phone = phoneNumberTextBox.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
+                    if (phone.Length == 1)
+                    {
+                        phone = null;
+                        presenter.RegistrationMethod(loginTextBox.Text, emailTextBox.Text, userNameTextBox.Text, phone,
+                                            passwordTextBox.Text, repeatPasswordTextBox.Text);
+                    }
+                    else if (phone.Length != 11)
+                    {
+                        MessageBox.Show("Номер телефона введён некорректно", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        presenter.RegistrationMethod(loginTextBox.Text, emailTextBox.Text, userNameTextBox.Text, phone,
+                                            passwordTextBox.Text, repeatPasswordTextBox.Text);
+                    }
                 }
                 else
                 {
-                    presenter.RegistrationMethod(loginTextBox.Text, emailTextBox.Text, userNameTextBox.Text, phone,
-                                        passwordTextBox.Text, repeatPasswordTextBox.Text);
+                    MessageBox.Show("Код из капчи не соответсвует введенному", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    captcha.Renew();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Код из капчи не соответсвует введенному", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message);
                 captcha.Renew();
             }
         }

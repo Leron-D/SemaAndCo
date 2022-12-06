@@ -13,22 +13,38 @@ using System.Xml.Linq;
 using System.Threading;
 using System.IO;
 using System.Reflection;
+using SemaAndCo.Model;
 
 namespace SemaAndCo.View
 {
     public partial class AccessRecoveryForm : TemplateForm
     {
         Core context = new Core(Core.StrConnection());
+        List<FtpUser.semaandcouser> users;
         public AccessRecoveryForm()
         {
-            IntroForm form = new IntroForm(533);
-            form.ShowDialog();
             InitializeComponent();
-            if (!Core.CheckMailVariability())
+            if (Core.goAdministration)
             {
-                Text = "Проверка почты";
-                descriptionLabel.Text = "Код подтверждения";
+                tabControl.SelectedTab = enterCodePage;
+                this.Text = "Доступ к администрированию";
+                passwordHeaderLabel.Text = "Пароль администратора";
+                passwordHeaderLabel.Location = new Point(80, 15);
+                saveNewPasswordTextBox.Text = "Проверить";
             }
+            else
+            {
+                this.Text = "Восстановление доступа";
+                passwordHeaderLabel.Text = "Новый пароль";
+                passwordHeaderLabel.Location = new Point(137, 15);
+                saveNewPasswordTextBox.Text = "Сохранить";
+                if (!Core.CheckMailVariability())
+                {
+                    Text = "Проверка почты";
+                    descriptionLabel.Text = "Код подтверждения";
+                }
+            }
+
             tabControl.Appearance = TabAppearance.FlatButtons;
             tabControl.ItemSize = new Size(0, 1);
             tabControl.SizeMode = TabSizeMode.Fixed;
@@ -95,7 +111,7 @@ namespace SemaAndCo.View
             }
         }
 
-        private void saveNewPasswordTextBox_Click(object sender, EventArgs e)
+        private async void SaveNewPasswordTextBox_Click(object sender, EventArgs e)
         {
             SaveNewPassword();
         }
@@ -104,11 +120,44 @@ namespace SemaAndCo.View
         {
             try
             {
-                var user = context.semaandcouser.FirstOrDefault(u => u.userid == Properties.Settings.Default.login || u.email == Properties.Settings.Default.login);
-                user.passwd = passwordTextBox.Text.EncryptString();
-                context.SaveChanges();
-                MessageBox.Show("Пароль успешно изменен", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Close();
+                if (!Core.goAdministration)
+                {
+                    var user = context.semaandcouser.FirstOrDefault(u => u.userid == Properties.Settings.Default.login || u.email == Properties.Settings.Default.login);
+                    user.passwd = passwordTextBox.Text.EncryptString();
+                    context.SaveChanges();
+                    MessageBox.Show("Пароль успешно изменен", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
+                }
+                else
+                {
+                    if (passwordTextBox.Text == Properties.Settings.Default.adminPassword)
+                    {
+                        AdministrationForm form = new AdministrationForm();
+                        form.FormClosed += Form_FormClosed;
+                        introPictureBox.Dock = DockStyle.Fill;
+                        introPictureBox.Enabled = true;
+                        introPictureBox.Visible = true;
+                        if (!UsersLoad())
+                        {
+                            MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            Core.access = true;
+                            MessageBox.Show("Вы зашли как администратор", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Hide();
+                            form.ShowDialog();
+                        }
+                        introPictureBox.Dock = DockStyle.None;
+                        introPictureBox.Visible = false;
+                        introPictureBox.Enabled = false;
+                    }
+                    else
+                    {
+                        Core.access = false;
+                        MessageBox.Show("Неверный пароль", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -116,9 +165,28 @@ namespace SemaAndCo.View
             }
         }
 
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Close();
+        }
+
+        public bool UsersLoad()
+        {
+            try
+            {
+                users = context.semaandcouser.AsNoTracking().ToList();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         private void AccessRecoveryForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Hide();
+            Core.goAdministration = false;
             AuthorizationForm form = new AuthorizationForm();
             form.ShowDialog();
             Close();

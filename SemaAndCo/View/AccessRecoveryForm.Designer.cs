@@ -39,12 +39,14 @@
             this.viewCheckBox = new System.Windows.Forms.CheckBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.saveNewPasswordTextBox = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.passwordHeaderLabel = new System.Windows.Forms.Label();
             this.regErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.introPictureBox = new System.Windows.Forms.PictureBox();
             this.tabControl.SuspendLayout();
             this.enterMailPage.SuspendLayout();
             this.enterCodePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.regErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.introPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // enterButton
@@ -125,10 +127,11 @@
             // enterCodePage
             // 
             this.enterCodePage.BackColor = System.Drawing.Color.SeaShell;
+            this.enterCodePage.Controls.Add(this.introPictureBox);
             this.enterCodePage.Controls.Add(this.viewCheckBox);
             this.enterCodePage.Controls.Add(this.passwordTextBox);
             this.enterCodePage.Controls.Add(this.saveNewPasswordTextBox);
-            this.enterCodePage.Controls.Add(this.label1);
+            this.enterCodePage.Controls.Add(this.passwordHeaderLabel);
             this.enterCodePage.Location = new System.Drawing.Point(4, 32);
             this.enterCodePage.Margin = new System.Windows.Forms.Padding(5);
             this.enterCodePage.Name = "enterCodePage";
@@ -168,29 +171,41 @@
             this.saveNewPasswordTextBox.FlatAppearance.BorderSize = 0;
             this.saveNewPasswordTextBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveNewPasswordTextBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.saveNewPasswordTextBox.Location = new System.Drawing.Point(97, 174);
+            this.saveNewPasswordTextBox.Location = new System.Drawing.Point(98, 149);
             this.saveNewPasswordTextBox.Margin = new System.Windows.Forms.Padding(5);
             this.saveNewPasswordTextBox.Name = "saveNewPasswordTextBox";
             this.saveNewPasswordTextBox.Size = new System.Drawing.Size(292, 71);
             this.saveNewPasswordTextBox.TabIndex = 80;
             this.saveNewPasswordTextBox.Text = "Сохранить";
             this.saveNewPasswordTextBox.UseVisualStyleBackColor = false;
-            this.saveNewPasswordTextBox.Click += new System.EventHandler(this.saveNewPasswordTextBox_Click);
+            this.saveNewPasswordTextBox.Click += new System.EventHandler(this.SaveNewPasswordTextBox_Click);
             // 
-            // label1
+            // passwordHeaderLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(137, 15);
-            this.label1.Margin = new System.Windows.Forms.Padding(13, 0, 13, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(217, 39);
-            this.label1.TabIndex = 78;
-            this.label1.Text = "Новый пароль";
+            this.passwordHeaderLabel.AutoSize = true;
+            this.passwordHeaderLabel.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.passwordHeaderLabel.Location = new System.Drawing.Point(137, 15);
+            this.passwordHeaderLabel.Margin = new System.Windows.Forms.Padding(13, 0, 13, 0);
+            this.passwordHeaderLabel.Name = "passwordHeaderLabel";
+            this.passwordHeaderLabel.Size = new System.Drawing.Size(217, 39);
+            this.passwordHeaderLabel.TabIndex = 78;
+            this.passwordHeaderLabel.Text = "Новый пароль";
             // 
             // regErrorProvider
             // 
             this.regErrorProvider.ContainerControl = this;
+            // 
+            // introPictureBox
+            // 
+            this.introPictureBox.Enabled = false;
+            this.introPictureBox.Image = global::SemaAndCo.Properties.Resources.video__1_;
+            this.introPictureBox.Location = new System.Drawing.Point(427, 4);
+            this.introPictureBox.Name = "introPictureBox";
+            this.introPictureBox.Size = new System.Drawing.Size(61, 50);
+            this.introPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.introPictureBox.TabIndex = 82;
+            this.introPictureBox.TabStop = false;
+            this.introPictureBox.Visible = false;
             // 
             // AccessRecoveryForm
             // 
@@ -212,6 +227,7 @@
             this.enterCodePage.ResumeLayout(false);
             this.enterCodePage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.regErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.introPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -227,8 +243,9 @@
         private System.Windows.Forms.TabPage enterCodePage;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Button saveNewPasswordTextBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label passwordHeaderLabel;
         private System.Windows.Forms.CheckBox viewCheckBox;
         private System.Windows.Forms.ErrorProvider regErrorProvider;
+        private System.Windows.Forms.PictureBox introPictureBox;
     }
 }

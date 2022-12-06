@@ -21,12 +21,12 @@ namespace SemaAndCo.View
         string saveText;
         string extension;
         bool fileResult;
+        string autonomPassword = "autonom".EncryptString();
         public MainForm()
         {
             InitializeComponent();
-            ToolTip tool = new ToolTip();
-            tool.SetToolTip(administrationButton, "Выход из аккаунта");
-            tool.SetToolTip(exitButton, "Выход из аккаунта");
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(exitButton, "Выход из аккаунта");
             if (CurrentUser.FtpUser == null)
                 serverRadioButton.Visible = false;
             else
@@ -73,70 +73,90 @@ namespace SemaAndCo.View
         {
             if (!System.IO.File.Exists(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
             {
-                DotNetZipHelper.CreateArchive($"{CurrentUser.FtpUser.userid}.zip");
+                DotNetZipHelper.CreateArchive($"{CurrentUser.FtpUser.userid}.zip", CurrentUser.FtpUser.userid.EncryptString());
             }
         }
 
         void LoadData()
         {
             listView.Items.Clear();
-            if (localRadioButton.Checked)
+            try
             {
-                if (CurrentUser.FtpUser != null)
+                if (localRadioButton.Checked)
                 {
-                    using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
+                    if (!LocalUser.Automatic)
                     {
-                        foreach (ZipEntry e in zip.Entries)
+                        using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
                         {
-                            ListViewItem item = new ListViewItem(Path.GetFileName(e.FileName));
-                            listView.SmallImageList = imageList;
-                            item.Tag = e;
-                            int index = GetIndex(e.FileName);
-                            item.ImageIndex = index;
-                            listView.Items.Add(item);
+                            foreach (ZipEntry e in zip.Entries)
+                            {
+                                ListViewItem item = new ListViewItem(Path.GetFileName(e.FileName));
+                                listView.SmallImageList = imageList;
+                                item.Tag = e;
+                                int index = GetIndex(e.FileName);
+                                item.ImageIndex = index;
+                                listView.Items.Add(item);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip")))
+                        {
+                            foreach (ZipEntry e in zip.Entries)
+                            {
+                                ListViewItem item = new ListViewItem(Path.GetFileName(e.FileName));
+                                listView.SmallImageList = imageList;
+                                item.Tag = e;
+                                int index = GetIndex(e.FileName);
+                                item.ImageIndex = index;
+                                listView.Items.Add(item);
+                            }
                         }
                     }
                 }
                 else
                 {
-                    using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip")))
+                    List<string> filesFromServer = FtpHelper.GetFilesList(@"ftp://91.122.211.144:50021/", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                    foreach (var item in filesFromServer)
                     {
-                        foreach (ZipEntry e in zip.Entries)
-                        {
-                            ListViewItem item = new ListViewItem(Path.GetFileName(e.FileName));
-                            listView.SmallImageList = imageList;
-                            item.Tag = e;
-                            int index = GetIndex(e.FileName);
-                            item.ImageIndex = index;
-                            listView.Items.Add(item);
-                        }
+                        ListViewItem listItem = new ListViewItem(Path.GetFileName(item));
+                        listView.SmallImageList = imageList;
+                        listItem.Tag = Path.GetFileName(item);
+                        int index = GetIndex(item);
+                        listItem.ImageIndex = index;
+                        listView.Items.Add(listItem);
                     }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                List<string> filesFromServer = FtpHelper.GetFilesList(@"ftp://91.122.211.144:50021/", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
-                foreach (var item in filesFromServer)
-                {
-                    ListViewItem listItem = new ListViewItem(Path.GetFileName(item));
-                    listView.SmallImageList = imageList;
-                    listItem.Tag = Path.GetFileName(item);
-                    int index = GetIndex(item);
-                    listItem.ImageIndex = index;
-                    listView.Items.Add(listItem);
-                }
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void UploadButton_Click(object sender, EventArgs e)
         {
-
-            pictureBox.Visible = true;
-            UploadData();
-            pictureBox.Visible = false;
+            try
+            {
+                pictureBox.Visible = true;
+                if (!LocalUser.Automatic)
+                {
+                    UploadData($"{CurrentUser.FtpUser.userid}.zip");
+                }
+                else
+                {
+                    UploadData("autonom.zip");
+                }
+                pictureBox.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        public void UploadData()
+        public void UploadData(string fileName)
         {
             try
             {
@@ -154,19 +174,9 @@ namespace SemaAndCo.View
                             List<string> filesForReplace = new List<string>();
                             foreach (string file in openFileDialog.FileNames)
                             {
-                                if (LocalUser.LocalUsers == null)
+                                using (ZipFile zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, fileName)))
                                 {
-                                    using (ZipFile zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
-                                    {
-                                        fileResult = zip.Any(entry => entry.FileName == Path.GetFileName(file));
-                                    }
-                                }
-                                else
-                                {
-                                    using (ZipFile zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip")))
-                                    {
-                                        fileResult = zip.Any(entry => entry.FileName == Path.GetFileName(file));
-                                    }
+                                    fileResult = zip.Any(entry => entry.FileName == Path.GetFileName(file));
                                 }
                                 if (fileResult)
                                 {
@@ -175,26 +185,25 @@ namespace SemaAndCo.View
                                     {
                                         filesForReplace.Clear();
                                         filesForReplace.Add(Path.GetFileName(file));
-                                        if (LocalUser.LocalUsers == null)
+                                        if (!LocalUser.Automatic)
                                         {
                                             DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), filesForReplace);
-                                            DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), file);
+                                            DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), file, CurrentUser.FtpUser.userid.EncryptString());
                                         }
                                         else
                                         {
                                             DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), filesForReplace);
-                                            DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), file);
+                                            DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), file, autonomPassword);
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    if(LocalUser.LocalUsers != null)
-                                        DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), file);
+                                    if (LocalUser.Automatic)
+                                        DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), file, autonomPassword);
                                     else
-                                        DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), file);
+                                        DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), file, CurrentUser.FtpUser.userid.EncryptString());
                                 }
-                                    
                             }
                             MessageBox.Show("Файлы успешно загружены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -260,7 +269,7 @@ namespace SemaAndCo.View
                     {
                         filesToDelete.Add(item.Text);
                     }
-                    if(LocalUser.LocalUsers == null)
+                    if(!LocalUser.Automatic)
                         DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), filesToDelete);
                     else
                         DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), filesToDelete);
@@ -296,7 +305,7 @@ namespace SemaAndCo.View
                 {
                     if (listView.SelectedItems.Count == 1)
                     {
-                        if(LocalUser.LocalUsers == null)
+                        if(!LocalUser.Automatic)
                             DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), listView.SelectedItems[0].Text);
                         else
                             DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, $"autonom.zip"), listView.SelectedItems[0].Text);
@@ -321,19 +330,6 @@ namespace SemaAndCo.View
             Hide();
             AuthorizationForm form = new AuthorizationForm();
             form.ShowDialog();
-        }
-
-        private void AdministrationButton_Click(object sender, EventArgs e)
-        {
-            AdministrationForm form = new AdministrationForm();
-            form.FormClosed += Form_FormClosed;
-            form.Show();
-            administrationButton.Enabled = false;
-        }
-
-        private void Form_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            administrationButton.Enabled = true;
         }
 
         private void RenameButton_Click(object sender, EventArgs e)
@@ -392,17 +388,20 @@ namespace SemaAndCo.View
             renameTextBox.Width = renameTextBox.Text.Length * 9 + 30;
             if(e.KeyCode == Keys.Enter)
             {
-                RenameMethod(renameTextBox.Text, extension);
+                if(!LocalUser.Automatic)
+                    RenameMethod(renameTextBox.Text, extension, $"{CurrentUser.FtpUser.userid}.zip");
+                else
+                    RenameMethod(renameTextBox.Text, extension, "autonom.zip");
             }
         }
 
-        private void RenameMethod(string fileName, string ext)
+        private void RenameMethod(string fileName, string ext, string archiveName)
         {
             try
             {
                 if (localRadioButton.Checked)
                 {
-                    using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
+                    using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, archiveName)))
                     {
                         var zipEntry = zip.Entries.FirstOrDefault(z => z.FileName == $"{renameTextBox.Text}.{extension}");
                         if (!String.IsNullOrEmpty(renameTextBox.Text) && renameTextBox.Text != saveText.Remove(saveText.Length - extension.Length - 1))
@@ -433,12 +432,12 @@ namespace SemaAndCo.View
                 LoadData();
                 listView.Enabled = true;
                 renameButton.Enabled = renameTextBox.Visible = deleteButton.Enabled = infoButton.Enabled = downloadButton.Enabled = false;
-        }
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-}
+        }
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
@@ -468,7 +467,10 @@ namespace SemaAndCo.View
                                     if (messageResult == DialogResult.Yes)
                                     {
                                         fileNames.Add(listView.SelectedItems[i].Text);
-                                        DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), listView.SelectedItems[i].Text, dialog.SelectedPath);
+                                        if(!LocalUser.Automatic)
+                                            DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), listView.SelectedItems[i].Text, dialog.SelectedPath);
+                                        else
+                                            DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), listView.SelectedItems[i].Text, dialog.SelectedPath);
                                     }
                                 }
                                 else
@@ -521,10 +523,16 @@ namespace SemaAndCo.View
 
         private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            pictureBox.Visible = true;
+            IntroForm form = new IntroForm();
+            form.Show();
             LoadData();
+            form.Close();
             ChangeEnabledButtons();
-            pictureBox.Visible = false;
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LocalUser.Automatic = false;
         }
     }
 }

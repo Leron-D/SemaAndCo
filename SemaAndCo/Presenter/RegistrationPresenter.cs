@@ -11,19 +11,18 @@ using SemaAndCo.Supporting;
 using SemaAndCo.View;
 using System.Runtime.Remoting.Contexts;
 using static System.Net.WebRequestMethods;
+using System.Text.RegularExpressions;
 
 namespace SemaAndCo.Presenter
 {
     class RegistrationPresenter
     {
         Core context = new Core(Core.StrConnection());
-        IRegistrationModel model;
         IRegistrationView view;
         SendMail sendMail;
 
         public RegistrationPresenter(IRegistrationView view)
         {
-            this.model = new RegistrationModel();
             this.view = view;
             sendMail = new SendMail();
         }
@@ -47,37 +46,54 @@ namespace SemaAndCo.Presenter
         {
             try
             {
-                if (login != "" && password != "" && password == repeatPassword && login.Length > 4 && password.Length > 4)
+                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                Match match = regex.Match(email);
+                var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
+                if (login != "" && password != "" && login.Length >= 5 && login.Length <= 30 && password.Length >= 5 && password.Length <= 30)
                 {
-                    var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
-                    var resultEmail = context.semaandcouser.FirstOrDefault(r => r.email == email);
-                    if (resultLog == null)
+                    if (password == repeatPassword)
                     {
-                        if (resultEmail == null)
+                        if (!String.IsNullOrEmpty(email))
                         {
-                            RegistrationData.login = login;
-                            RegistrationData.email = email;
-                            RegistrationData.name = name;
-                            RegistrationData.phone = phone;
-                            RegistrationData.password = password;
-                            if (sendMail.SendRegCode(email, false))
+                            if (match.Success)
                             {
-                                view.Hide();
-                                Core.mailVariability = false;
-                                Core.addingUserVariability = false;
-                                AccessRecoveryForm form = new AccessRecoveryForm();
-                                form.ShowDialog();
-                                view.Close();
+                                var resultEmail = context.semaandcouser.FirstOrDefault(r => r.email == email);
+                                if (resultLog == null)
+                                {
+                                    if (resultEmail == null)
+                                    {
+                                        RegistrationData.login = login;
+                                        RegistrationData.email = email;
+                                        RegistrationData.name = name;
+                                        RegistrationData.phone = phone;
+                                        RegistrationData.password = password;
+                                        if (sendMail.SendRegCode(email, false))
+                                        {
+                                            view.Hide();
+                                            Core.mailVariability = false;
+                                            Core.addingUserVariability = false;
+                                            AccessRecoveryForm form = new AccessRecoveryForm();
+                                            form.ShowDialog();
+                                            view.Close();
+                                        }
+                                    }
+                                    else
+                                        throw new Exception("Введенный Email уже существует в системе");
+                                }
+                                else
+                                    throw new Exception("Пользователь с таким логином уже существует");
                             }
+                            else
+                                throw new Exception("Ввёден некорректный E-mail");
                         }
                         else
-                            throw new Exception("Введенный Email уже существует в системе");
+                            throw new Exception("Не введён E-mail");
                     }
                     else
-                        throw new Exception("Такой пользователь уже существует");
+                        throw new Exception("Поля ввода пароля и подтверждения пароля не совпадают");
                 }
                 else
-                    throw new Exception("Проверьте правильность ввода логина и пароля");
+                    throw new Exception("Логин и(или) пароль введён(-ены) некорректно");
             }
             catch (Exception ex)
             {
@@ -89,30 +105,46 @@ namespace SemaAndCo.Presenter
         {
             try
             {
-                if (login != "" && password != "" && password == repeatPassword && login.Length > 4 && password.Length > 4)
+                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                Match match = regex.Match(email);
+                var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
+                if (login != "" && password != "" && login.Length >= 5 && login.Length <= 30 && password.Length >= 5 && password.Length <= 30)
                 {
-                    var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
-                    var resultEmail = context.semaandcouser.FirstOrDefault(r => r.email == email);
-                    if (resultLog == null)
+                    if (password == repeatPassword)
                     {
-                        if (resultEmail == null)
+                        if (!String.IsNullOrEmpty(email))
                         {
-                            RegistrationData.login = login;
-                            RegistrationData.email = email;
-                            RegistrationData.name = name;
-                            RegistrationData.phone = phone;
-                            RegistrationData.password = password;
-                            RegistrationData.Registrate();
-                            MessageBox.Show("Пользователь успешно добавлен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (match.Success)
+                            {
+                                var resultEmail = context.semaandcouser.FirstOrDefault(r => r.email == email);
+                                if (resultLog == null)
+                                {
+                                    if (resultEmail == null)
+                                    {
+                                        RegistrationData.login = login;
+                                        RegistrationData.email = email;
+                                        RegistrationData.name = name;
+                                        RegistrationData.phone = phone;
+                                        RegistrationData.password = password; RegistrationData.Registrate();
+                                        MessageBox.Show("Пользователь успешно добавлен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                    else
+                                        throw new Exception("Введенный Email уже существует в системе");
+                                }
+                                else
+                                    throw new Exception("Пользователь с таким логином уже существует");
+                            }
+                            else
+                                throw new Exception("Ввёден некорректный E-mail");
                         }
                         else
-                            throw new Exception("Введенный Email уже существует в системе");
+                            throw new Exception("Не введён E-mail");
                     }
                     else
-                        throw new Exception("Такой пользователь уже существует");
+                        throw new Exception("Поля ввода пароля и подтверждения пароля не совпадают");
                 }
                 else
-                    throw new Exception("Проверьте правильность ввода логина и пароля");
+                    throw new Exception("Логин и(или) пароль введён(-ены) некорректно");
             }
             catch (Exception ex)
             {
