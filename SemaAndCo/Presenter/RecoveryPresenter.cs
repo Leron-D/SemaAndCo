@@ -6,7 +6,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApp1.Model;
 using SemaAndCo.View;
 using SemaAndCo.Supporting;
 

@@ -330,6 +330,7 @@ namespace SemaAndCo.View
             Hide();
             AuthorizationForm form = new AuthorizationForm();
             form.ShowDialog();
+            Close();
         }
 
         private void RenameButton_Click(object sender, EventArgs e)
