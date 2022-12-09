@@ -75,7 +75,7 @@ namespace SemaAndCo.View
                     }
                     else
                     {
-                        MessageBox.Show("Данной папки несуществует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Данной папки не существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else

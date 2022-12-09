@@ -57,21 +57,28 @@ namespace SemaAndCo.View
 
         private void EnteringMethod()
         {
-            if (captcha.CheckText(captchaTextBox.Text))
+            try
             {
-                if(sendMail.SendMessageWithConfirmOnMail(loginOrEmailTextBox.Text, true))
+                if (captcha.CheckText(captchaTextBox.Text))
                 {
-                    presenter.GetLoginOrEmail(loginOrEmailTextBox.Text);
-                    Hide();
-                    AccessRecoveryForm form = new AccessRecoveryForm();
-                    form.ShowDialog();
-                    Close();
+                    if (sendMail.SendMessageWithConfirmOnMail(loginOrEmailTextBox.Text, true))
+                    {
+                        presenter.GetLoginOrEmail(loginOrEmailTextBox.Text);
+                        Hide();
+                        AccessRecoveryForm form = new AccessRecoveryForm();
+                        form.ShowDialog();
+                        Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Код из капчи не соответствует введенному", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    captcha.Renew();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Код из капчи не соответствует введенному", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                captcha.Renew();
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -86,7 +93,7 @@ namespace SemaAndCo.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка!");
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

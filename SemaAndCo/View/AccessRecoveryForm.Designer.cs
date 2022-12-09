@@ -36,17 +36,17 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.enterMailPage = new System.Windows.Forms.TabPage();
             this.enterCodePage = new System.Windows.Forms.TabPage();
+            this.introPictureBox = new System.Windows.Forms.PictureBox();
             this.viewCheckBox = new System.Windows.Forms.CheckBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.saveNewPasswordTextBox = new System.Windows.Forms.Button();
             this.passwordHeaderLabel = new System.Windows.Forms.Label();
             this.regErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.introPictureBox = new System.Windows.Forms.PictureBox();
             this.tabControl.SuspendLayout();
             this.enterMailPage.SuspendLayout();
             this.enterCodePage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.regErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.introPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.regErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // enterButton
@@ -55,7 +55,7 @@
             this.enterButton.FlatAppearance.BorderSize = 0;
             this.enterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.enterButton.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.enterButton.Location = new System.Drawing.Point(95, 172);
+            this.enterButton.Location = new System.Drawing.Point(92, 152);
             this.enterButton.Margin = new System.Windows.Forms.Padding(5);
             this.enterButton.Name = "enterButton";
             this.enterButton.Size = new System.Drawing.Size(292, 71);
@@ -140,6 +140,18 @@
             this.enterCodePage.TabIndex = 1;
             this.enterCodePage.Text = "Ввод кода";
             // 
+            // introPictureBox
+            // 
+            this.introPictureBox.Enabled = false;
+            this.introPictureBox.Image = global::SemaAndCo.Properties.Resources.video__1_;
+            this.introPictureBox.Location = new System.Drawing.Point(427, 4);
+            this.introPictureBox.Name = "introPictureBox";
+            this.introPictureBox.Size = new System.Drawing.Size(61, 50);
+            this.introPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.introPictureBox.TabIndex = 82;
+            this.introPictureBox.TabStop = false;
+            this.introPictureBox.Visible = false;
+            // 
             // viewCheckBox
             // 
             this.viewCheckBox.AutoSize = true;
@@ -195,18 +207,6 @@
             // 
             this.regErrorProvider.ContainerControl = this;
             // 
-            // introPictureBox
-            // 
-            this.introPictureBox.Enabled = false;
-            this.introPictureBox.Image = global::SemaAndCo.Properties.Resources.video__1_;
-            this.introPictureBox.Location = new System.Drawing.Point(427, 4);
-            this.introPictureBox.Name = "introPictureBox";
-            this.introPictureBox.Size = new System.Drawing.Size(61, 50);
-            this.introPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.introPictureBox.TabIndex = 82;
-            this.introPictureBox.TabStop = false;
-            this.introPictureBox.Visible = false;
-            // 
             // AccessRecoveryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
@@ -226,8 +226,8 @@
             this.enterMailPage.PerformLayout();
             this.enterCodePage.ResumeLayout(false);
             this.enterCodePage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.regErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.introPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.regErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }

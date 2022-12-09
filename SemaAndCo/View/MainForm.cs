@@ -1,4 +1,5 @@
 ﻿using Ionic.Zip;
+using MySql.Data.MySqlClient;
 using SemaAndCo.Model;
 using SemaAndCo.Supporting;
 using System;
@@ -131,7 +132,12 @@ namespace SemaAndCo.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -152,7 +158,12 @@ namespace SemaAndCo.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -251,11 +262,22 @@ namespace SemaAndCo.View
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            pictureBox.Visible = true;
-            DeleteMethod();
-            pictureBox.Visible = false;
-            ChangeEnabledButtons();
-
+            try
+            {
+                pictureBox.Visible = true;
+                DeleteMethod();
+                pictureBox.Visible = false;
+                ChangeEnabledButtons();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void DeleteMethod()
@@ -288,13 +310,30 @@ namespace SemaAndCo.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void InfoButton_Click(object sender, EventArgs e)
         {
-            GetFileInfo();
+            try
+            {
+                GetFileInfo();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void GetFileInfo()
@@ -321,7 +360,12 @@ namespace SemaAndCo.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -335,7 +379,19 @@ namespace SemaAndCo.View
 
         private void RenameButton_Click(object sender, EventArgs e)
         {
-            CreateTextBoxToRename();
+            try
+            {
+                CreateTextBoxToRename();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CreateTextBoxToRename()
@@ -389,10 +445,22 @@ namespace SemaAndCo.View
             renameTextBox.Width = renameTextBox.Text.Length * 9 + 30;
             if(e.KeyCode == Keys.Enter)
             {
-                if(!LocalUser.Automatic)
-                    RenameMethod(renameTextBox.Text, extension, $"{CurrentUser.FtpUser.userid}.zip");
-                else
-                    RenameMethod(renameTextBox.Text, extension, "autonom.zip");
+                try
+                {
+                    if (!LocalUser.Automatic)
+                        RenameMethod(renameTextBox.Text, extension, $"{CurrentUser.FtpUser.userid}.zip");
+                    else
+                        RenameMethod(renameTextBox.Text, extension, "autonom.zip");
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException is MySqlException)
+                    {
+                        MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -436,16 +504,33 @@ namespace SemaAndCo.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
-            pictureBox.Visible = true;
-            DownloadMethod();
-            pictureBox.Visible = false;
-            ChangeEnabledButtons();
+            try
+            {
+                pictureBox.Visible = true;
+                DownloadMethod();
+                pictureBox.Visible = false;
+                ChangeEnabledButtons();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void DownloadMethod()
@@ -518,17 +603,34 @@ namespace SemaAndCo.View
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message);
             }
         }
 
         private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            IntroForm form = new IntroForm();
-            form.Show();
-            LoadData();
-            form.Close();
-            ChangeEnabledButtons();
+            try
+            {
+                IntroForm form = new IntroForm();
+                form.Show();
+                LoadData();
+                form.Close();
+                ChangeEnabledButtons();
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

@@ -1,4 +1,5 @@
-﻿using SemaAndCo.Model;
+﻿using MySql.Data.MySqlClient;
+using SemaAndCo.Model;
 using SemaAndCo.Supporting;
 using SemaAndCo.View;
 using System;
@@ -39,9 +40,16 @@ namespace SemaAndCo.Presenter
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Отсутствует соединение с сервером", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 return false;
             }
         }

@@ -1,4 +1,5 @@
-﻿using SemaAndCo.Model;
+﻿using MySql.Data.MySqlClient;
+using SemaAndCo.Model;
 using SemaAndCo.Presenter;
 using SemaAndCo.Supporting;
 using System;
@@ -213,9 +214,21 @@ namespace SemaAndCo.View
 
         private void SearchMethod()
         {
-            presenter.SearchFilterUsers(searchTextBox.Text);
-            presenter.Navigation(pageSize, 1);
-            currentPageNumeric.Value = currentPageNumeric.Minimum = 1;
+            try
+            {
+                presenter.SearchFilterUsers(searchTextBox.Text);
+                presenter.Navigation(pageSize, 1);
+                currentPageNumeric.Value = currentPageNumeric.Minimum = 1;
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void AdministrationForm_SizeChanged(object sender, EventArgs e)
@@ -242,10 +255,10 @@ namespace SemaAndCo.View
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            DeleteUserMEthod();
+            DeleteUserMethod();
         }
 
-        private void DeleteUserMEthod()
+        private void DeleteUserMethod()
         {
             try
             {                
@@ -269,8 +282,15 @@ namespace SemaAndCo.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Close();
+                }
             }
         }
 
@@ -286,10 +306,22 @@ namespace SemaAndCo.View
 
         private void ChangeUserMethod()
         {
-            ChangeUserForm form = new ChangeUserForm(usersGridView.SelectedRows[0].Cells[0].Value.ToString());
-            form.FormClosed += Form_FormClosed;
-            form.Show();
-            addButton.Enabled = changeButton.Enabled = deleteButton.Enabled = false;
+            try
+            {
+                ChangeUserForm form = new ChangeUserForm(usersGridView.SelectedRows[0].Cells[0].Value.ToString());
+                form.FormClosed += Form_FormClosed;
+                form.Show();
+                addButton.Enabled = changeButton.Enabled = deleteButton.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

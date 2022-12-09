@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Data.Entity.Infrastructure.Interception;
 using System.Net.Sockets;
 using System.Runtime.Remoting.Contexts;
+using MySql.Data.MySqlClient;
 
 namespace SemaAndCo.Supporting
 {
@@ -108,7 +109,12 @@ namespace SemaAndCo.Supporting
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if(ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутсвует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }

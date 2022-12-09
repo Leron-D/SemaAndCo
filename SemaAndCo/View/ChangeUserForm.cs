@@ -1,4 +1,5 @@
-﻿using SemaAndCo.Model;
+﻿using MySql.Data.MySqlClient;
+using SemaAndCo.Model;
 using SemaAndCo.Supporting;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ namespace SemaAndCo.View
 {
     public partial class ChangeUserForm : TemplateForm
     {
-        string oldLogin;
         string oldEmail;
         string oldPassword;
         string oldName;
@@ -32,7 +32,6 @@ namespace SemaAndCo.View
         private void LoadForm(string userid)
         {
             user = context.semaandcouser.Where(u => u.userid == userid).FirstOrDefault();
-            loginTextBox.Text = oldLogin = user.userid;
             emailTextBox.Text = oldEmail = user.email;
             nameTextBox.Text = oldName = user.username;
             passwordTextBox.Text = oldPassword = user.passwd;
@@ -46,8 +45,6 @@ namespace SemaAndCo.View
 
         private void SendMessageToUser(string password)
         {
-            if (user.userid != oldLogin)
-                messageToEmail += $"Ваш логин был изменён на <b>{user.userid}</b>";
             if (user.email != oldEmail)
                 messageToEmail += $"<br>Ваш E-mail был изменён на <b>{user.email}</b>";
             if (user.username != oldName)
@@ -69,8 +66,6 @@ namespace SemaAndCo.View
         {
             try
             {
-                if (String.IsNullOrEmpty(loginTextBox.Text))
-                    throw new Exception("Поле логина не заполнено");
                 if (String.IsNullOrEmpty(emailTextBox.Text))
                     throw new Exception("Поле email не заполнено");
                 if (String.IsNullOrEmpty(passwordTextBox.Text))
@@ -78,7 +73,6 @@ namespace SemaAndCo.View
                 var message = MessageBox.Show($"Сохранить изменения?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (message == DialogResult.Yes)
                 {
-                    user.userid = loginTextBox.Text;
                     user.email = emailTextBox.Text;
                     user.username = nameTextBox.Text;
                     if(passwordTextBox.Text != oldPassword)
@@ -94,7 +88,12 @@ namespace SemaAndCo.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

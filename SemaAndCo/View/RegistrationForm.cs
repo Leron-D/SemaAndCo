@@ -1,4 +1,5 @@
-﻿using SemaAndCo.Presenter;
+﻿using MySql.Data.MySqlClient;
+using SemaAndCo.Presenter;
 using SemaAndCo.Supporting;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,12 @@ namespace SemaAndCo.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -81,8 +87,16 @@ namespace SemaAndCo.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                captcha.Renew();
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    captcha.Renew();
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                    captcha.Renew();
+                }
             }
         }
 
@@ -180,7 +194,19 @@ namespace SemaAndCo.View
         {
             if (e.KeyCode == Keys.Enter)
             {
-                RegistrateMethod();
+                try
+                {
+                    RegistrateMethod();
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException is MySqlException)
+                    {
+                        MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
