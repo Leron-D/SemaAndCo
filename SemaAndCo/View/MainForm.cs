@@ -23,6 +23,9 @@ namespace SemaAndCo.View
         string extension;
         bool fileResult;
         string autonomPassword = "autonom".EncryptString();
+        string zipFilePath = Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip");
+        string autonomFilePath = Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip");
+        string ftpUrl = @"ftp://91.122.211.144:50021/";
         public MainForm()
         {
             InitializeComponent();
@@ -72,7 +75,7 @@ namespace SemaAndCo.View
 
         void CreateZip()
         {
-            if (!System.IO.File.Exists(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
+            if (!System.IO.File.Exists(zipFilePath))
             {
                 DotNetZipHelper.CreateArchive($"{CurrentUser.FtpUser.userid}.zip", CurrentUser.FtpUser.userid.EncryptString());
             }
@@ -87,7 +90,7 @@ namespace SemaAndCo.View
                 {
                     if (!LocalUser.Automatic)
                     {
-                        using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
+                        using (var zip = ZipFile.Read(zipFilePath))
                         {
                             foreach (ZipEntry e in zip.Entries)
                             {
@@ -102,7 +105,7 @@ namespace SemaAndCo.View
                     }
                     else
                     {
-                        using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip")))
+                        using (var zip = ZipFile.Read(autonomFilePath))
                         {
                             foreach (ZipEntry e in zip.Entries)
                             {
@@ -118,7 +121,7 @@ namespace SemaAndCo.View
                 }
                 else
                 {
-                    List<string> filesFromServer = FtpHelper.GetFilesList(@"ftp://91.122.211.144:50021/", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                    List<string> filesFromServer = FtpHelper.GetFilesList(ftpUrl, CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                     foreach (var item in filesFromServer)
                     {
                         ListViewItem listItem = new ListViewItem(Path.GetFileName(item));
@@ -198,25 +201,25 @@ namespace SemaAndCo.View
                                         filesForReplace.Add(Path.GetFileName(file));
                                         if (!LocalUser.Automatic)
                                         {
-                                            DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), filesForReplace);
-                                            DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), file, CurrentUser.FtpUser.userid.EncryptString());
+                                            DotNetZipHelper.DeleteFilesFromZip(zipFilePath, filesForReplace);
+                                            DotNetZipHelper.AppendFilesToZip(zipFilePath, file, CurrentUser.FtpUser.userid.EncryptString());
                                         }
                                         else
                                         {
-                                            DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), filesForReplace);
-                                            DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), file, autonomPassword);
+                                            DotNetZipHelper.DeleteFilesFromZip(autonomFilePath, filesForReplace);
+                                            DotNetZipHelper.AppendFilesToZip(autonomFilePath, file, autonomPassword);
                                         }
                                     }
                                 }
                                 else
                                 {
                                     if (LocalUser.Automatic)
-                                        DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), file, autonomPassword);
+                                        DotNetZipHelper.AppendFilesToZip(autonomFilePath, file, autonomPassword);
                                     else
-                                        DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), file, CurrentUser.FtpUser.userid.EncryptString());
+                                        DotNetZipHelper.AppendFilesToZip(zipFilePath, file, CurrentUser.FtpUser.userid.EncryptString());
                                 }
                             }
-                            MessageBox.Show("Файлы успешно загружены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            //MessageBox.Show("Файлы успешно загружены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         catch (ArgumentException ex)
                         {
@@ -229,18 +232,18 @@ namespace SemaAndCo.View
                         {
                             try
                             {
-                                if (!FtpHelper.GetFilesList(@"ftp://91.122.211.144:50021/", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd).Contains(Path.GetFileName(file)))
+                                if (!FtpHelper.GetFilesList(ftpUrl, CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd).Contains(Path.GetFileName(file)))
                                 {
-                                    FtpHelper.UploadFile(file, $"ftp://91.122.211.144:50021/{Path.GetFileName(file)}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                                    FtpHelper.UploadFile(file, $"{ftpUrl}{Path.GetFileName(file)}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                                 }
                                 else
                                 {
                                     var message = MessageBox.Show($"Файл с именем {Path.GetFileName(file)} уже существует. Вы хотите заменить его?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                                     if(message == DialogResult.Yes)
                                     {
-                                        FtpHelper.DeleteFile($"ftp://91.122.211.144:50021/{Path.GetFileName(file)}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
-                                        FtpHelper.UploadFile(file, $"ftp://91.122.211.144:50021/{Path.GetFileName(file)}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
-                                        MessageBox.Show("Файл успешно заменён", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        FtpHelper.DeleteFile($"{ftpUrl}{Path.GetFileName(file)}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                                        FtpHelper.UploadFile(file, $"{ftpUrl}{Path.GetFileName(file)}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                                        //MessageBox.Show("Файл успешно заменён", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     }
                                 }
                             }
@@ -249,7 +252,7 @@ namespace SemaAndCo.View
                                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
-                        MessageBox.Show("Файлы успешно загружены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //MessageBox.Show("Файлы успешно загружены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 LoadData();
@@ -292,18 +295,18 @@ namespace SemaAndCo.View
                         filesToDelete.Add(item.Text);
                     }
                     if(!LocalUser.Automatic)
-                        DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), filesToDelete);
+                        DotNetZipHelper.DeleteFilesFromZip(zipFilePath, filesToDelete);
                     else
-                        DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), filesToDelete);
-                    MessageBox.Show("Файлы успешно удалены", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DotNetZipHelper.DeleteFilesFromZip(autonomFilePath, filesToDelete);
+                    //MessageBox.Show("Файлы успешно удалены", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     foreach (ListViewItem item in listView.SelectedItems)
                     {
-                        FtpHelper.DeleteFile($"ftp://91.122.211.144:50021/{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                        FtpHelper.DeleteFile($"{ftpUrl}{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                     }                
-                    MessageBox.Show("Файлы успешно удалены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Файлы успешно удалены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 LoadData();
@@ -345,7 +348,7 @@ namespace SemaAndCo.View
                     if (listView.SelectedItems.Count == 1)
                     {
                         if(!LocalUser.Automatic)
-                            DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), listView.SelectedItems[0].Text);
+                            DotNetZipHelper.GetInfoFiles(zipFilePath, listView.SelectedItems[0].Text);
                         else
                             DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, $"autonom.zip"), listView.SelectedItems[0].Text);
                     }
@@ -354,7 +357,7 @@ namespace SemaAndCo.View
                 {
                     if (listView.SelectedItems.Count == 1)
                     {
-                        FtpHelper.GetFileNameAndSize(listView.SelectedItems[0].Text, $"ftp://91.122.211.144:50021/{listView.SelectedItems[0].Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                        FtpHelper.GetFileNameAndSize(listView.SelectedItems[0].Text, $"{ftpUrl}{listView.SelectedItems[0].Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                     }
                 }
             }
@@ -495,7 +498,7 @@ namespace SemaAndCo.View
                 {
                     if (!String.IsNullOrEmpty(fileName) && fileName != saveText.Remove(saveText.Length - extension.Length - 1))
                     {
-                        FtpHelper.RenameFile($"{fileName}.{ext}", $"ftp://91.122.211.144:50021/{saveText}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                        FtpHelper.RenameFile($"{fileName}.{ext}", $"{ftpUrl}{saveText}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                     }
                 }
                 LoadData();
@@ -554,15 +557,15 @@ namespace SemaAndCo.View
                                     {
                                         fileNames.Add(listView.SelectedItems[i].Text);
                                         if(!LocalUser.Automatic)
-                                            DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), listView.SelectedItems[i].Text, dialog.SelectedPath);
+                                            DotNetZipHelper.ExtractFiles(zipFilePath, listView.SelectedItems[i].Text, dialog.SelectedPath);
                                         else
-                                            DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip"), listView.SelectedItems[i].Text, dialog.SelectedPath);
+                                            DotNetZipHelper.ExtractFiles(autonomFilePath, listView.SelectedItems[i].Text, dialog.SelectedPath);
                                     }
                                 }
                                 else
                                 {
                                     fileNames.Add(listView.SelectedItems[i].Text);
-                                    DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), listView.SelectedItems[i].Text, dialog.SelectedPath);
+                                    DotNetZipHelper.ExtractFiles(zipFilePath, listView.SelectedItems[i].Text, dialog.SelectedPath);
                                 }
                             }
                             if (fileNames.Count > 0)
@@ -586,13 +589,13 @@ namespace SemaAndCo.View
                                 if (messageResult == DialogResult.Yes)
                                 {
                                     listItems.Add(item.Text);
-                                    FtpHelper.DownloadFile($@"{dialog.SelectedPath}\{item.Text}", $"ftp://91.122.211.144:50021/{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                                    FtpHelper.DownloadFile($@"{dialog.SelectedPath}\{item.Text}", $"{ftpUrl}{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                                 }
                             }
                             else
                             {
                                 listItems.Add(item.Text);
-                                FtpHelper.DownloadFile($@"{dialog.SelectedPath}\{item.Text}", $"ftp://91.122.211.144:50021/{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                                FtpHelper.DownloadFile($@"{dialog.SelectedPath}\{item.Text}", $"{ftpUrl}{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                             }
 
                         }

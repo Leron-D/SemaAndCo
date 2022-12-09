@@ -70,7 +70,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SemaAndCo.View.IntroForm">
-    <Position X="11.25" Y="6" Width="1.5" />
+    <Position X="12.25" Y="6" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -122,7 +122,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="SemaAndCo.Presenter.RegistrationPresenter">
-    <Position X="7.75" Y="6.75" Width="1.5" />
+    <Position X="8.25" Y="6.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -152,7 +152,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SemaAndCo.Presenter.RecoveryPresenter">
-    <Position X="9.5" Y="6.75" Width="1.5" />
+    <Position X="10.25" Y="6" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>

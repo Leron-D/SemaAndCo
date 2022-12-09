@@ -58,6 +58,7 @@
             this.repeatPasswordTextBox.Location = new System.Drawing.Point(67, 223);
             this.repeatPasswordTextBox.MaxLength = 30;
             this.repeatPasswordTextBox.Name = "repeatPasswordTextBox";
+            this.repeatPasswordTextBox.PasswordChar = '●';
             this.repeatPasswordTextBox.Size = new System.Drawing.Size(355, 33);
             this.repeatPasswordTextBox.TabIndex = 25;
             this.repeatPasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
@@ -80,6 +81,7 @@
             this.passwordTextBox.Location = new System.Drawing.Point(67, 158);
             this.passwordTextBox.MaxLength = 30;
             this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.PasswordChar = '●';
             this.passwordTextBox.Size = new System.Drawing.Size(355, 33);
             this.passwordTextBox.TabIndex = 24;
             this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
@@ -149,7 +151,6 @@
             this.userNameTextBox.Size = new System.Drawing.Size(355, 33);
             this.userNameTextBox.TabIndex = 32;
             this.userNameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
-            this.userNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.userNameTextBox_Validating);
             // 
             // emailTextBox
             // 

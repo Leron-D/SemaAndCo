@@ -44,7 +44,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(78, 77);
+            this.label2.Location = new System.Drawing.Point(72, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 23);
             this.label2.TabIndex = 1;
@@ -53,7 +53,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(78, 118);
+            this.label3.Location = new System.Drawing.Point(72, 124);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 23);
             this.label3.TabIndex = 2;
@@ -62,7 +62,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(78, 160);
+            this.label4.Location = new System.Drawing.Point(72, 166);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(79, 23);
             this.label4.TabIndex = 3;
@@ -71,7 +71,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(78, 207);
+            this.label5.Location = new System.Drawing.Point(72, 213);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 23);
             this.label5.TabIndex = 4;
@@ -79,25 +79,25 @@
             // 
             // emailTextBox
             // 
-            this.emailTextBox.Location = new System.Drawing.Point(170, 74);
+            this.emailTextBox.Location = new System.Drawing.Point(164, 80);
             this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(210, 31);
+            this.emailTextBox.Size = new System.Drawing.Size(281, 31);
             this.emailTextBox.TabIndex = 6;
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(170, 115);
+            this.nameTextBox.Location = new System.Drawing.Point(164, 121);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(210, 31);
+            this.nameTextBox.Size = new System.Drawing.Size(281, 31);
             this.nameTextBox.TabIndex = 7;
             // 
             // passwordTextBox
             // 
             this.passwordTextBox.Enabled = false;
-            this.passwordTextBox.Location = new System.Drawing.Point(170, 157);
+            this.passwordTextBox.Location = new System.Drawing.Point(164, 163);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.PasswordChar = '*';
-            this.passwordTextBox.Size = new System.Drawing.Size(210, 31);
+            this.passwordTextBox.PasswordChar = '●';
+            this.passwordTextBox.Size = new System.Drawing.Size(281, 31);
             this.passwordTextBox.TabIndex = 8;
             // 
             // saveButton
@@ -106,9 +106,9 @@
             this.saveButton.FlatAppearance.BorderSize = 0;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.saveButton.Location = new System.Drawing.Point(83, 261);
+            this.saveButton.Location = new System.Drawing.Point(212, 261);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(297, 50);
+            this.saveButton.Size = new System.Drawing.Size(281, 50);
             this.saveButton.TabIndex = 84;
             this.saveButton.Text = "Сохранить";
             this.saveButton.UseVisualStyleBackColor = false;
@@ -118,7 +118,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(163, 9);
+            this.label7.Location = new System.Drawing.Point(224, 15);
             this.label7.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(248, 39);
@@ -128,17 +128,17 @@
             // phoneTextBox
             // 
             this.phoneTextBox.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.phoneTextBox.Location = new System.Drawing.Point(170, 202);
+            this.phoneTextBox.Location = new System.Drawing.Point(164, 208);
             this.phoneTextBox.Mask = "8(000)-000-00-00";
             this.phoneTextBox.Name = "phoneTextBox";
-            this.phoneTextBox.Size = new System.Drawing.Size(210, 33);
+            this.phoneTextBox.Size = new System.Drawing.Size(281, 33);
             this.phoneTextBox.TabIndex = 86;
             // 
             // changePasswordCheckBox
             // 
             this.changePasswordCheckBox.AutoSize = true;
             this.changePasswordCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.changePasswordCheckBox.Location = new System.Drawing.Point(388, 161);
+            this.changePasswordCheckBox.Location = new System.Drawing.Point(468, 167);
             this.changePasswordCheckBox.Margin = new System.Windows.Forms.Padding(5);
             this.changePasswordCheckBox.Name = "changePasswordCheckBox";
             this.changePasswordCheckBox.Size = new System.Drawing.Size(162, 24);
@@ -151,7 +151,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 334);
+            this.ClientSize = new System.Drawing.Size(704, 334);
             this.Controls.Add(this.changePasswordCheckBox);
             this.Controls.Add(this.phoneTextBox);
             this.Controls.Add(this.label7);

@@ -138,7 +138,7 @@
             this.enterCodePage.Padding = new System.Windows.Forms.Padding(5);
             this.enterCodePage.Size = new System.Drawing.Size(491, 238);
             this.enterCodePage.TabIndex = 1;
-            this.enterCodePage.Text = "Ввод кода";
+            this.enterCodePage.Text = "Ввод пароля";
             // 
             // introPictureBox
             // 

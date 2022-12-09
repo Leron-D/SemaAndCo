@@ -47,20 +47,35 @@ namespace SemaAndCo.View
 
         private void SendMessageToUser(string password)
         {
-            if (user.email != oldEmail)
-                messageToEmail += $"<br>Ваш E-mail был изменён на <b>{user.email}</b>";
-            if (user.username != oldName)
-                messageToEmail += $"<br>Ваше имя было изменено на <b>{user.username}</b>";
-            if (user.passwd != oldPassword)
-                messageToEmail += $"<br>Ваш пароль был изменён на <b>{password}</b>";
-            if (String.IsNullOrEmpty(user.phone))
-                messageToEmail += "<br>Ваш телефон был удалён";
-            else if (user.phone != oldPhone)
-                messageToEmail += $"<br>Ваш телефон был изменён на <b>{user.phone}</b>";
-            if(!String.IsNullOrEmpty(messageToEmail))
+            try
             {
-                sendMail.EnterMailWithChangesOfUser(oldEmail, messageToEmail);
-                MessageBox.Show("Данные пользователя успешно изменены. Пользователю отправлено сообщение с изменениями", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (user.email != oldEmail)
+                {
+                    messageToEmail += $"<br>Ваш E-mail был изменён на <b>{user.email}</b>";
+                    sendMail.EnterMailWithChangesOfUser(user.email, $"Ваша почта была привязана к аккаунту с логином {user.userid}");
+                }
+                if (user.username != oldName)
+                    messageToEmail += $"<br>Ваше имя было изменено на <b>{user.username}</b>";
+                if (user.passwd != oldPassword)
+                    messageToEmail += $"<br>Ваш пароль был изменён на <b>{password}</b>";
+                if (String.IsNullOrEmpty(user.phone))
+                    messageToEmail += "<br>Ваш телефон был удалён";
+                else if (user.phone != oldPhone)
+                    messageToEmail += $"<br>Ваш телефон был изменён на <b>{user.phone}</b>";
+                if (!String.IsNullOrEmpty(messageToEmail))
+                {
+                    sendMail.EnterMailWithChangesOfUser(oldEmail, messageToEmail);
+                    MessageBox.Show("Данные пользователя успешно изменены. Пользователю отправлено сообщение с изменениями", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
