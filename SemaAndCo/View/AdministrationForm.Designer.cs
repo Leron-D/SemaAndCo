@@ -155,7 +155,7 @@
             // currentPageNumeric
             // 
             this.currentPageNumeric.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.currentPageNumeric.Font = new System.Drawing.Font("Calibri", 12F);
+            this.currentPageNumeric.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.currentPageNumeric.Location = new System.Drawing.Point(169, 410);
             this.currentPageNumeric.Minimum = new decimal(new int[] {
             1,
@@ -163,7 +163,7 @@
             0,
             0});
             this.currentPageNumeric.Name = "currentPageNumeric";
-            this.currentPageNumeric.Size = new System.Drawing.Size(56, 27);
+            this.currentPageNumeric.Size = new System.Drawing.Size(56, 31);
             this.currentPageNumeric.TabIndex = 33;
             this.currentPageNumeric.Value = new decimal(new int[] {
             1,

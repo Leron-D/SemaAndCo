@@ -39,7 +39,7 @@ namespace SemaAndCo.View
             captcha.Renew();
         }
 
-        private void registrationButton_Click(object sender, EventArgs e)
+        private void RegistrationButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace SemaAndCo.View
             }
         }
 
-        private void emailTextBox_Validating(object sender, CancelEventArgs e)
+        private void EmailTextBox_Validating(object sender, CancelEventArgs e)
         {
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             Match match = regex.Match(emailTextBox.Text);
@@ -118,7 +118,7 @@ namespace SemaAndCo.View
             }
         }
 
-        private void loginTextBox_Validating(object sender, CancelEventArgs e)
+        private void LoginTextBox_Validating(object sender, CancelEventArgs e)
         {
             if (String.IsNullOrEmpty(loginTextBox.Text))
             {
@@ -134,7 +134,7 @@ namespace SemaAndCo.View
             }
         }
 
-        private void passwordTextBox_Validating(object sender, CancelEventArgs e)
+        private void PasswordTextBox_Validating(object sender, CancelEventArgs e)
         {
             if(String.IsNullOrEmpty(passwordTextBox.Text))
             {
@@ -150,7 +150,7 @@ namespace SemaAndCo.View
             }
         }
 
-        private void repeatPasswordTextBox_Validating(object sender, CancelEventArgs e)
+        private void RepeatPasswordTextBox_Validating(object sender, CancelEventArgs e)
         {
             if (repeatPasswordTextBox.Text != passwordTextBox.Text)
             {
@@ -160,18 +160,6 @@ namespace SemaAndCo.View
             {
                 regErrorProvider.Clear();
             }   
-        }
-
-        private void userNameTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            //if (userNameTextBox.Text.Length < 5 || userNameTextBox.Text.Length > 30)
-            //{
-            //    regErrorProvider.SetError(userNameTextBox, "Имя пользователя должно быть длиной от 5 до 30 символов");
-            //}
-            //else
-            //{
-            //    regErrorProvider.Clear();
-            //}
         }
 
         private void RegistrationForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -185,7 +173,7 @@ namespace SemaAndCo.View
             }
         }
 
-        private void renewButton_Click(object sender, EventArgs e)
+        private void RenewButton_Click(object sender, EventArgs e)
         {
             captcha.Renew();
         }
@@ -210,7 +198,7 @@ namespace SemaAndCo.View
             }
         }
 
-        private void captchaTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void CaptchaTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }

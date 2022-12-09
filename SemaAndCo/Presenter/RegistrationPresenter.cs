@@ -55,7 +55,7 @@ namespace SemaAndCo.Presenter
                 Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
                 Match match = regex.Match(email);
                 var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
-                if (login != "" && password != "" && login.Length >= 5 && login.Length <= 30 && password.Length >= 5 && password.Length <= 30)
+                if (login != "" && login.Length >= 5 && login.Length <= 30 && password.Length >= 5 && password.Length <= 30)
                 {
                     if (password == repeatPassword)
                     {
@@ -119,7 +119,7 @@ namespace SemaAndCo.Presenter
                 Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
                 Match match = regex.Match(email);
                 var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
-                if (login != "" && password != "" && login.Length >= 5 && login.Length <= 30 && password.Length >= 5 && password.Length <= 30)
+                if (login != "" && login.Length >= 5 && login.Length <= 30 && password.Length >= 5 && password.Length <= 30)
                 {
                     if (password == repeatPassword)
                     {
@@ -159,7 +159,12 @@ namespace SemaAndCo.Presenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

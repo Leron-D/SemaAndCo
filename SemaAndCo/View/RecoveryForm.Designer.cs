@@ -51,7 +51,7 @@
             this.loginOrEmailTextBox.Size = new System.Drawing.Size(355, 35);
             this.loginOrEmailTextBox.TabIndex = 69;
             this.loginOrEmailTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
-            this.loginOrEmailTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.loginOrEmailTextBox_Validating);
+            this.loginOrEmailTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.LoginOrEmailTextBox_Validating);
             // 
             // label2
             // 
@@ -88,7 +88,7 @@
             this.captchaTextBox.Size = new System.Drawing.Size(355, 35);
             this.captchaTextBox.TabIndex = 74;
             this.captchaTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
-            this.captchaTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.captchaTextBox_KeyPress);
+            this.captchaTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CaptchaTextBox_KeyPress);
             // 
             // label1
             // 
@@ -113,7 +113,7 @@
             this.renewButton.TabIndex = 81;
             this.renewButton.Text = "Обновить капчу";
             this.renewButton.UseVisualStyleBackColor = false;
-            this.renewButton.Click += new System.EventHandler(this.renewButton_Click);
+            this.renewButton.Click += new System.EventHandler(this.RenewButton_Click);
             // 
             // enterButton
             // 
@@ -127,7 +127,7 @@
             this.enterButton.TabIndex = 83;
             this.enterButton.Text = "Отправить";
             this.enterButton.UseVisualStyleBackColor = false;
-            this.enterButton.Click += new System.EventHandler(this.enterButton_Click);
+            this.enterButton.Click += new System.EventHandler(this.EnterButton_Click);
             // 
             // captcha
             // 

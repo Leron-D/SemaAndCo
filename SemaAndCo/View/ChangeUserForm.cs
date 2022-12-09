@@ -8,8 +8,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace SemaAndCo.View
 {
@@ -38,7 +40,7 @@ namespace SemaAndCo.View
             phoneTextBox.Text = oldPhone = user.phone;
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             SaveChangesMethod();
         }
@@ -66,21 +68,38 @@ namespace SemaAndCo.View
         {
             try
             {
+                string phone = phoneTextBox.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
+                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                Match match = regex.Match(emailTextBox.Text);
                 if (String.IsNullOrEmpty(emailTextBox.Text))
                     throw new Exception("Поле email не заполнено");
                 if (String.IsNullOrEmpty(passwordTextBox.Text))
                     throw new Exception("Поле пароля не заполнено");
+                if (!match.Success)
+                    throw new Exception("E-mail имеет формат");
+                if (changePasswordCheckBox.Checked)
+                {
+                    if (passwordTextBox.Text.Length < 5 || passwordTextBox.Text.Length > 30)
+                        throw new Exception("Пароль должен быть длиной от 5 до 30 символов");
+                }
+                if(phone.Length > 1 && phone.Length < 11)
+                {
+                    throw new Exception("Номер телефона введён некорректно");
+                }
                 var message = MessageBox.Show($"Сохранить изменения?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (message == DialogResult.Yes)
                 {
                     user.email = emailTextBox.Text;
                     user.username = nameTextBox.Text;
-                    if(passwordTextBox.Text != oldPassword)
-                        user.passwd = passwordTextBox.Text.EncryptString();
-                    if (phoneTextBox.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Length == 1)
+                    if (changePasswordCheckBox.Checked)
+                    {
+                        if (passwordTextBox.Text != oldPassword)
+                            user.passwd = passwordTextBox.Text.EncryptString();
+                    }
+                    if (phone.Length == 1)
                         user.phone = null;
                     else
-                        user.phone = phoneTextBox.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
+                        user.phone = phone;
                     context.SaveChanges();
                     SendMessageToUser(passwordTextBox.Text);
                 }
@@ -94,6 +113,20 @@ namespace SemaAndCo.View
                 }
                 else
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ChangePasswordCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (changePasswordCheckBox.Checked)
+            {
+                passwordTextBox.Enabled = true;
+                passwordTextBox.Text = "";
+            }
+            else
+            {
+                passwordTextBox.Enabled = false;
+                passwordTextBox.Text = oldPassword;
             }
         }
     }

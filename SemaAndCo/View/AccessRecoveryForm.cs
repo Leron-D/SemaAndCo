@@ -51,7 +51,7 @@ namespace SemaAndCo.View
             passwordTextBox.UseSystemPasswordChar = true;
         }
 
-        private void enterButton_Click(object sender, EventArgs e)
+        private void EnterButton_Click(object sender, EventArgs e)
         {
             EnterButtonMethod();
         }
@@ -82,7 +82,7 @@ namespace SemaAndCo.View
             }
         }
 
-        private void recoveryCodeTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void RecoveryCodeTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
@@ -111,12 +111,12 @@ namespace SemaAndCo.View
             }
         }
 
-        private async void SaveNewPasswordTextBox_Click(object sender, EventArgs e)
+        private void SaveNewPasswordTextBox_Click(object sender, EventArgs e)
         {
-            SaveNewPassword();
+            EnterPassword();
         }
 
-        private void SaveNewPassword()
+        private void EnterPassword()
         {
             try
             {
@@ -192,7 +192,7 @@ namespace SemaAndCo.View
             Close();
         }
 
-        private void viewCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void ViewCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (viewCheckBox.Checked)
                 passwordTextBox.UseSystemPasswordChar = false;
@@ -200,13 +200,13 @@ namespace SemaAndCo.View
                 passwordTextBox.UseSystemPasswordChar = true;
         }
 
-        private void passwordTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void PasswordTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (int)Keys.Space)
                 e.KeyChar = '\0';
         }
 
-        private void passwordTextBox_TextChanged(object sender, EventArgs e)
+        private void PasswordTextBox_TextChanged(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(passwordTextBox.Text))
             {
@@ -219,6 +219,14 @@ namespace SemaAndCo.View
             else
             {
                 regErrorProvider.Clear();
+            }
+        }
+
+        private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                EnterPassword();
             }
         }
     }

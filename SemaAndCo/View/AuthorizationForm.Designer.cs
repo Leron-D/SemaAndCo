@@ -165,7 +165,7 @@
             this.autoButton.TabIndex = 21;
             this.autoButton.Text = "Работать автономно";
             this.autoButton.UseVisualStyleBackColor = false;
-            this.autoButton.Click += new System.EventHandler(this.autoButton_Click);
+            this.autoButton.Click += new System.EventHandler(this.AutoButton_Click);
             // 
             // savingPathButton
             // 

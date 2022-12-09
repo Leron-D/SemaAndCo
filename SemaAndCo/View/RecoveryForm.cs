@@ -30,7 +30,7 @@ namespace SemaAndCo.View
             captcha.Renew();
         }
 
-        private void loginOrEmailTextBox_Validating(object sender, CancelEventArgs e)
+        private void LoginOrEmailTextBox_Validating(object sender, CancelEventArgs e)
         {
             if (String.IsNullOrEmpty(loginOrEmailTextBox.Text))
             {
@@ -43,7 +43,7 @@ namespace SemaAndCo.View
                 
         }
 
-        private void enterButton_Click(object sender, EventArgs e)
+        private void EnterButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -105,12 +105,12 @@ namespace SemaAndCo.View
             Close();
         }
 
-        private void renewButton_Click(object sender, EventArgs e)
+        private void RenewButton_Click(object sender, EventArgs e)
         {
             captcha.Renew();
         }
 
-        private void captchaTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void CaptchaTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = char.ToUpper(e.KeyChar);
         }

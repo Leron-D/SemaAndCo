@@ -163,7 +163,7 @@ namespace SemaAndCo
             Close();
         }
 
-        private void autoButton_Click(object sender, EventArgs e)
+        private void AutoButton_Click(object sender, EventArgs e)
         {
             AutomaticEnter();
         }

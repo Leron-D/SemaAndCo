@@ -61,7 +61,7 @@
             this.repeatPasswordTextBox.Size = new System.Drawing.Size(355, 33);
             this.repeatPasswordTextBox.TabIndex = 25;
             this.repeatPasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
-            this.repeatPasswordTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.repeatPasswordTextBox_Validating);
+            this.repeatPasswordTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.RepeatPasswordTextBox_Validating);
             // 
             // label4
             // 
@@ -83,7 +83,7 @@
             this.passwordTextBox.Size = new System.Drawing.Size(355, 33);
             this.passwordTextBox.TabIndex = 24;
             this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
-            this.passwordTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.passwordTextBox_Validating);
+            this.passwordTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.PasswordTextBox_Validating);
             // 
             // loginTextBox
             // 
@@ -94,7 +94,7 @@
             this.loginTextBox.Size = new System.Drawing.Size(355, 33);
             this.loginTextBox.TabIndex = 23;
             this.loginTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
-            this.loginTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.loginTextBox_Validating);
+            this.loginTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.LoginTextBox_Validating);
             // 
             // label3
             // 
@@ -155,12 +155,12 @@
             // 
             this.emailTextBox.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.emailTextBox.Location = new System.Drawing.Point(67, 291);
-            this.emailTextBox.MaxLength = 30;
+            this.emailTextBox.MaxLength = 50;
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(355, 33);
             this.emailTextBox.TabIndex = 31;
             this.emailTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
-            this.emailTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.emailTextBox_Validating);
+            this.emailTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.EmailTextBox_Validating);
             // 
             // label6
             // 
@@ -210,7 +210,7 @@
             this.renewButton.TabIndex = 80;
             this.renewButton.Text = "Обновить капчу";
             this.renewButton.UseVisualStyleBackColor = false;
-            this.renewButton.Click += new System.EventHandler(this.renewButton_Click);
+            this.renewButton.Click += new System.EventHandler(this.RenewButton_Click);
             // 
             // captchaTextBox
             // 
@@ -221,7 +221,7 @@
             this.captchaTextBox.Size = new System.Drawing.Size(355, 35);
             this.captchaTextBox.TabIndex = 78;
             this.captchaTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
-            this.captchaTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.captchaTextBox_KeyPress);
+            this.captchaTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CaptchaTextBox_KeyPress);
             // 
             // label8
             // 
@@ -246,7 +246,7 @@
             this.registrationButton.TabIndex = 82;
             this.registrationButton.Text = "Зарегистрироваться";
             this.registrationButton.UseVisualStyleBackColor = false;
-            this.registrationButton.Click += new System.EventHandler(this.registrationButton_Click);
+            this.registrationButton.Click += new System.EventHandler(this.RegistrationButton_Click);
             // 
             // captcha
             // 

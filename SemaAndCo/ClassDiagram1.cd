@@ -26,7 +26,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>IAAiAAAIACCAQhCAQHCAQAAiEgNEAAAAAgCAAAQAAAI=</HashCode>
+      <HashCode>IIAjAAQIACCAQxCCQHCAAAACGAJEAAAAAACAAAQAAAM=</HashCode>
       <FileName>View\AccessRecoveryForm.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -65,7 +65,7 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>ESACAEACgCEAAhAAACCAAAACAAAIAARBAIQAQCAAAQA=</HashCode>
+      <HashCode>FSACAAAiACEAAhAgACCAAAACAAAIAARBAIQAACAAAQA=</HashCode>
       <FileName>View\ChangeUserForm.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -80,7 +80,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SemaAndCo.View.MainForm">
-    <Position X="4" Y="3.25" Width="1.5" />
+    <Position X="4" Y="3.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -89,8 +89,8 @@
         <Point X="6.5" Y="2.627" />
         <Point X="6.5" Y="2.867" />
         <Point X="5.74" Y="2.867" />
-        <Point X="5.74" Y="3.938" />
-        <Point X="5.5" Y="3.938" />
+        <Point X="5.74" Y="4.188" />
+        <Point X="5.5" Y="4.188" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -104,7 +104,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AQCAAgAIAKBARBAEAACAAAAiAAAgAAAAAAAAAABgQAA=</HashCode>
+      <HashCode>AQCAAkAIAKAARBAAAACAAAAiCAAgAAAAQAAAAABAQAA=</HashCode>
       <FileName>View\RecoveryForm.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -116,13 +116,13 @@
       <Compartment Name="Properties" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>EAABAECAgSAABBSABCCAAAACChCkAIACAIDQACAAAAA=</HashCode>
+      <HashCode>UAABAECAgSAABBSABCCAAAACChCkAIACAIDQACAAAAA=</HashCode>
       <FileName>View\AuthorizationForm.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="SemaAndCo.Presenter.RegistrationPresenter">
-    <Position X="7.75" Y="6.5" Width="1.5" />
+    <Position X="7.75" Y="6.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -142,7 +142,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SemaAndCo.Presenter.LoginPresenter">
-    <Position X="8.25" Y="4.5" Width="1.5" />
+    <Position X="8.25" Y="4.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -152,7 +152,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SemaAndCo.Presenter.RecoveryPresenter">
-    <Position X="9.5" Y="6.5" Width="1.5" />
+    <Position X="9.5" Y="6.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
