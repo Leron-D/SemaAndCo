@@ -130,25 +130,6 @@
     <Compile Include="Model\IAdministrationModel.cs" />
     <Compile Include="Supporting\LocalUser.cs" />
     <Compile Include="Model\LoginModel.cs" />
-    <Compile Include="Model\IRegistrationModel.cs" />
-    <Compile Include="Model\SacModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SacModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SacModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SacModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SacModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SacModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Users.cs">
-      <DependentUpon>SacModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Presenter\AdministrationPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -278,16 +259,9 @@
     <EmbeddedResource Include="View\TemplateForm.resx">
       <DependentUpon>TemplateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\SacModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SacModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
     <None Include="ds_brushes.ttf" />
-    <None Include="Model\SacModel.edmx.diagram">
-      <DependentUpon>SacModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -307,16 +281,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\SacModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SacModel.edmx</DependentUpon>
-      <LastGenOutput>SacModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\SacModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SacModel.edmx</DependentUpon>
-      <LastGenOutput>SacModel.cs</LastGenOutput>
-    </Content>
     <Content Include="logo.ico" />
     <None Include="Resources\icons8-logout-40ы1.png" />
     <None Include="Resources\icons8-administration-40.png" />

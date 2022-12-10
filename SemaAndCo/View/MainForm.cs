@@ -23,7 +23,6 @@ namespace SemaAndCo.View
         string extension;
         bool fileResult;
         string autonomPassword = "autonom".EncryptString();
-        string zipFilePath = Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip");
         string autonomFilePath = Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip");
         string ftpUrl = @"ftp://91.122.211.144:50021/";
         public MainForm()
@@ -75,7 +74,7 @@ namespace SemaAndCo.View
 
         void CreateZip()
         {
-            if (!System.IO.File.Exists(zipFilePath))
+            if (!System.IO.File.Exists(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
             {
                 DotNetZipHelper.CreateArchive($"{CurrentUser.FtpUser.userid}.zip", CurrentUser.FtpUser.userid.EncryptString());
             }
@@ -90,7 +89,7 @@ namespace SemaAndCo.View
                 {
                     if (!LocalUser.Automatic)
                     {
-                        using (var zip = ZipFile.Read(zipFilePath))
+                        using (var zip = ZipFile.Read(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
                         {
                             foreach (ZipEntry e in zip.Entries)
                             {
@@ -201,8 +200,8 @@ namespace SemaAndCo.View
                                         filesForReplace.Add(Path.GetFileName(file));
                                         if (!LocalUser.Automatic)
                                         {
-                                            DotNetZipHelper.DeleteFilesFromZip(zipFilePath, filesForReplace);
-                                            DotNetZipHelper.AppendFilesToZip(zipFilePath, file, CurrentUser.FtpUser.userid.EncryptString());
+                                            DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), filesForReplace);
+                                            DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), file, CurrentUser.FtpUser.userid.EncryptString());
                                         }
                                         else
                                         {
@@ -216,7 +215,7 @@ namespace SemaAndCo.View
                                     if (LocalUser.Automatic)
                                         DotNetZipHelper.AppendFilesToZip(autonomFilePath, file, autonomPassword);
                                     else
-                                        DotNetZipHelper.AppendFilesToZip(zipFilePath, file, CurrentUser.FtpUser.userid.EncryptString());
+                                        DotNetZipHelper.AppendFilesToZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), file, CurrentUser.FtpUser.userid.EncryptString());
                                 }
                             }
                             //MessageBox.Show("Файлы успешно загружены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -295,7 +294,7 @@ namespace SemaAndCo.View
                         filesToDelete.Add(item.Text);
                     }
                     if(!LocalUser.Automatic)
-                        DotNetZipHelper.DeleteFilesFromZip(zipFilePath, filesToDelete);
+                        DotNetZipHelper.DeleteFilesFromZip(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), filesToDelete);
                     else
                         DotNetZipHelper.DeleteFilesFromZip(autonomFilePath, filesToDelete);
                     //MessageBox.Show("Файлы успешно удалены", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -348,7 +347,7 @@ namespace SemaAndCo.View
                     if (listView.SelectedItems.Count == 1)
                     {
                         if(!LocalUser.Automatic)
-                            DotNetZipHelper.GetInfoFiles(zipFilePath, listView.SelectedItems[0].Text);
+                            DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), listView.SelectedItems[0].Text);
                         else
                             DotNetZipHelper.GetInfoFiles(Path.Combine(Properties.Settings.Default.savingPath, $"autonom.zip"), listView.SelectedItems[0].Text);
                     }
@@ -557,7 +556,7 @@ namespace SemaAndCo.View
                                     {
                                         fileNames.Add(listView.SelectedItems[i].Text);
                                         if(!LocalUser.Automatic)
-                                            DotNetZipHelper.ExtractFiles(zipFilePath, listView.SelectedItems[i].Text, dialog.SelectedPath);
+                                            DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), listView.SelectedItems[i].Text, dialog.SelectedPath);
                                         else
                                             DotNetZipHelper.ExtractFiles(autonomFilePath, listView.SelectedItems[i].Text, dialog.SelectedPath);
                                     }
@@ -565,7 +564,7 @@ namespace SemaAndCo.View
                                 else
                                 {
                                     fileNames.Add(listView.SelectedItems[i].Text);
-                                    DotNetZipHelper.ExtractFiles(zipFilePath, listView.SelectedItems[i].Text, dialog.SelectedPath);
+                                    DotNetZipHelper.ExtractFiles(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip"), listView.SelectedItems[i].Text, dialog.SelectedPath);
                                 }
                             }
                             if (fileNames.Count > 0)

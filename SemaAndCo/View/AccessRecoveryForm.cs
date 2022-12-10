@@ -185,11 +185,14 @@ namespace SemaAndCo.View
 
         private void AccessRecoveryForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Hide();
-            Core.goAdministration = false;
-            AuthorizationForm form = new AuthorizationForm();
-            form.ShowDialog();
-            Close();
+            if(Core.goAdministration)
+            {
+                Hide();
+                Core.goAdministration = false;
+                AuthorizationForm form = new AuthorizationForm();
+                form.ShowDialog();
+                Close();
+            }
         }
 
         private void ViewCheckBox_CheckedChanged(object sender, EventArgs e)

@@ -55,7 +55,7 @@ namespace SemaAndCo.Presenter
                 Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
                 Match match = regex.Match(email);
                 var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
-                if (login != "" && login.Length >= 5 && login.Length <= 30 && password.Length >= 5 && password.Length <= 30)
+                if (!String.IsNullOrWhiteSpace(login) && login.Length >= 5 && login.Length <= 30 && !String.IsNullOrWhiteSpace(password) && password.Length >= 5 && password.Length <= 30)
                 {
                     if (password == repeatPassword)
                     {

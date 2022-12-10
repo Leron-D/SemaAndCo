@@ -4,5 +4,6 @@
     {
         void Close();
         void Hide();
+        void Show();
     }
 }

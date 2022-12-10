@@ -28,6 +28,7 @@ namespace SemaAndCo.View
 
         private void SelectFolderForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Hide();
             AuthorizationForm form = new AuthorizationForm();
             form.ShowDialog();
         }
