@@ -28,10 +28,8 @@ namespace SemaAndCo.View
 
         private void SelectFolderForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Hide();
             AuthorizationForm form = new AuthorizationForm();
             form.ShowDialog();
-            Close();
         }
 
         void ChooseFolder()
@@ -89,15 +87,12 @@ namespace SemaAndCo.View
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void OpenAuthorizationFormMethod()
         {
             MessageBox.Show("Путь успешно сохранен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Hide();
-            AuthorizationForm form = new AuthorizationForm();
-            form.ShowDialog();
             Close();
         }
 

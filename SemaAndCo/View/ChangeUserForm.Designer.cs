@@ -82,14 +82,14 @@
             this.emailTextBox.Location = new System.Drawing.Point(164, 80);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(281, 31);
-            this.emailTextBox.TabIndex = 6;
+            this.emailTextBox.TabIndex = 0;
             // 
             // nameTextBox
             // 
             this.nameTextBox.Location = new System.Drawing.Point(164, 121);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(281, 31);
-            this.nameTextBox.TabIndex = 7;
+            this.nameTextBox.TabIndex = 1;
             // 
             // passwordTextBox
             // 
@@ -98,7 +98,7 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '●';
             this.passwordTextBox.Size = new System.Drawing.Size(281, 31);
-            this.passwordTextBox.TabIndex = 8;
+            this.passwordTextBox.TabIndex = 2;
             // 
             // saveButton
             // 
@@ -109,7 +109,7 @@
             this.saveButton.Location = new System.Drawing.Point(212, 261);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(281, 50);
-            this.saveButton.TabIndex = 84;
+            this.saveButton.TabIndex = 5;
             this.saveButton.Text = "Сохранить";
             this.saveButton.UseVisualStyleBackColor = false;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
@@ -132,7 +132,7 @@
             this.phoneTextBox.Mask = "8(000)-000-00-00";
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.Size = new System.Drawing.Size(281, 33);
-            this.phoneTextBox.TabIndex = 86;
+            this.phoneTextBox.TabIndex = 3;
             // 
             // changePasswordCheckBox
             // 
@@ -142,7 +142,7 @@
             this.changePasswordCheckBox.Margin = new System.Windows.Forms.Padding(5);
             this.changePasswordCheckBox.Name = "changePasswordCheckBox";
             this.changePasswordCheckBox.Size = new System.Drawing.Size(162, 24);
-            this.changePasswordCheckBox.TabIndex = 87;
+            this.changePasswordCheckBox.TabIndex = 4;
             this.changePasswordCheckBox.Text = "Изменить пароль";
             this.changePasswordCheckBox.UseVisualStyleBackColor = true;
             this.changePasswordCheckBox.CheckedChanged += new System.EventHandler(this.ChangePasswordCheckBox_CheckedChanged);

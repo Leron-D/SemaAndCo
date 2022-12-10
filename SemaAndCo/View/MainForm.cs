@@ -615,14 +615,14 @@ namespace SemaAndCo.View
             }
         }
 
-        private void RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void RadioButton_CheckedChangedAsync(object sender, EventArgs e)
         {
             try
             {
-                IntroForm form = new IntroForm();
-                form.Show();
+                IntroForm introForm = new IntroForm();
+                introForm.Show();
                 LoadData();
-                form.Close();
+                introForm.Close();
                 ChangeEnabledButtons();
             }
             catch (Exception ex)

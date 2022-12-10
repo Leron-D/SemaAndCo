@@ -59,7 +59,7 @@
             this.enterButton.Margin = new System.Windows.Forms.Padding(5);
             this.enterButton.Name = "enterButton";
             this.enterButton.Size = new System.Drawing.Size(292, 71);
-            this.enterButton.TabIndex = 76;
+            this.enterButton.TabIndex = 1;
             this.enterButton.Text = "Проверить";
             this.enterButton.UseVisualStyleBackColor = false;
             this.enterButton.Click += new System.EventHandler(this.EnterButton_Click);
@@ -72,7 +72,7 @@
             this.recoveryCodeTextBox.MaxLength = 30;
             this.recoveryCodeTextBox.Name = "recoveryCodeTextBox";
             this.recoveryCodeTextBox.Size = new System.Drawing.Size(402, 35);
-            this.recoveryCodeTextBox.TabIndex = 73;
+            this.recoveryCodeTextBox.TabIndex = 0;
             this.recoveryCodeTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RecoveryCodeTextBox_KeyDown);
             // 
             // descriptionLabel
@@ -160,7 +160,7 @@
             this.viewCheckBox.Margin = new System.Windows.Forms.Padding(5);
             this.viewCheckBox.Name = "viewCheckBox";
             this.viewCheckBox.Size = new System.Drawing.Size(160, 24);
-            this.viewCheckBox.TabIndex = 81;
+            this.viewCheckBox.TabIndex = 1;
             this.viewCheckBox.Text = "Показать пароль";
             this.viewCheckBox.UseVisualStyleBackColor = true;
             this.viewCheckBox.CheckedChanged += new System.EventHandler(this.ViewCheckBox_CheckedChanged);
@@ -173,7 +173,7 @@
             this.passwordTextBox.MaxLength = 30;
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(404, 35);
-            this.passwordTextBox.TabIndex = 77;
+            this.passwordTextBox.TabIndex = 0;
             this.passwordTextBox.TextChanged += new System.EventHandler(this.PasswordTextBox_TextChanged);
             this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PasswordTextBox_KeyDown);
             this.passwordTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PasswordTextBox_KeyPress);
@@ -188,7 +188,7 @@
             this.saveNewPasswordTextBox.Margin = new System.Windows.Forms.Padding(5);
             this.saveNewPasswordTextBox.Name = "saveNewPasswordTextBox";
             this.saveNewPasswordTextBox.Size = new System.Drawing.Size(292, 71);
-            this.saveNewPasswordTextBox.TabIndex = 80;
+            this.saveNewPasswordTextBox.TabIndex = 2;
             this.saveNewPasswordTextBox.Text = "Сохранить";
             this.saveNewPasswordTextBox.UseVisualStyleBackColor = false;
             this.saveNewPasswordTextBox.Click += new System.EventHandler(this.SaveNewPasswordTextBox_Click);

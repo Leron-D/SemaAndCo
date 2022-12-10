@@ -134,9 +134,9 @@ namespace SemaAndCo.View
                     {
                         AdministrationForm form = new AdministrationForm();
                         form.FormClosed += Form_FormClosed;
-                        introPictureBox.Dock = DockStyle.Fill;
-                        introPictureBox.Enabled = true;
-                        introPictureBox.Visible = true;
+                        //introPictureBox.Dock = DockStyle.Fill;
+                        //introPictureBox.Enabled = true;
+                        //introPictureBox.Visible = true;
                         if (!UsersLoad())
                         {
                             MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -144,13 +144,13 @@ namespace SemaAndCo.View
                         else
                         {
                             Core.access = true;
-                            MessageBox.Show("Вы зашли как администратор", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            //MessageBox.Show("Вы зашли как администратор", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Hide();
                             form.ShowDialog();
                         }
-                        introPictureBox.Dock = DockStyle.None;
-                        introPictureBox.Visible = false;
-                        introPictureBox.Enabled = false;
+                        //introPictureBox.Dock = DockStyle.None;
+                        //introPictureBox.Visible = false;
+                        //introPictureBox.Enabled = false;
                     }
                     else
                     {
@@ -208,17 +208,20 @@ namespace SemaAndCo.View
 
         private void PasswordTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(passwordTextBox.Text))
+            if (!Core.goAdministration)
             {
-                regErrorProvider.SetError(passwordTextBox, "Не введен пароль!");
-            }
-            else if (passwordTextBox.Text.Length < 5 || passwordTextBox.Text.Length > 30)
-            {
-                regErrorProvider.SetError(passwordTextBox, "Пароль должен быть длиной от 5 до 30 символов");
-            }
-            else
-            {
-                regErrorProvider.Clear();
+                if (String.IsNullOrEmpty(passwordTextBox.Text))
+                {
+                    regErrorProvider.SetError(passwordTextBox, "Не введен пароль!");
+                }
+                else if (passwordTextBox.Text.Length < 5 || passwordTextBox.Text.Length > 30)
+                {
+                    regErrorProvider.SetError(passwordTextBox, "Пароль должен быть длиной от 5 до 30 символов");
+                }
+                else
+                {
+                    regErrorProvider.Clear();
+                }
             }
         }
 

@@ -42,7 +42,7 @@
             this.folderTextBox.MaxLength = 30;
             this.folderTextBox.Name = "folderTextBox";
             this.folderTextBox.Size = new System.Drawing.Size(454, 35);
-            this.folderTextBox.TabIndex = 72;
+            this.folderTextBox.TabIndex = 1;
             // 
             // label2
             // 
@@ -65,7 +65,7 @@
             this.saveButton.Margin = new System.Windows.Forms.Padding(5);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(273, 58);
-            this.saveButton.TabIndex = 84;
+            this.saveButton.TabIndex = 3;
             this.saveButton.Text = "Сохранить";
             this.saveButton.UseVisualStyleBackColor = false;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
@@ -79,7 +79,7 @@
             this.choosePathButton.Location = new System.Drawing.Point(472, 49);
             this.choosePathButton.Name = "choosePathButton";
             this.choosePathButton.Size = new System.Drawing.Size(46, 39);
-            this.choosePathButton.TabIndex = 85;
+            this.choosePathButton.TabIndex = 2;
             this.choosePathButton.UseVisualStyleBackColor = false;
             this.choosePathButton.Click += new System.EventHandler(this.ChoosePathButton_Click);
             // 

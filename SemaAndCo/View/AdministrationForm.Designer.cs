@@ -85,7 +85,7 @@
             this.usersGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.usersGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.usersGridView.Size = new System.Drawing.Size(1033, 347);
-            this.usersGridView.TabIndex = 3;
+            this.usersGridView.TabIndex = 12;
             this.usersGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.UsersGridView_CellMouseClick);
             // 
             // loginColumn
@@ -133,7 +133,7 @@
             this.changeButton.Margin = new System.Windows.Forms.Padding(5);
             this.changeButton.Name = "changeButton";
             this.changeButton.Size = new System.Drawing.Size(106, 31);
-            this.changeButton.TabIndex = 2;
+            this.changeButton.TabIndex = 3;
             this.changeButton.Text = "Изменить";
             this.changeButton.UseVisualStyleBackColor = false;
             this.changeButton.Click += new System.EventHandler(this.ChangeButton_Click);
@@ -164,7 +164,7 @@
             0});
             this.currentPageNumeric.Name = "currentPageNumeric";
             this.currentPageNumeric.Size = new System.Drawing.Size(56, 31);
-            this.currentPageNumeric.TabIndex = 33;
+            this.currentPageNumeric.TabIndex = 7;
             this.currentPageNumeric.Value = new decimal(new int[] {
             1,
             0,
@@ -189,7 +189,7 @@
             this.label13.Location = new System.Drawing.Point(231, 412);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(28, 23);
-            this.label13.TabIndex = 34;
+            this.label13.TabIndex = 8;
             this.label13.Text = "из";
             // 
             // totalPagesLabel
@@ -199,7 +199,7 @@
             this.totalPagesLabel.Location = new System.Drawing.Point(254, 412);
             this.totalPagesLabel.Name = "totalPagesLabel";
             this.totalPagesLabel.Size = new System.Drawing.Size(91, 23);
-            this.totalPagesLabel.TabIndex = 37;
+            this.totalPagesLabel.TabIndex = 9;
             this.totalPagesLabel.Text = "TotalPages";
             // 
             // lastPageButton
@@ -209,7 +209,7 @@
             this.lastPageButton.Location = new System.Drawing.Point(388, 410);
             this.lastPageButton.Name = "lastPageButton";
             this.lastPageButton.Size = new System.Drawing.Size(32, 27);
-            this.lastPageButton.TabIndex = 36;
+            this.lastPageButton.TabIndex = 11;
             this.lastPageButton.Text = ">|";
             this.lastPageButton.UseVisualStyleBackColor = true;
             this.lastPageButton.Click += new System.EventHandler(this.LastPageButton_Click);
@@ -220,7 +220,7 @@
             this.rightPageButton.Location = new System.Drawing.Point(351, 410);
             this.rightPageButton.Name = "rightPageButton";
             this.rightPageButton.Size = new System.Drawing.Size(31, 27);
-            this.rightPageButton.TabIndex = 35;
+            this.rightPageButton.TabIndex = 10;
             this.rightPageButton.Text = ">";
             this.rightPageButton.UseVisualStyleBackColor = true;
             this.rightPageButton.Click += new System.EventHandler(this.RightPageButton_Click);
@@ -232,7 +232,7 @@
             this.leftPageButton.Location = new System.Drawing.Point(55, 408);
             this.leftPageButton.Name = "leftPageButton";
             this.leftPageButton.Size = new System.Drawing.Size(31, 27);
-            this.leftPageButton.TabIndex = 31;
+            this.leftPageButton.TabIndex = 6;
             this.leftPageButton.Text = "<";
             this.leftPageButton.UseVisualStyleBackColor = true;
             this.leftPageButton.Click += new System.EventHandler(this.LeftPageButton_Click);
@@ -245,7 +245,7 @@
             this.firstPageButton.Location = new System.Drawing.Point(17, 408);
             this.firstPageButton.Name = "firstPageButton";
             this.firstPageButton.Size = new System.Drawing.Size(32, 27);
-            this.firstPageButton.TabIndex = 30;
+            this.firstPageButton.TabIndex = 5;
             this.firstPageButton.Text = "|<";
             this.firstPageButton.UseVisualStyleBackColor = true;
             this.firstPageButton.Click += new System.EventHandler(this.FirstPageButton_Click);
@@ -257,7 +257,7 @@
             this.label15.Location = new System.Drawing.Point(426, 412);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(80, 23);
-            this.label15.TabIndex = 39;
+            this.label15.TabIndex = 15;
             this.label15.Text = "Записей:";
             // 
             // resultsAmountLabel
@@ -267,7 +267,7 @@
             this.resultsAmountLabel.Location = new System.Drawing.Point(503, 410);
             this.resultsAmountLabel.Name = "resultsAmountLabel";
             this.resultsAmountLabel.Size = new System.Drawing.Size(20, 23);
-            this.resultsAmountLabel.TabIndex = 38;
+            this.resultsAmountLabel.TabIndex = 14;
             this.resultsAmountLabel.Text = "0";
             // 
             // deleteButton
@@ -280,7 +280,7 @@
             this.deleteButton.Margin = new System.Windows.Forms.Padding(5);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(106, 31);
-            this.deleteButton.TabIndex = 40;
+            this.deleteButton.TabIndex = 4;
             this.deleteButton.Text = "Удалить";
             this.deleteButton.UseVisualStyleBackColor = false;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
@@ -295,7 +295,7 @@
             this.addButton.Margin = new System.Windows.Forms.Padding(5);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(106, 31);
-            this.addButton.TabIndex = 41;
+            this.addButton.TabIndex = 2;
             this.addButton.Text = "Добавить";
             this.addButton.UseVisualStyleBackColor = false;
             this.addButton.Click += new System.EventHandler(this.AddButton_Click);

@@ -83,55 +83,5 @@ namespace SemaAndCo.Supporting
                 zip.Save();
             }
         }
-        //private void EncryptFile(string inputFile, string outputFile, string password)
-        //{
-        //    UnicodeEncoding UE = new UnicodeEncoding();
-        //    byte[] key = CreateKey(password);
-
-        //    string cryptFile = outputFile;
-        //    FileStream fsCrypt = new FileStream(cryptFile, FileMode.Create);
-
-        //    RijndaelManaged RMCrypto = new RijndaelManaged();
-        //    IV = CreateIV(password);
-
-        //    CryptoStream cs = new CryptoStream(fsCrypt,
-        //        RMCrypto.CreateEncryptor(key, IV),
-        //        CryptoStreamMode.Write);
-
-        //    FileStream fsIn = new FileStream(inputFile, FileMode.Open);
-
-        //    int data;
-        //    while ((data = fsIn.ReadByte()) != -1)
-        //        cs.WriteByte((byte)data);
-
-
-        //    fsIn.Close();
-        //    cs.Close();
-        //    fsCrypt.Close();
-        //}
-
-        //private void DecryptFile(string inputFile, string outputFile, string password)
-        //{
-        //    UnicodeEncoding UE = new UnicodeEncoding();
-        //    byte[] key = CreateKey(password);
-        //    FileStream fsCrypt = new FileStream(inputFile, FileMode.Open);
-        //    RijndaelManaged RMCrypto = new RijndaelManaged();
-        //    IV = CreateIV(password);
-
-        //    CryptoStream cs = new CryptoStream(fsCrypt,
-        //        RMCrypto.CreateDecryptor(key, IV),
-        //        CryptoStreamMode.Read);
-
-        //    FileStream fsOut = new FileStream(outputFile.Remove(outputFile.Length - 4), FileMode.Create);
-
-        //    int data;
-        //    while ((data = cs.ReadByte()) != -1)
-        //        fsOut.WriteByte((byte)data);
-
-        //    fsOut.Close();
-        //    cs.Close();
-        //    fsCrypt.Close();
-
-        //}
     }
 }

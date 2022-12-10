@@ -70,7 +70,7 @@
             this.listView.Location = new System.Drawing.Point(-2, 73);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(1210, 534);
-            this.listView.TabIndex = 3;
+            this.listView.TabIndex = 9;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.List;
             this.listView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.ListView_ItemSelectionChanged);
@@ -85,7 +85,7 @@
             this.downloadButton.Margin = new System.Windows.Forms.Padding(5);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(117, 45);
-            this.downloadButton.TabIndex = 4;
+            this.downloadButton.TabIndex = 2;
             this.downloadButton.Text = "Скачать ↓";
             this.downloadButton.UseVisualStyleBackColor = false;
             this.downloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
@@ -101,7 +101,7 @@
             this.deleteButton.Margin = new System.Windows.Forms.Padding(5);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(91, 45);
-            this.deleteButton.TabIndex = 5;
+            this.deleteButton.TabIndex = 4;
             this.deleteButton.Text = "Удалить";
             this.deleteButton.UseVisualStyleBackColor = false;
             this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
@@ -117,7 +117,7 @@
             this.renameButton.Margin = new System.Windows.Forms.Padding(5);
             this.renameButton.Name = "renameButton";
             this.renameButton.Size = new System.Drawing.Size(120, 45);
-            this.renameButton.TabIndex = 6;
+            this.renameButton.TabIndex = 3;
             this.renameButton.Text = "Переименовать";
             this.renameButton.UseVisualStyleBackColor = false;
             this.renameButton.Click += new System.EventHandler(this.RenameButton_Click);
@@ -133,7 +133,7 @@
             this.infoButton.Margin = new System.Windows.Forms.Padding(5);
             this.infoButton.Name = "infoButton";
             this.infoButton.Size = new System.Drawing.Size(114, 45);
-            this.infoButton.TabIndex = 9;
+            this.infoButton.TabIndex = 5;
             this.infoButton.Text = "Информация";
             this.infoButton.UseVisualStyleBackColor = false;
             this.infoButton.Click += new System.EventHandler(this.InfoButton_Click);
@@ -157,7 +157,7 @@
             this.renameTextBox.MaxLength = 64;
             this.renameTextBox.Name = "renameTextBox";
             this.renameTextBox.Size = new System.Drawing.Size(100, 31);
-            this.renameTextBox.TabIndex = 13;
+            this.renameTextBox.TabIndex = 0;
             this.renameTextBox.Visible = false;
             this.renameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RenameTextBox_KeyDown);
             // 
@@ -168,11 +168,11 @@
             this.localRadioButton.Location = new System.Drawing.Point(630, 23);
             this.localRadioButton.Name = "localRadioButton";
             this.localRadioButton.Size = new System.Drawing.Size(210, 27);
-            this.localRadioButton.TabIndex = 14;
+            this.localRadioButton.TabIndex = 6;
             this.localRadioButton.TabStop = true;
             this.localRadioButton.Text = "Локальное хранилище";
             this.localRadioButton.UseVisualStyleBackColor = true;
-            this.localRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
+            this.localRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChangedAsync);
             // 
             // serverRadioButton
             // 
@@ -180,10 +180,10 @@
             this.serverRadioButton.Location = new System.Drawing.Point(856, 23);
             this.serverRadioButton.Name = "serverRadioButton";
             this.serverRadioButton.Size = new System.Drawing.Size(208, 27);
-            this.serverRadioButton.TabIndex = 15;
+            this.serverRadioButton.TabIndex = 7;
             this.serverRadioButton.Text = "Серверное хранилище";
             this.serverRadioButton.UseVisualStyleBackColor = true;
-            this.serverRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
+            this.serverRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChangedAsync);
             // 
             // exitButton
             // 
@@ -197,7 +197,7 @@
             this.exitButton.Margin = new System.Windows.Forms.Padding(5);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(45, 45);
-            this.exitButton.TabIndex = 11;
+            this.exitButton.TabIndex = 8;
             this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 

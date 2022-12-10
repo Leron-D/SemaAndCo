@@ -54,7 +54,7 @@
             this.rememberCheckBox.Location = new System.Drawing.Point(10, 291);
             this.rememberCheckBox.Name = "rememberCheckBox";
             this.rememberCheckBox.Size = new System.Drawing.Size(143, 23);
-            this.rememberCheckBox.TabIndex = 18;
+            this.rememberCheckBox.TabIndex = 4;
             this.rememberCheckBox.Text = "Запомнить меня";
             this.rememberCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -68,7 +68,7 @@
             this.forgotPasswordLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.forgotPasswordLabel.Name = "forgotPasswordLabel";
             this.forgotPasswordLabel.Size = new System.Drawing.Size(142, 23);
-            this.forgotPasswordLabel.TabIndex = 13;
+            this.forgotPasswordLabel.TabIndex = 5;
             this.forgotPasswordLabel.Text = "Забыли пароль?";
             this.forgotPasswordLabel.Click += new System.EventHandler(this.ForgotPasswordLabel_Click);
             // 
@@ -81,7 +81,7 @@
             this.toRegistrationButton.Location = new System.Drawing.Point(86, 458);
             this.toRegistrationButton.Name = "toRegistrationButton";
             this.toRegistrationButton.Size = new System.Drawing.Size(200, 39);
-            this.toRegistrationButton.TabIndex = 16;
+            this.toRegistrationButton.TabIndex = 8;
             this.toRegistrationButton.Text = "Зарегистрироваться";
             this.toRegistrationButton.UseVisualStyleBackColor = false;
             this.toRegistrationButton.Click += new System.EventHandler(this.ToRegistrationButton_Click);
@@ -107,7 +107,7 @@
             this.loginButton.Location = new System.Drawing.Point(86, 369);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(200, 47);
-            this.loginButton.TabIndex = 15;
+            this.loginButton.TabIndex = 7;
             this.loginButton.Text = "Войти";
             this.loginButton.UseVisualStyleBackColor = false;
             this.loginButton.Click += new System.EventHandler(this.LoginButton_Click);
@@ -119,7 +119,7 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '●';
             this.passwordTextBox.Size = new System.Drawing.Size(355, 47);
-            this.passwordTextBox.TabIndex = 11;
+            this.passwordTextBox.TabIndex = 3;
             this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // loginTextBox
@@ -128,7 +128,7 @@
             this.loginTextBox.Location = new System.Drawing.Point(10, 140);
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(355, 47);
-            this.loginTextBox.TabIndex = 10;
+            this.loginTextBox.TabIndex = 2;
             this.loginTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // label3
@@ -162,7 +162,7 @@
             this.autoButton.Location = new System.Drawing.Point(10, 317);
             this.autoButton.Name = "autoButton";
             this.autoButton.Size = new System.Drawing.Size(149, 26);
-            this.autoButton.TabIndex = 21;
+            this.autoButton.TabIndex = 6;
             this.autoButton.Text = "Работать автономно";
             this.autoButton.UseVisualStyleBackColor = false;
             this.autoButton.Click += new System.EventHandler(this.AutoButton_Click);
@@ -177,7 +177,7 @@
             this.savingPathButton.Location = new System.Drawing.Point(10, 3);
             this.savingPathButton.Name = "savingPathButton";
             this.savingPathButton.Size = new System.Drawing.Size(31, 27);
-            this.savingPathButton.TabIndex = 22;
+            this.savingPathButton.TabIndex = 0;
             this.savingPathButton.UseVisualStyleBackColor = false;
             this.savingPathButton.Click += new System.EventHandler(this.SavingPathButton_Click);
             // 
@@ -216,7 +216,7 @@
             this.administrationButton.Margin = new System.Windows.Forms.Padding(5);
             this.administrationButton.Name = "administrationButton";
             this.administrationButton.Size = new System.Drawing.Size(41, 40);
-            this.administrationButton.TabIndex = 24;
+            this.administrationButton.TabIndex = 1;
             this.administrationButton.UseVisualStyleBackColor = false;
             this.administrationButton.Click += new System.EventHandler(this.AdministrationButton_Click);
             // 

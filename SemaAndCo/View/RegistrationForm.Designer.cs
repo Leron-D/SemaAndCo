@@ -60,7 +60,7 @@
             this.repeatPasswordTextBox.Name = "repeatPasswordTextBox";
             this.repeatPasswordTextBox.PasswordChar = '●';
             this.repeatPasswordTextBox.Size = new System.Drawing.Size(355, 33);
-            this.repeatPasswordTextBox.TabIndex = 25;
+            this.repeatPasswordTextBox.TabIndex = 2;
             this.repeatPasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             this.repeatPasswordTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.RepeatPasswordTextBox_Validating);
             // 
@@ -83,7 +83,7 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '●';
             this.passwordTextBox.Size = new System.Drawing.Size(355, 33);
-            this.passwordTextBox.TabIndex = 24;
+            this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             this.passwordTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.PasswordTextBox_Validating);
             // 
@@ -94,7 +94,7 @@
             this.loginTextBox.MaxLength = 30;
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(355, 33);
-            this.loginTextBox.TabIndex = 23;
+            this.loginTextBox.TabIndex = 0;
             this.loginTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             this.loginTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.LoginTextBox_Validating);
             // 
@@ -149,7 +149,7 @@
             this.userNameTextBox.MaxLength = 30;
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(355, 33);
-            this.userNameTextBox.TabIndex = 32;
+            this.userNameTextBox.TabIndex = 4;
             this.userNameTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // emailTextBox
@@ -159,7 +159,7 @@
             this.emailTextBox.MaxLength = 50;
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(355, 33);
-            this.emailTextBox.TabIndex = 31;
+            this.emailTextBox.TabIndex = 3;
             this.emailTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             this.emailTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.EmailTextBox_Validating);
             // 
@@ -192,7 +192,7 @@
             this.phoneNumberTextBox.Mask = "8(000)-000-00-00";
             this.phoneNumberTextBox.Name = "phoneNumberTextBox";
             this.phoneNumberTextBox.Size = new System.Drawing.Size(355, 33);
-            this.phoneNumberTextBox.TabIndex = 37;
+            this.phoneNumberTextBox.TabIndex = 5;
             this.phoneNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // regErrorProvider
@@ -208,7 +208,7 @@
             this.renewButton.Location = new System.Drawing.Point(689, 324);
             this.renewButton.Name = "renewButton";
             this.renewButton.Size = new System.Drawing.Size(125, 26);
-            this.renewButton.TabIndex = 80;
+            this.renewButton.TabIndex = 6;
             this.renewButton.Text = "Обновить капчу";
             this.renewButton.UseVisualStyleBackColor = false;
             this.renewButton.Click += new System.EventHandler(this.RenewButton_Click);
@@ -220,7 +220,7 @@
             this.captchaTextBox.MaxLength = 30;
             this.captchaTextBox.Name = "captchaTextBox";
             this.captchaTextBox.Size = new System.Drawing.Size(355, 35);
-            this.captchaTextBox.TabIndex = 78;
+            this.captchaTextBox.TabIndex = 7;
             this.captchaTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             this.captchaTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CaptchaTextBox_KeyPress);
             // 
@@ -244,7 +244,7 @@
             this.registrationButton.Location = new System.Drawing.Point(298, 418);
             this.registrationButton.Name = "registrationButton";
             this.registrationButton.Size = new System.Drawing.Size(297, 50);
-            this.registrationButton.TabIndex = 82;
+            this.registrationButton.TabIndex = 8;
             this.registrationButton.Text = "Зарегистрироваться";
             this.registrationButton.UseVisualStyleBackColor = false;
             this.registrationButton.Click += new System.EventHandler(this.RegistrationButton_Click);

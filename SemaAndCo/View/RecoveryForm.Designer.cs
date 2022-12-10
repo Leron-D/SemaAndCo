@@ -49,7 +49,7 @@
             this.loginOrEmailTextBox.MaxLength = 30;
             this.loginOrEmailTextBox.Name = "loginOrEmailTextBox";
             this.loginOrEmailTextBox.Size = new System.Drawing.Size(355, 35);
-            this.loginOrEmailTextBox.TabIndex = 69;
+            this.loginOrEmailTextBox.TabIndex = 0;
             this.loginOrEmailTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             this.loginOrEmailTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.LoginOrEmailTextBox_Validating);
             // 
@@ -61,7 +61,7 @@
             this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(159, 29);
-            this.label2.TabIndex = 71;
+            this.label2.TabIndex = 5;
             this.label2.Text = "Логин/E-mail";
             // 
             // label7
@@ -72,7 +72,7 @@
             this.label7.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(358, 39);
-            this.label7.TabIndex = 70;
+            this.label7.TabIndex = 4;
             this.label7.Text = "Заполните информацию";
             // 
             // recErrorProvider
@@ -86,7 +86,7 @@
             this.captchaTextBox.MaxLength = 30;
             this.captchaTextBox.Name = "captchaTextBox";
             this.captchaTextBox.Size = new System.Drawing.Size(355, 35);
-            this.captchaTextBox.TabIndex = 74;
+            this.captchaTextBox.TabIndex = 2;
             this.captchaTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             this.captchaTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CaptchaTextBox_KeyPress);
             // 
@@ -110,7 +110,7 @@
             this.renewButton.Location = new System.Drawing.Point(280, 341);
             this.renewButton.Name = "renewButton";
             this.renewButton.Size = new System.Drawing.Size(125, 26);
-            this.renewButton.TabIndex = 81;
+            this.renewButton.TabIndex = 1;
             this.renewButton.Text = "Обновить капчу";
             this.renewButton.UseVisualStyleBackColor = false;
             this.renewButton.Click += new System.EventHandler(this.RenewButton_Click);
@@ -124,7 +124,7 @@
             this.enterButton.Location = new System.Drawing.Point(79, 455);
             this.enterButton.Name = "enterButton";
             this.enterButton.Size = new System.Drawing.Size(297, 50);
-            this.enterButton.TabIndex = 83;
+            this.enterButton.TabIndex = 3;
             this.enterButton.Text = "Отправить";
             this.enterButton.UseVisualStyleBackColor = false;
             this.enterButton.Click += new System.EventHandler(this.EnterButton_Click);
@@ -134,7 +134,7 @@
             this.captcha.Location = new System.Drawing.Point(50, 172);
             this.captcha.Name = "captcha";
             this.captcha.Size = new System.Drawing.Size(355, 163);
-            this.captcha.TabIndex = 73;
+            this.captcha.TabIndex = 6;
             // 
             // RecoveryForm
             // 
