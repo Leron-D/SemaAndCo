@@ -172,7 +172,7 @@
             this.localRadioButton.TabStop = true;
             this.localRadioButton.Text = "Локальное хранилище";
             this.localRadioButton.UseVisualStyleBackColor = true;
-            this.localRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChangedAsync);
+            this.localRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // serverRadioButton
             // 
@@ -183,7 +183,7 @@
             this.serverRadioButton.TabIndex = 7;
             this.serverRadioButton.Text = "Серверное хранилище";
             this.serverRadioButton.UseVisualStyleBackColor = true;
-            this.serverRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChangedAsync);
+            this.serverRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // exitButton
             // 

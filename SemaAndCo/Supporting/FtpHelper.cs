@@ -1,4 +1,5 @@
 ﻿using Ionic.Zip;
+using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Ocsp;
 using System;
 using System.Collections.Generic;
@@ -17,186 +18,187 @@ namespace SemaAndCo.Supporting
         public static string message;
         public static FtpStatusCode DownloadFile(string filename, string address, string login, string password)
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
-            request.Method = WebRequestMethods.Ftp.DownloadFile;
-            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
-            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            try
             {
-                using (Stream responseStream = response.GetResponseStream())
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
+                request.Method = WebRequestMethods.Ftp.DownloadFile;
+                request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
                 {
-                    using (FileStream fs = new FileStream(filename, FileMode.Create))
+                    using (Stream responseStream = response.GetResponseStream())
                     {
-                        responseStream.DecryptStream(fs, login.GetKey(16));
+                        using (FileStream fs = new FileStream(filename, FileMode.Create))
+                        {
+                            responseStream.DecryptStream(fs, login.GetKey(16));
+                        }
                     }
+                    return response.StatusCode;
                 }
-                return response.StatusCode;
             }
+            catch (Exception)
+            {
+                return FtpStatusCode.ConnectionClosed;
+            }
+
         }
 
         public static void RenameFile(string filename, string address, string login, string password)
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
-            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
-            request.Proxy = null;
-            request.Method = WebRequestMethods.Ftp.Rename;
-            request.RenameTo = filename;
-            request.GetResponse().Close();
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
+                request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
+                request.Proxy = null;
+                request.Method = WebRequestMethods.Ftp.Rename;
+                request.RenameTo = filename;
+                request.GetResponse().Close();
+            }
+            catch (WebException)
+            {
+                MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
-        public static void GetFileNameAndSize(string filename, string address, string login, string password)
+        public static bool GetFileInfo(string filename, string address, string login, string password)
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
-            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
-            request.Method = WebRequestMethods.Ftp.GetFileSize;
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            string size = "";
-            if (response.ContentLength < 1024)
-                size = $"Размер файла: {response.ContentLength} Б";
-            if (response.ContentLength >= 1024)
-                size = $"Размер файла: {Math.Round(response.ContentLength / 1024d)} КБ";
-            if ((response.ContentLength / 1024) > 1024)
-                size = $"Размер файла: {Math.Round(response.ContentLength / 1024 / 1024d)} МБ";
-            message = $"Название файла: {filename}\nРазмер файла: {size}\n";
-            GetFileLastModificated(address, login, password);
-            MessageBox.Show(message, "Информация о файле", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            request.GetResponse();
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
+                request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
+                request.Method = WebRequestMethods.Ftp.GetFileSize;
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                string size = "";
+                if (response.ContentLength < 1024)
+                    size = $"Размер файла: {response.ContentLength} Б";
+                if (response.ContentLength >= 1024)
+                    size = $"Размер файла: {Math.Round(response.ContentLength / 1024d)} КБ";
+                if ((response.ContentLength / 1024) > 1024)
+                    size = $"Размер файла: {Math.Round(response.ContentLength / 1024 / 1024d)} МБ";
+                message = $"Название файла: {filename}\nРазмер файла: {size}\n";
+                GetFileLastModificated(address, login, password);
+                MessageBox.Show(message, "Информация о файле", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                request.GetResponse();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public static void GetFileLastModificated(string address, string login, string password)
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
-            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
-            request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
-            FtpWebResponse ftpResponse = (FtpWebResponse)request.GetResponse();
-            message += $"Последнее изменение: {ftpResponse.LastModified}";
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
+                request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
+                request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+                FtpWebResponse ftpResponse = (FtpWebResponse)request.GetResponse();
+                message += $"Последнее изменение: {ftpResponse.LastModified}";
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public static FtpStatusCode UploadFile(string filename, string address, string login, string password)
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
-            request.Method = WebRequestMethods.Ftp.UploadFile;
-            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
-            using (FileStream fs = new FileStream(filename, FileMode.Open))
+            try
             {
-                using (Stream requestStream = request.GetRequestStream())
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
+                using (FileStream fs = new FileStream(filename, FileMode.Open))
                 {
-                    fs.EncryptStream(requestStream, login.GetKey(16));
-                }
+                    using (Stream requestStream = request.GetRequestStream())
+                    {
+                        fs.EncryptStream(requestStream, login.GetKey(16));
+                    }
 
-                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                    using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                    {
+                        return response.StatusCode;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException is MySqlException)
                 {
-                    return response.StatusCode;
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return FtpStatusCode.ConnectionClosed;
+                }
+                else if (ex.InnerException is WebException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return FtpStatusCode.ConnectionClosed;
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return FtpStatusCode.CantOpenData;
                 }
             }
         }
 
         public static List<string> GetFilesList(string address, string login, string password)
         {
-            List<string> lines = new List<string>();
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
-            request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
-
-            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            try
             {
-                using (Stream responseStream = response.GetResponseStream())
+                List<string> lines = new List<string>();
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
+                request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
+
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
                 {
-                    using (StreamReader reader = new StreamReader(responseStream))
+                    using (Stream responseStream = response.GetResponseStream())
                     {
-                        while (!reader.EndOfStream)
+                        using (StreamReader reader = new StreamReader(responseStream))
                         {
-                            lines.Add(reader.ReadLine());
+                            while (!reader.EndOfStream)
+                            {
+                                lines.Add(reader.ReadLine());
+                            }
                         }
                     }
                 }
+                List<string> files = new List<string>();
+                foreach (string line in lines)
+                {
+                    string[] tokens =
+                        line.Split(new[] { ' ' }, 9, StringSplitOptions.RemoveEmptyEntries);
+                    string name = tokens[8];
+                    string permissions = tokens[0];
+
+                    files.Add(name + (permissions[0] == 'd' ? "/" : ""));
+                }
+                return files;
             }
-            List<string> files = new List<string>();
-            foreach (string line in lines)
+            catch (Exception)
             {
-                string[] tokens =
-                    line.Split(new[] { ' ' }, 9, StringSplitOptions.RemoveEmptyEntries);
-                string name = tokens[8];
-                string permissions = tokens[0];
-
-                files.Add(name + (permissions[0] == 'd' ? "/" : ""));
-            }
-            return files;
-        }
-
-        public static FtpStatusCode CreateDirectory(string address, string login, string password)
-        {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
-
-            request.Method = WebRequestMethods.Ftp.MakeDirectory;
-            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
-
-            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
-            {
-                return response.StatusCode;
+                MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
         }
 
-        public static FtpStatusCode DeleteDirectory(string address, string login, string password)
-        {
-            var listRequest = (FtpWebRequest)WebRequest.Create(address);
-            listRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-            var credentials = new NetworkCredential($"{login}.{Core.hash}", password);
-            listRequest.Credentials = credentials;
-
-            List<string> lines = new List<string>();
-
-            using (var listResponse = (FtpWebResponse)listRequest.GetResponse())
-            using (Stream listStream = listResponse.GetResponseStream())
-            using (var listReader = new StreamReader(listStream))
-            {
-                while (!listReader.EndOfStream)
-                {
-                    lines.Add(listReader.ReadLine());
-                }
-            }
-
-            foreach (string line in lines)
-            {
-                string[] tokens =
-                    line.Split(new[] { ' ' }, 9, StringSplitOptions.RemoveEmptyEntries);
-                string name = tokens[8];
-                string permissions = tokens[0];
-
-                string fileUrl = address + name;
-
-                if (permissions[0] == 'd')
-                {
-                    DeleteDirectory(fileUrl + "/", login, password);
-                }
-                else
-                {
-                    var deleteRequest = (FtpWebRequest)WebRequest.Create(fileUrl);
-                    deleteRequest.Method = WebRequestMethods.Ftp.DeleteFile;
-                    deleteRequest.Credentials = credentials;
-
-                    deleteRequest.GetResponse();
-                }
-            }
-
-            var removeRequest = (FtpWebRequest)WebRequest.Create(address);
-            removeRequest.Method = WebRequestMethods.Ftp.RemoveDirectory;
-            removeRequest.Credentials = credentials;
-
-            using (FtpWebResponse response = (FtpWebResponse)removeRequest.GetResponse())
-            {
-                return response.StatusCode;
-            }
-        }
 
         public static FtpStatusCode DeleteFile(string address, string login, string password)
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
-
-            request.Method = WebRequestMethods.Ftp.DeleteFile;
-            request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
-
-            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            try
             {
-                return response.StatusCode;
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(address);
+                request.Method = WebRequestMethods.Ftp.DeleteFile;
+                request.Credentials = new NetworkCredential($"{login}.{Core.hash}", password);
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                {
+                    return response.StatusCode;
+                }
+            }
+            catch (Exception)
+            {
+                return FtpStatusCode.ConnectionClosed;
             }
         }
     }

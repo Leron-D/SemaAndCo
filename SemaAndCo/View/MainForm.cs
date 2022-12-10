@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.WebRequestMethods;
@@ -121,14 +122,21 @@ namespace SemaAndCo.View
                 else
                 {
                     List<string> filesFromServer = FtpHelper.GetFilesList(ftpUrl, CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
-                    foreach (var item in filesFromServer)
+                    if (filesFromServer != null)
                     {
-                        ListViewItem listItem = new ListViewItem(Path.GetFileName(item));
-                        listView.SmallImageList = imageList;
-                        listItem.Tag = Path.GetFileName(item);
-                        int index = GetIndex(item);
-                        listItem.ImageIndex = index;
-                        listView.Items.Add(listItem);
+                        foreach (var item in filesFromServer)
+                        {
+                            ListViewItem listItem = new ListViewItem(Path.GetFileName(item));
+                            listView.SmallImageList = imageList;
+                            listItem.Tag = Path.GetFileName(item);
+                            int index = GetIndex(item);
+                            listItem.ImageIndex = index;
+                            listView.Items.Add(listItem);
+                        }
+                    }
+                    else
+                    {
+                        localRadioButton.Checked = true;
                     }
                 }
             }
@@ -136,7 +144,8 @@ namespace SemaAndCo.View
             {
                 if (ex.InnerException is MySqlException)
                 {
-                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Отсутствует соединенме с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    localRadioButton.Checked = true;
                 }
                 else
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -163,6 +172,7 @@ namespace SemaAndCo.View
                 if (ex.InnerException is MySqlException)
                 {
                     MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    localRadioButton.Checked = true;
                 }
                 else
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -229,7 +239,11 @@ namespace SemaAndCo.View
                     {
                         foreach (string file in openFileDialog.FileNames)
                         {
-                            try
+                            if (FtpHelper.GetFilesList(ftpUrl, CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd) == null)
+                            {
+                                localRadioButton.Checked = true;
+                            }
+                            else
                             {
                                 if (!FtpHelper.GetFilesList(ftpUrl, CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd).Contains(Path.GetFileName(file)))
                                 {
@@ -238,7 +252,7 @@ namespace SemaAndCo.View
                                 else
                                 {
                                     var message = MessageBox.Show($"Файл с именем {Path.GetFileName(file)} уже существует. Вы хотите заменить его?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                                    if(message == DialogResult.Yes)
+                                    if (message == DialogResult.Yes)
                                     {
                                         FtpHelper.DeleteFile($"{ftpUrl}{Path.GetFileName(file)}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
                                         FtpHelper.UploadFile(file, $"{ftpUrl}{Path.GetFileName(file)}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
@@ -246,13 +260,9 @@ namespace SemaAndCo.View
                                     }
                                 }
                             }
-                            catch(Exception ex)
-                            {
-                                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
                         }
-                        //MessageBox.Show("Файлы успешно загружены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    //MessageBox.Show("Файлы успешно загружены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 LoadData();
             }
@@ -276,6 +286,7 @@ namespace SemaAndCo.View
                 if (ex.InnerException is MySqlException)
                 {
                     MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    localRadioButton.Checked = true;
                 }
                 else
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -303,7 +314,11 @@ namespace SemaAndCo.View
                 {
                     foreach (ListViewItem item in listView.SelectedItems)
                     {
-                        FtpHelper.DeleteFile($"{ftpUrl}{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                        if(FtpHelper.DeleteFile($"{ftpUrl}{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd) == FtpStatusCode.ConnectionClosed)
+                        {
+                            localRadioButton.Checked = true;
+                            throw new Exception("Отсутствует соединение с сервером");
+                        }
                     }                
                     //MessageBox.Show("Файлы успешно удалены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -315,6 +330,7 @@ namespace SemaAndCo.View
                 if (ex.InnerException is MySqlException)
                 {
                     MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    localRadioButton.Checked = true;
                 }
                 else
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -332,6 +348,7 @@ namespace SemaAndCo.View
                 if (ex.InnerException is MySqlException)
                 {
                     MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    localRadioButton.Checked = true;
                 }
                 else
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -356,7 +373,11 @@ namespace SemaAndCo.View
                 {
                     if (listView.SelectedItems.Count == 1)
                     {
-                        FtpHelper.GetFileNameAndSize(listView.SelectedItems[0].Text, $"{ftpUrl}{listView.SelectedItems[0].Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                        if(!FtpHelper.GetFileInfo(listView.SelectedItems[0].Text, $"{ftpUrl}{listView.SelectedItems[0].Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd))
+                        {
+                            localRadioButton.Checked = true;
+                            throw new Exception("Отсутствует соединение с сервером");
+                        }
                     }
                 }
             }
@@ -366,8 +387,15 @@ namespace SemaAndCo.View
                 {
                     MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else if(ex.InnerException is WebException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 else
+                {
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
         }
 
@@ -390,6 +418,8 @@ namespace SemaAndCo.View
                 if (ex.InnerException is MySqlException)
                 {
                     MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    renameTextBox.Visible = false;
+                    localRadioButton.Checked = true;
                 }
                 else
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -427,18 +457,32 @@ namespace SemaAndCo.View
 
         private void ChangeEnabledButtons()
         {
-            if (listView.SelectedItems.Count == 1)
+            try
             {
-                renameButton.Enabled = downloadButton.Enabled = deleteButton.Enabled = infoButton.Enabled = true;
-            }
-            else if (listView.SelectedItems.Count == 0)
+                if (listView.SelectedItems.Count == 1)
+                {
+                    renameButton.Enabled = downloadButton.Enabled = deleteButton.Enabled = infoButton.Enabled = true;
+                }
+                else if (listView.SelectedItems.Count == 0)
+                {
+                    renameButton.Enabled = downloadButton.Enabled = deleteButton.Enabled = infoButton.Enabled = false;
+                }
+                else
+                {
+                    renameButton.Enabled = infoButton.Enabled = false;
+                    downloadButton.Enabled = true;
+                }
+        }
+            catch (Exception ex)
             {
-                renameButton.Enabled = downloadButton.Enabled = deleteButton.Enabled = infoButton.Enabled = false;
-            }
-            else
-            {
-                renameButton.Enabled = infoButton.Enabled = false;
-                downloadButton.Enabled = true;
+                if (ex.InnerException is MySqlException)
+                {
+                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (!localRadioButton.Checked)
+                        localRadioButton.Checked = true;
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -459,6 +503,8 @@ namespace SemaAndCo.View
                     if (ex.InnerException is MySqlException)
                     {
                         MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        renameTextBox.Visible = false;
+                        localRadioButton.Checked = true;
                     }
                     else
                         MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -509,9 +555,21 @@ namespace SemaAndCo.View
                 if (ex.InnerException is MySqlException)
                 {
                     MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    renameTextBox.Visible = false;
+                    localRadioButton.Checked = true;
+                }
+                else if (ex.InnerException is WebException)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    renameTextBox.Visible = false;
+                    localRadioButton.Checked = true;
                 }
                 else
+                {
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    renameTextBox.Visible = false;
+                    localRadioButton.Checked = true;
+                }
             }
         }
 
@@ -529,6 +587,7 @@ namespace SemaAndCo.View
                 if (ex.InnerException is MySqlException)
                 {
                     MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    localRadioButton.Checked = true;
                 }
                 else
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -588,13 +647,21 @@ namespace SemaAndCo.View
                                 if (messageResult == DialogResult.Yes)
                                 {
                                     listItems.Add(item.Text);
-                                    FtpHelper.DownloadFile($@"{dialog.SelectedPath}\{item.Text}", $"{ftpUrl}{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                                    if(FtpHelper.DownloadFile($@"{dialog.SelectedPath}\{item.Text}", $"{ftpUrl}{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd) == FtpStatusCode.ConnectionClosed)
+                                    {
+                                        localRadioButton.Checked = true;
+                                        throw new Exception("Отсутствует соединение с сервером");
+                                    }
                                 }
                             }
                             else
                             {
                                 listItems.Add(item.Text);
-                                FtpHelper.DownloadFile($@"{dialog.SelectedPath}\{item.Text}", $"{ftpUrl}{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd);
+                                if (FtpHelper.DownloadFile($@"{dialog.SelectedPath}\{item.Text}", $"{ftpUrl}{item.Text}", CurrentUser.FtpUser.userid, CurrentUser.FtpUser.passwd) == FtpStatusCode.ConnectionClosed)
+                                {
+                                    localRadioButton.Checked = true;
+                                    throw new Exception("Отсутствует соединение с сервером");
+                                }
                             }
 
                         }
@@ -608,13 +675,14 @@ namespace SemaAndCo.View
                 if (ex.InnerException is MySqlException)
                 {
                     MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    localRadioButton.Checked = true;
                 }
                 else
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void RadioButton_CheckedChangedAsync(object sender, EventArgs e)
+        private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
@@ -626,14 +694,10 @@ namespace SemaAndCo.View
             }
             catch (Exception ex)
             {
-                if (ex.InnerException is MySqlException)
-                {
-                    MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                localRadioButton.Checked = true;
             }
-        }
+}
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
