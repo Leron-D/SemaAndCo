@@ -42,7 +42,7 @@ namespace SemaAndCo.Supporting
 
         }
 
-        public static void RenameFile(string filename, string address, string login, string password)
+        public static bool RenameFile(string filename, string address, string login, string password)
         {
             try
             {
@@ -52,10 +52,11 @@ namespace SemaAndCo.Supporting
                 request.Method = WebRequestMethods.Ftp.Rename;
                 request.RenameTo = filename;
                 request.GetResponse().Close();
+                return true;
             }
             catch (WebException)
             {
-                MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
 
         }

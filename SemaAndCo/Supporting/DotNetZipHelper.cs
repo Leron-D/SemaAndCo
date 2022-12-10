@@ -52,7 +52,7 @@ namespace SemaAndCo.Supporting
             }
         }
 
-        public static void GetInfoFiles(string archiveName, string fileName)
+        public static void GetFileInfo(string archiveName, string fileName)
         {
             using (var zipFile = ZipFile.Read(archiveName))
             {
