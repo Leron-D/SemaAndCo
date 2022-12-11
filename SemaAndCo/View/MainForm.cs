@@ -22,12 +22,14 @@ namespace SemaAndCo.View
     public partial class MainForm : TemplateForm
     {
         bool connection;
+        bool selectCloudStorage = false;
         string saveText;
         string extension;
         bool fileResult;
         string autonomPassword = "autonom".EncryptString();
         string autonomFilePath = Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip");
         string ftpUrl = @"ftp://91.122.211.144:50021/";
+        ToolTip toolTip = new ToolTip();
         public MainForm()
         {
             InitializeComponent();
@@ -38,8 +40,8 @@ namespace SemaAndCo.View
         {
             try
             {
-                ToolTip toolTip = new ToolTip();
-                toolTip.SetToolTip(exitButton, "Выход из аккаунта");
+                ToolTip tool = new ToolTip();
+                tool.SetToolTip(exitButton, "Выход из аккаунта");
                 if (CurrentUser.FtpUser == null)
                     serverRadioButton.Visible = false;
                 else
@@ -49,7 +51,7 @@ namespace SemaAndCo.View
                     CreateZip();
                 }
                 LoadData();
-                toolTip.SetToolTip(connectionCheckLabel, "Подключение к серверному хранилищу присутствует");
+                tool.SetToolTip(connectionCheckLabel, "Подключение к серверному хранилищу присутствует");
                 timer.Start();
             }
             catch (Exception ex)
@@ -726,22 +728,33 @@ namespace SemaAndCo.View
             }
         }
 
-        private void RadioButton_CheckedChanged(object sender, EventArgs e)
+        private async void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
-                timer.Enabled = false;
+                //timer.Enabled = false;
                 IntroForm introForm = new IntroForm();
                 introForm.Show();
-                LoadData();
-                introForm.Close();
-                ChangeEnabledButtons();
-                timer.Enabled = true;
+                await CheckConnection();
+                if (!connection)
+                {
+                    introForm.Close();
+                    selectCloudStorage = true;
+                    localRadioButton.Checked = true;
+                    LoadData();
+                    timer.Start();
+                    //throw new Exception("Отсутствует соединение с сервером");
+                }
+                else
+                {
+                    introForm.Close();
+                    LoadData();
+                    ChangeEnabledButtons();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                localRadioButton.Checked = true;
             }
 }
 
@@ -752,25 +765,27 @@ namespace SemaAndCo.View
 
         private async void timer_Tick(object sender, EventArgs e)
         {
-            ToolTip toolTip = new ToolTip();
-            await CheckConnection();
-            if (connection)
+            if (selectCloudStorage)
             {
-                connectionCheckLabel.Location = new Point(1096, 573);
-                connectionCheckLabel.Text = "Соединено";
-                connectionCheckLabel.ForeColor = Color.Lime;
-                toolTip.RemoveAll();
-                toolTip.SetToolTip(connectionCheckLabel, "Подключение к серверному хранилищу присутствует");
+                await CheckConnection();
+                if (connection)
+                {
+                    connectionCheckLabel.Location = new Point(1096, 573);
+                    connectionCheckLabel.Text = "Соединено";
+                    connectionCheckLabel.ForeColor = Color.Lime;
+                    toolTip.RemoveAll();
+                    toolTip.SetToolTip(connectionCheckLabel, "Подключение к серверному хранилищу присутствует");
+                }
+                else
+                {
+                    connectionCheckLabel.Location = new Point(1000, 573);
+                    connectionCheckLabel.Text = "Соединение отсутствует";
+                    connectionCheckLabel.ForeColor = Color.Red;
+                    toolTip.RemoveAll();
+                    toolTip.SetToolTip(connectionCheckLabel, "Подключение к серверному хранилищу отсутствует");
+                }
+                timer.Start();
             }
-            else
-            {
-                connectionCheckLabel.Location = new Point(1000, 573);
-                connectionCheckLabel.Text = "Соединение отсутствует";
-                connectionCheckLabel.ForeColor = Color.Red;
-                toolTip.RemoveAll();
-                toolTip.SetToolTip(connectionCheckLabel, "Подключение к серверному хранилищу отсутствует");
-            }
-            timer.Start();
         }
     }
 }
