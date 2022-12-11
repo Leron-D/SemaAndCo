@@ -1,5 +1,6 @@
 ﻿using Ionic.Zip;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Utilities.Net;
 using SemaAndCo.Model;
 using SemaAndCo.Supporting;
 using System;
@@ -20,6 +21,7 @@ namespace SemaAndCo.View
 {
     public partial class MainForm : TemplateForm
     {
+        bool connection;
         string saveText;
         string extension;
         bool fileResult;
@@ -29,17 +31,53 @@ namespace SemaAndCo.View
         public MainForm()
         {
             InitializeComponent();
-            ToolTip toolTip = new ToolTip();
-            toolTip.SetToolTip(exitButton, "Выход из аккаунта");
-            if (CurrentUser.FtpUser == null)
-                serverRadioButton.Visible = false;
-            else
-                serverRadioButton.Visible = true;
-            if (CurrentUser.FtpUser != null)
+            LoadForm();
+        }
+
+        private void LoadForm()
+        {
+            try
             {
-                CreateZip();
+                ToolTip toolTip = new ToolTip();
+                toolTip.SetToolTip(exitButton, "Выход из аккаунта");
+                if (CurrentUser.FtpUser == null)
+                    serverRadioButton.Visible = false;
+                else
+                    serverRadioButton.Visible = true;
+                if (CurrentUser.FtpUser != null)
+                {
+                    CreateZip();
+                }
+                LoadData();
+                toolTip.SetToolTip(connectionCheckLabel, "Подключение к серверному хранилищу присутствует");
+                timer.Start();
             }
-            LoadData();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public async Task CheckConnection()
+        {
+            timer.Stop();
+            await Task.Run(() =>
+            {
+                try
+                {
+                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpUrl);
+                    request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                    request.Credentials = new NetworkCredential($"{CurrentUser.FtpUser.userid}.{Core.hash}", CurrentUser.FtpUser.passwd);
+                    using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                    {
+                        connection = true;
+                    }
+                }
+                catch (Exception)
+                {
+                    connection = false;
+                }
+            });
         }
 
         int GetIndex(string filename)
@@ -692,11 +730,13 @@ namespace SemaAndCo.View
         {
             try
             {
+                timer.Enabled = false;
                 IntroForm introForm = new IntroForm();
                 introForm.Show();
                 LoadData();
                 introForm.Close();
                 ChangeEnabledButtons();
+                timer.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -708,6 +748,29 @@ namespace SemaAndCo.View
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             LocalUser.Automatic = false;
+        }
+
+        private async void timer_Tick(object sender, EventArgs e)
+        {
+            ToolTip toolTip = new ToolTip();
+            await CheckConnection();
+            if (connection)
+            {
+                connectionCheckLabel.Location = new Point(1096, 573);
+                connectionCheckLabel.Text = "Соединено";
+                connectionCheckLabel.ForeColor = Color.Lime;
+                toolTip.RemoveAll();
+                toolTip.SetToolTip(connectionCheckLabel, "Подключение к серверному хранилищу присутствует");
+            }
+            else
+            {
+                connectionCheckLabel.Location = new Point(1000, 573);
+                connectionCheckLabel.Text = "Соединение отсутствует";
+                connectionCheckLabel.ForeColor = Color.Red;
+                toolTip.RemoveAll();
+                toolTip.SetToolTip(connectionCheckLabel, "Подключение к серверному хранилищу отсутствует");
+            }
+            timer.Start();
         }
     }
 }

@@ -42,6 +42,8 @@
             this.serverRadioButton = new System.Windows.Forms.RadioButton();
             this.exitButton = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.connectionCheckLabel = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -213,11 +215,30 @@
             this.pictureBox.TabStop = false;
             this.pictureBox.Visible = false;
             // 
+            // connectionCheckLabel
+            // 
+            this.connectionCheckLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.connectionCheckLabel.AutoSize = true;
+            this.connectionCheckLabel.BackColor = System.Drawing.Color.White;
+            this.connectionCheckLabel.ForeColor = System.Drawing.Color.Lime;
+            this.connectionCheckLabel.Location = new System.Drawing.Point(1096, 573);
+            this.connectionCheckLabel.Name = "connectionCheckLabel";
+            this.connectionCheckLabel.Size = new System.Drawing.Size(99, 23);
+            this.connectionCheckLabel.TabIndex = 11;
+            this.connectionCheckLabel.Text = "Соединено";
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 3000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1207, 605);
+            this.Controls.Add(this.connectionCheckLabel);
             this.Controls.Add(this.serverRadioButton);
             this.Controls.Add(this.localRadioButton);
             this.Controls.Add(this.renameTextBox);
@@ -254,5 +275,7 @@
         private System.Windows.Forms.TextBox renameTextBox;
         private System.Windows.Forms.RadioButton localRadioButton;
         private System.Windows.Forms.RadioButton serverRadioButton;
+        private System.Windows.Forms.Label connectionCheckLabel;
+        private System.Windows.Forms.Timer timer;
     }
 }
