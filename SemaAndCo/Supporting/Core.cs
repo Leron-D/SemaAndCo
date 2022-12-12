@@ -24,6 +24,7 @@ namespace SemaAndCo.Supporting
         static public string StrConnection()
         {
             MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
+            builder.ConnectionTimeout = 10;
             builder.Database = "ftp";
             builder.UserID = "semaandcoadmin";
             builder.Password = "0f2ce17f1f5af3212ffde44976734c6b";
@@ -32,7 +33,9 @@ namespace SemaAndCo.Supporting
             return builder.ConnectionString;
         }
         public Core(string conStr) : base(new MySqlConnection(conStr), true)
-        { }
+        {
+            this.Database.CommandTimeout = 10;
+        }
         public DbSet<semaandcouser> semaandcouser { get; set; }
 
         public static bool CheckAccess()

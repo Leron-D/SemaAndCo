@@ -167,7 +167,7 @@
             // 
             this.localRadioButton.AutoSize = true;
             this.localRadioButton.Checked = true;
-            this.localRadioButton.Location = new System.Drawing.Point(630, 23);
+            this.localRadioButton.Location = new System.Drawing.Point(630, 12);
             this.localRadioButton.Name = "localRadioButton";
             this.localRadioButton.Size = new System.Drawing.Size(210, 27);
             this.localRadioButton.TabIndex = 6;
@@ -179,7 +179,7 @@
             // serverRadioButton
             // 
             this.serverRadioButton.AutoSize = true;
-            this.serverRadioButton.Location = new System.Drawing.Point(856, 23);
+            this.serverRadioButton.Location = new System.Drawing.Point(630, 35);
             this.serverRadioButton.Name = "serverRadioButton";
             this.serverRadioButton.Size = new System.Drawing.Size(208, 27);
             this.serverRadioButton.TabIndex = 7;
@@ -221,11 +221,12 @@
             this.connectionCheckLabel.AutoSize = true;
             this.connectionCheckLabel.BackColor = System.Drawing.Color.White;
             this.connectionCheckLabel.ForeColor = System.Drawing.Color.Lime;
-            this.connectionCheckLabel.Location = new System.Drawing.Point(1096, 573);
+            this.connectionCheckLabel.Location = new System.Drawing.Point(1096, 562);
             this.connectionCheckLabel.Name = "connectionCheckLabel";
             this.connectionCheckLabel.Size = new System.Drawing.Size(99, 23);
             this.connectionCheckLabel.TabIndex = 11;
             this.connectionCheckLabel.Text = "Соединено";
+            this.connectionCheckLabel.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // timer
             // 
@@ -251,7 +252,7 @@
             this.Controls.Add(this.listView);
             this.Controls.Add(this.uploadButton);
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
-            this.MinimumSize = new System.Drawing.Size(770, 260);
+            this.MinimumSize = new System.Drawing.Size(930, 260);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главная";

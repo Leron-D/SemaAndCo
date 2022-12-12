@@ -21,6 +21,7 @@ namespace SemaAndCo.View
 {
     public partial class MainForm : TemplateForm
     {
+        bool previousConnectionChecked = true;
         bool connection;
         bool selectCloudStorage = false;
         string saveText;
@@ -62,12 +63,12 @@ namespace SemaAndCo.View
 
         public async Task CheckConnection()
         {
-            timer.Stop();
             await Task.Run(() =>
             {
                 try
                 {
                     FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpUrl);
+                    request.Timeout = 5000;
                     request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
                     request.Credentials = new NetworkCredential($"{CurrentUser.FtpUser.userid}.{Core.hash}", CurrentUser.FtpUser.passwd);
                     using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
@@ -742,7 +743,6 @@ namespace SemaAndCo.View
                     selectCloudStorage = true;
                     localRadioButton.Checked = true;
                     LoadData();
-                    timer.Start();
                     //throw new Exception("Отсутствует соединение с сервером");
                 }
                 else
@@ -770,7 +770,11 @@ namespace SemaAndCo.View
                 await CheckConnection();
                 if (connection)
                 {
-                    connectionCheckLabel.Location = new Point(1096, 573);
+                    if (!previousConnectionChecked)
+                    {
+                        connectionCheckLabel.Location = new Point(connectionCheckLabel.Location.X + 95, connectionCheckLabel.Location.Y);
+                        previousConnectionChecked = true;
+                    }
                     connectionCheckLabel.Text = "Соединено";
                     connectionCheckLabel.ForeColor = Color.Lime;
                     toolTip.RemoveAll();
@@ -778,13 +782,16 @@ namespace SemaAndCo.View
                 }
                 else
                 {
-                    connectionCheckLabel.Location = new Point(1000, 573);
+                    if (previousConnectionChecked)
+                    {
+                        connectionCheckLabel.Location = new Point(connectionCheckLabel.Location.X - 95, connectionCheckLabel.Location.Y);
+                        previousConnectionChecked = false;
+                    }
                     connectionCheckLabel.Text = "Соединение отсутствует";
                     connectionCheckLabel.ForeColor = Color.Red;
                     toolTip.RemoveAll();
                     toolTip.SetToolTip(connectionCheckLabel, "Подключение к серверному хранилищу отсутствует");
                 }
-                timer.Start();
             }
         }
     }
