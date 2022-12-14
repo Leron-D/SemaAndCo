@@ -282,6 +282,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.ico" />
+    <Content Include="Resources\reference.png" />
     <None Include="Resources\icons8-logout-40ы1.png" />
     <None Include="Resources\icons8-administration-40.png" />
     <None Include="Resources\icons8-logout-3ф.png" />

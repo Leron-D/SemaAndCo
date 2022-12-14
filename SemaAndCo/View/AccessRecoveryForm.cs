@@ -30,14 +30,14 @@ namespace SemaAndCo.View
                 this.Text = "Доступ к администрированию";
                 passwordHeaderLabel.Text = "Пароль администратора";
                 passwordHeaderLabel.Location = new Point(80, 15);
-                saveNewPasswordTextBox.Text = "Проверить";
+                saveNewPasswordButton.Text = "Проверить";
             }
             else
             {
                 this.Text = "Восстановление доступа";
                 passwordHeaderLabel.Text = "Новый пароль";
                 passwordHeaderLabel.Location = new Point(137, 15);
-                saveNewPasswordTextBox.Text = "Сохранить";
+                saveNewPasswordButton.Text = "Сохранить";
                 if (!Core.CheckMailVariability())
                 {
                     Text = "Проверка почты";
@@ -234,6 +234,30 @@ namespace SemaAndCo.View
             {
                 EnterPassword();
             }
+        }
+
+        private void ReferenceButton1_Click(object sender, EventArgs e)
+        {
+            referenceButton1.Enabled = enterButton.Enabled = false;
+            ReferenceForm form = new ReferenceForm();
+            form.FormClosed += ReferenceForm1_Closed;
+            form.Show();
+        }
+        private void ReferenceForm1_Closed(object sender, FormClosedEventArgs e)
+        {
+            referenceButton1.Enabled = enterButton.Enabled = true;
+        }
+
+        private void ReferenceButton2_Click(object sender, EventArgs e)
+        {
+            referenceButton1.Enabled = saveNewPasswordButton.Enabled = false;
+            ReferenceForm form = new ReferenceForm();
+            form.FormClosed += ReferenceForm2_Closed;
+            form.Show();
+        }
+        private void ReferenceForm2_Closed(object sender, FormClosedEventArgs e)
+        {
+            referenceButton1.Enabled = saveNewPasswordButton.Enabled = true;
         }
     }
 }

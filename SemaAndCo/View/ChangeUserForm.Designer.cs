@@ -39,6 +39,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.phoneTextBox = new System.Windows.Forms.MaskedTextBox();
             this.changePasswordCheckBox = new System.Windows.Forms.CheckBox();
+            this.referenceButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -147,12 +148,28 @@
             this.changePasswordCheckBox.UseVisualStyleBackColor = true;
             this.changePasswordCheckBox.CheckedChanged += new System.EventHandler(this.ChangePasswordCheckBox_CheckedChanged);
             // 
+            // referenceButton
+            // 
+            this.referenceButton.BackColor = System.Drawing.Color.Transparent;
+            this.referenceButton.FlatAppearance.BorderSize = 0;
+            this.referenceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.referenceButton.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.referenceButton.Image = global::SemaAndCo.Properties.Resources.reference;
+            this.referenceButton.Location = new System.Drawing.Point(676, 298);
+            this.referenceButton.Margin = new System.Windows.Forms.Padding(5);
+            this.referenceButton.Name = "referenceButton";
+            this.referenceButton.Size = new System.Drawing.Size(26, 33);
+            this.referenceButton.TabIndex = 86;
+            this.referenceButton.UseVisualStyleBackColor = false;
+            this.referenceButton.Click += new System.EventHandler(this.ReferenceButton_Click);
+            // 
             // ChangeUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(704, 334);
+            this.Controls.Add(this.referenceButton);
             this.Controls.Add(this.changePasswordCheckBox);
             this.Controls.Add(this.phoneTextBox);
             this.Controls.Add(this.label7);
@@ -188,5 +205,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.MaskedTextBox phoneTextBox;
         private System.Windows.Forms.CheckBox changePasswordCheckBox;
+        private System.Windows.Forms.Button referenceButton;
     }
 }

@@ -49,6 +49,7 @@
             this.resultsAmountLabel = new System.Windows.Forms.Label();
             this.deleteButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
+            this.referenceButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.usersGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentPageNumeric)).BeginInit();
             this.SuspendLayout();
@@ -300,11 +301,27 @@
             this.addButton.UseVisualStyleBackColor = false;
             this.addButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
+            // referenceButton
+            // 
+            this.referenceButton.BackColor = System.Drawing.Color.Transparent;
+            this.referenceButton.FlatAppearance.BorderSize = 0;
+            this.referenceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.referenceButton.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.referenceButton.Image = global::SemaAndCo.Properties.Resources.reference;
+            this.referenceButton.Location = new System.Drawing.Point(1029, 410);
+            this.referenceButton.Margin = new System.Windows.Forms.Padding(5);
+            this.referenceButton.Name = "referenceButton";
+            this.referenceButton.Size = new System.Drawing.Size(26, 33);
+            this.referenceButton.TabIndex = 33;
+            this.referenceButton.UseVisualStyleBackColor = false;
+            this.referenceButton.Click += new System.EventHandler(this.ReferenceButton_Click);
+            // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 444);
+            this.Controls.Add(this.referenceButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.label15);
@@ -356,5 +373,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn passwordColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneColumn;
+        private System.Windows.Forms.Button referenceButton;
     }
 }

@@ -39,6 +39,7 @@
             this.renewButton = new System.Windows.Forms.Button();
             this.enterButton = new System.Windows.Forms.Button();
             this.captcha = new SemaAndCo.Captcha();
+            this.referenceButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.recErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -136,6 +137,21 @@
             this.captcha.Size = new System.Drawing.Size(355, 163);
             this.captcha.TabIndex = 6;
             // 
+            // referenceButton
+            // 
+            this.referenceButton.BackColor = System.Drawing.Color.Transparent;
+            this.referenceButton.FlatAppearance.BorderSize = 0;
+            this.referenceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.referenceButton.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.referenceButton.Image = global::SemaAndCo.Properties.Resources.reference;
+            this.referenceButton.Location = new System.Drawing.Point(421, 493);
+            this.referenceButton.Margin = new System.Windows.Forms.Padding(5);
+            this.referenceButton.Name = "referenceButton";
+            this.referenceButton.Size = new System.Drawing.Size(26, 33);
+            this.referenceButton.TabIndex = 76;
+            this.referenceButton.UseVisualStyleBackColor = false;
+            this.referenceButton.Click += new System.EventHandler(this.ReferenceButton_Click);
+            // 
             // RecoveryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -143,6 +159,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(449, 528);
+            this.Controls.Add(this.referenceButton);
             this.Controls.Add(this.enterButton);
             this.Controls.Add(this.renewButton);
             this.Controls.Add(this.label1);
@@ -176,5 +193,6 @@
         private Captcha captcha;
         private System.Windows.Forms.Button renewButton;
         private System.Windows.Forms.Button enterButton;
+        private System.Windows.Forms.Button referenceButton;
     }
 }

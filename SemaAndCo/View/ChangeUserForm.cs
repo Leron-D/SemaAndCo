@@ -144,5 +144,17 @@ namespace SemaAndCo.View
                 passwordTextBox.Text = oldPassword;
             }
         }
+
+        private void ReferenceButton_Click(object sender, EventArgs e)
+        {
+            referenceButton.Enabled = saveButton.Enabled = false;
+            ReferenceForm form = new ReferenceForm();
+            form.FormClosed += ReferenceForm_Closed;
+            form.Show();
+        }
+        private void ReferenceForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            referenceButton.Enabled = saveButton.Enabled = true;
+        }
     }
 }

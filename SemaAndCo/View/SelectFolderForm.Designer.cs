@@ -32,6 +32,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.choosePathButton = new System.Windows.Forms.Button();
+            this.referenceButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // folderTextBox
@@ -83,6 +84,21 @@
             this.choosePathButton.UseVisualStyleBackColor = false;
             this.choosePathButton.Click += new System.EventHandler(this.ChoosePathButton_Click);
             // 
+            // referenceButton
+            // 
+            this.referenceButton.BackColor = System.Drawing.Color.Transparent;
+            this.referenceButton.FlatAppearance.BorderSize = 0;
+            this.referenceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.referenceButton.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.referenceButton.Image = global::SemaAndCo.Properties.Resources.reference;
+            this.referenceButton.Location = new System.Drawing.Point(501, 137);
+            this.referenceButton.Margin = new System.Windows.Forms.Padding(5);
+            this.referenceButton.Name = "referenceButton";
+            this.referenceButton.Size = new System.Drawing.Size(26, 33);
+            this.referenceButton.TabIndex = 74;
+            this.referenceButton.UseVisualStyleBackColor = false;
+            this.referenceButton.Click += new System.EventHandler(this.ReferenceButton_Click);
+            // 
             // SelectFolderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
@@ -90,6 +106,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(525, 171);
+            this.Controls.Add(this.referenceButton);
             this.Controls.Add(this.choosePathButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.folderTextBox);
@@ -113,5 +130,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button choosePathButton;
+        private System.Windows.Forms.Button referenceButton;
     }
 }

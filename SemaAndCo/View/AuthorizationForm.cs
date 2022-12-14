@@ -206,5 +206,17 @@ namespace SemaAndCo
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void ReferenceButton_Click(object sender, EventArgs e)
+        {
+            referenceButton.Enabled = forgotPasswordLabel.Enabled = autoButton.Enabled = toRegistrationButton.Enabled = loginButton.Enabled = administrationButton.Enabled = savingPathButton.Enabled = false;
+            ReferenceForm form = new ReferenceForm();
+            form.FormClosed += ReferenceForm_Closed;
+            form.Show();
+        }
+        private void ReferenceForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            referenceButton.Enabled = forgotPasswordLabel.Enabled = autoButton.Enabled = toRegistrationButton.Enabled = loginButton.Enabled = administrationButton.Enabled = savingPathButton.Enabled = true;
+        }
     }
 }

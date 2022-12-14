@@ -40,10 +40,11 @@
             this.renameTextBox = new System.Windows.Forms.TextBox();
             this.localRadioButton = new System.Windows.Forms.RadioButton();
             this.serverRadioButton = new System.Windows.Forms.RadioButton();
-            this.exitButton = new System.Windows.Forms.Button();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.connectionCheckLabel = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.referenceButton = new System.Windows.Forms.Button();
+            this.exitButton = new System.Windows.Forms.Button();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -187,6 +188,40 @@
             this.serverRadioButton.UseVisualStyleBackColor = true;
             this.serverRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
+            // connectionCheckLabel
+            // 
+            this.connectionCheckLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.connectionCheckLabel.AutoSize = true;
+            this.connectionCheckLabel.BackColor = System.Drawing.Color.White;
+            this.connectionCheckLabel.ForeColor = System.Drawing.Color.Lime;
+            this.connectionCheckLabel.Location = new System.Drawing.Point(1096, 562);
+            this.connectionCheckLabel.Name = "connectionCheckLabel";
+            this.connectionCheckLabel.Size = new System.Drawing.Size(99, 23);
+            this.connectionCheckLabel.TabIndex = 11;
+            this.connectionCheckLabel.Text = "Соединено";
+            this.connectionCheckLabel.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 3000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // referenceButton
+            // 
+            this.referenceButton.BackColor = System.Drawing.Color.Transparent;
+            this.referenceButton.FlatAppearance.BorderSize = 0;
+            this.referenceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.referenceButton.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.referenceButton.Image = global::SemaAndCo.Properties.Resources.reference;
+            this.referenceButton.Location = new System.Drawing.Point(1100, 19);
+            this.referenceButton.Margin = new System.Windows.Forms.Padding(5);
+            this.referenceButton.Name = "referenceButton";
+            this.referenceButton.Size = new System.Drawing.Size(26, 33);
+            this.referenceButton.TabIndex = 12;
+            this.referenceButton.UseVisualStyleBackColor = false;
+            this.referenceButton.Click += new System.EventHandler(this.ReferenceButton_Click);
+            // 
             // exitButton
             // 
             this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -215,30 +250,12 @@
             this.pictureBox.TabStop = false;
             this.pictureBox.Visible = false;
             // 
-            // connectionCheckLabel
-            // 
-            this.connectionCheckLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.connectionCheckLabel.AutoSize = true;
-            this.connectionCheckLabel.BackColor = System.Drawing.Color.White;
-            this.connectionCheckLabel.ForeColor = System.Drawing.Color.Lime;
-            this.connectionCheckLabel.Location = new System.Drawing.Point(1096, 562);
-            this.connectionCheckLabel.Name = "connectionCheckLabel";
-            this.connectionCheckLabel.Size = new System.Drawing.Size(99, 23);
-            this.connectionCheckLabel.TabIndex = 11;
-            this.connectionCheckLabel.Text = "Соединено";
-            this.connectionCheckLabel.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            // 
-            // timer
-            // 
-            this.timer.Enabled = true;
-            this.timer.Interval = 3000;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1207, 605);
+            this.Controls.Add(this.referenceButton);
             this.Controls.Add(this.connectionCheckLabel);
             this.Controls.Add(this.serverRadioButton);
             this.Controls.Add(this.localRadioButton);
@@ -278,5 +295,6 @@
         private System.Windows.Forms.RadioButton serverRadioButton;
         private System.Windows.Forms.Label connectionCheckLabel;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Button referenceButton;
     }
 }

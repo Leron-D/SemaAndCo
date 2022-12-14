@@ -101,5 +101,18 @@ namespace SemaAndCo.View
         {
             ChooseFolder();
         }
+
+        private void ReferenceButton_Click(object sender, EventArgs e)
+        {
+            referenceButton.Enabled = saveButton.Enabled = false;
+            ReferenceForm form = new ReferenceForm();
+            form.FormClosed += ReferenceForm_FormClosed;
+            form.Show();
+        }
+
+        private void ReferenceForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            referenceButton.Enabled = saveButton.Enabled = true;
+        }
     }
 }

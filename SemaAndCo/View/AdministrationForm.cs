@@ -323,5 +323,17 @@ namespace SemaAndCo.View
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void ReferenceButton_Click(object sender, EventArgs e)
+        {
+            referenceButton.Enabled = addButton.Enabled = changeButton.Enabled = deleteButton.Enabled = false;
+            ReferenceForm form = new ReferenceForm();
+            form.FormClosed += ReferenceForm_Closed;
+            form.Show();
+        }
+        private void ReferenceForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            referenceButton.Enabled = addButton.Enabled = changeButton.Enabled = deleteButton.Enabled = false;
+        }
     }
 }
