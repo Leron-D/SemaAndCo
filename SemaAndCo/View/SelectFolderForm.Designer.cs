@@ -87,6 +87,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(525, 171);
             this.Controls.Add(this.choosePathButton);
@@ -94,6 +95,9 @@
             this.Controls.Add(this.folderTextBox);
             this.Controls.Add(this.label2);
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(541, 210);
+            this.MinimumSize = new System.Drawing.Size(541, 210);
             this.Name = "SelectFolderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Выбор пути сохранения";

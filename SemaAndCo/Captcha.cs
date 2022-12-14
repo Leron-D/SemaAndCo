@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,8 +43,9 @@ namespace SemaAndCo
 
             for (int i = 0; i < 5; ++i)
                 text += ALF[rnd.Next(ALF.Length)];
-
-            Font stringFont = new Font("DS Brushes", 50);
+            System.Drawing.Text.PrivateFontCollection f = new System.Drawing.Text.PrivateFontCollection();
+            f.AddFontFile(Directory.GetCurrentDirectory() + @"\ds_brushes.ttf");
+            Font stringFont = new Font(f.Families[0], 50);
             double textWidth;
             double textHeight;
 

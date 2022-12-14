@@ -675,7 +675,7 @@ namespace SemaAndCo.View
                             }
                             if (fileNames.Count > 0)
                             {
-                                MessageBox.Show("Файлы успешно скачены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("Файлы успешно скачаны", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                     }

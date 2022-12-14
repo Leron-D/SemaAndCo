@@ -13,6 +13,10 @@ using SemaAndCo.Presenter;
 using System.Data.Entity.Core.Metadata.Edm;
 using SemaAndCo.Supporting;
 using System.Threading;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using System.Configuration.Install;
+using System.Diagnostics;
+using System.Drawing.Text;
 
 namespace SemaAndCo.View
 {

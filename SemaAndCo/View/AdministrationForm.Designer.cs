@@ -322,7 +322,7 @@
             this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.usersGridView);
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
-            this.MinimumSize = new System.Drawing.Size(770, 260);
+            this.MinimumSize = new System.Drawing.Size(860, 260);
             this.Name = "AdministrationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Администрирование";

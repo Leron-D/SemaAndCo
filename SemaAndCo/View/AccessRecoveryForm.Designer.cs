@@ -218,6 +218,8 @@
             this.Controls.Add(this.tabControl);
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(515, 313);
+            this.MinimumSize = new System.Drawing.Size(515, 313);
             this.Name = "AccessRecoveryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Восстановление доступа";

@@ -151,6 +151,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(704, 334);
             this.Controls.Add(this.changePasswordCheckBox);
             this.Controls.Add(this.phoneTextBox);
@@ -164,6 +165,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(720, 373);
+            this.MinimumSize = new System.Drawing.Size(720, 373);
             this.Name = "ChangeUserForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Редактирование пользователя";

@@ -153,6 +153,8 @@
             this.Controls.Add(this.label7);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(465, 567);
+            this.MinimumSize = new System.Drawing.Size(465, 567);
             this.Name = "RecoveryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Восстановление доступа";

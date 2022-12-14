@@ -18,6 +18,7 @@ namespace SemaAndCo.Presenter
 {
     class RegistrationPresenter
     {
+        Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
         Core context = new Core(Core.StrConnection());
         IRegistrationView view;
         SendMail sendMail;
@@ -52,7 +53,6 @@ namespace SemaAndCo.Presenter
         {
             try
             {
-                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
                 Match match = regex.Match(email);
                 var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
                 if (!String.IsNullOrWhiteSpace(login) && login.Length >= 5 && login.Length <= 30 && !String.IsNullOrWhiteSpace(password) && password.Length >= 5 && password.Length <= 30)
@@ -116,7 +116,6 @@ namespace SemaAndCo.Presenter
         {
             try
             {
-                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
                 Match match = regex.Match(email);
                 var resultLog = context.semaandcouser.FirstOrDefault(u => u.userid == login);
                 if (login != "" && login.Length >= 5 && login.Length <= 30 && password.Length >= 5 && password.Length <= 30)
