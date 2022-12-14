@@ -209,5 +209,15 @@ namespace SemaAndCo.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] Руководство_пользователя {
+            get {
+                object obj = ResourceManager.GetObject("Руководство_пользователя", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
