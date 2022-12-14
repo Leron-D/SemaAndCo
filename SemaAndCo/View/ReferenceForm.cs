@@ -17,7 +17,7 @@ namespace SemaAndCo.View
         public ReferenceForm()
         {
             InitializeComponent();
-            referenceWebBrowser.Navigate(Directory.GetCurrentDirectory() + @"\Руководство пользователя.html");
+            referenceWebBrowser.Navigate(Directory.GetCurrentDirectory() + @"\Reference.html");
         }
     }
 }
