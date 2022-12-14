@@ -49,6 +49,7 @@
             this.Controls.Add(this.referenceWebBrowser);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ReferenceForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Справка о программе";
             this.ResumeLayout(false);
 
