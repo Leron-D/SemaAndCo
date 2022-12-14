@@ -42,9 +42,9 @@ namespace SemaAndCo.Supporting
                 smtp.Credentials = new NetworkCredential("sememshot2@yandex.ru", "Mamo4ka228");
                 smtp.Send(m);
                 if(modif)
-                    MessageBox.Show("Письмо с восстановлением пароля отправлено на ваш email. Проверьте почту.");
+                    MessageBox.Show("Письмо с восстановлением пароля отправлено на ваш email. Проверьте почту.", "Инфоррмация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
-                    MessageBox.Show("Письмо с подтверждением пароля отправлено на ваш email. Проверьте почту.");
+                    MessageBox.Show("Письмо с кодом подтверждением отправлено на ваш email. Проверьте почту.", "Инфоррмация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Properties.Settings.Default.code = code;
                 Properties.Settings.Default.Save();
                 success = true;
