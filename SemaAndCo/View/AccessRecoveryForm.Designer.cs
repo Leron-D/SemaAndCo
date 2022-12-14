@@ -144,9 +144,9 @@
             // 
             this.introPictureBox.Enabled = false;
             this.introPictureBox.Image = global::SemaAndCo.Properties.Resources.video__1_;
-            this.introPictureBox.Location = new System.Drawing.Point(427, 4);
+            this.introPictureBox.Location = new System.Drawing.Point(441, 4);
             this.introPictureBox.Name = "introPictureBox";
-            this.introPictureBox.Size = new System.Drawing.Size(61, 50);
+            this.introPictureBox.Size = new System.Drawing.Size(47, 50);
             this.introPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.introPictureBox.TabIndex = 82;
             this.introPictureBox.TabStop = false;
@@ -184,7 +184,7 @@
             this.saveNewPasswordTextBox.FlatAppearance.BorderSize = 0;
             this.saveNewPasswordTextBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveNewPasswordTextBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.saveNewPasswordTextBox.Location = new System.Drawing.Point(98, 149);
+            this.saveNewPasswordTextBox.Location = new System.Drawing.Point(92, 157);
             this.saveNewPasswordTextBox.Margin = new System.Windows.Forms.Padding(5);
             this.saveNewPasswordTextBox.Name = "saveNewPasswordTextBox";
             this.saveNewPasswordTextBox.Size = new System.Drawing.Size(292, 71);
@@ -197,7 +197,7 @@
             // 
             this.passwordHeaderLabel.AutoSize = true;
             this.passwordHeaderLabel.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.passwordHeaderLabel.Location = new System.Drawing.Point(137, 15);
+            this.passwordHeaderLabel.Location = new System.Drawing.Point(131, 15);
             this.passwordHeaderLabel.Margin = new System.Windows.Forms.Padding(13, 0, 13, 0);
             this.passwordHeaderLabel.Name = "passwordHeaderLabel";
             this.passwordHeaderLabel.Size = new System.Drawing.Size(217, 39);

@@ -737,19 +737,18 @@ namespace SemaAndCo.View
         {
             try
             {
-                IntroForm introForm = new IntroForm();
-                introForm.Show();
+                pictureBox.Visible = true;
                 await CheckConnection();
                 if (!connection)
                 {
-                    introForm.Close();
+                    pictureBox.Visible = false;
                     selectCloudStorage = true;
                     localRadioButton.Checked = true;
                     LoadData();
                 }
                 else
                 {
-                    introForm.Close();
+                    pictureBox.Visible = false;
                     LoadData();
                     ChangeEnabledButtons();
                 }
