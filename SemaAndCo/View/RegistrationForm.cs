@@ -18,6 +18,7 @@ namespace SemaAndCo.View
     public partial class RegistrationForm : Form, IRegistrationView
     {
         RegistrationPresenter presenter;
+        ReferenceForm referenceForm = new ReferenceForm();
         public RegistrationForm()
         {
             IntroForm form = new IntroForm(533);
@@ -163,9 +164,11 @@ namespace SemaAndCo.View
         }
 
         private void RegistrationForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
+        {                
+            referenceForm.Close();
             if (!Core.CheckAddingUserVariability())
             {
+
                 Hide();
                 AuthorizationForm authorizationForm = new AuthorizationForm();
                 authorizationForm.ShowDialog();
@@ -206,9 +209,8 @@ namespace SemaAndCo.View
         private void ReferenceButton_Click(object sender, EventArgs e)
         {
             referenceButton.Enabled = registrationButton.Enabled = false;
-            ReferenceForm form = new ReferenceForm();
-            form.FormClosed += ReferenceForm_Closed;
-            form.Show();
+            referenceForm.FormClosed += ReferenceForm_Closed;
+            referenceForm.Show();
         }
         private void ReferenceForm_Closed(object sender, FormClosedEventArgs e)
         {

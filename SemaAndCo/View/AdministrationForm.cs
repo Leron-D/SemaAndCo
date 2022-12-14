@@ -22,6 +22,7 @@ namespace SemaAndCo.View
         int currentPage = 1;
         AdministrationPresenter presenter;
         SendMail sendMail = new SendMail();
+        ReferenceForm referenceForm = new ReferenceForm();
 
         public AdministrationForm()
         {
@@ -327,13 +328,17 @@ namespace SemaAndCo.View
         private void ReferenceButton_Click(object sender, EventArgs e)
         {
             referenceButton.Enabled = addButton.Enabled = changeButton.Enabled = deleteButton.Enabled = false;
-            ReferenceForm form = new ReferenceForm();
-            form.FormClosed += ReferenceForm_Closed;
-            form.Show();
+            referenceForm.FormClosed += ReferenceForm_Closed;
+            referenceForm.Show();
         }
         private void ReferenceForm_Closed(object sender, FormClosedEventArgs e)
         {
             referenceButton.Enabled = addButton.Enabled = changeButton.Enabled = deleteButton.Enabled = false;
+        }
+
+        private void AdministrationForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            referenceForm.Close();
         }
     }
 }

@@ -25,6 +25,7 @@ namespace SemaAndCo.View
         Core context = new Core(Core.StrConnection());
         SendMail sendMail = new SendMail();
         FtpUser.semaandcouser user = new FtpUser.semaandcouser();
+        ReferenceForm referenceForm = new ReferenceForm();
         public ChangeUserForm(string userid)
         {
             InitializeComponent();
@@ -41,8 +42,10 @@ namespace SemaAndCo.View
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
-        {
+        {           
+            referenceForm.Close();
             SaveChangesMethod();
+
         }
 
         private void SendMessageToUser(string password)
@@ -148,9 +151,8 @@ namespace SemaAndCo.View
         private void ReferenceButton_Click(object sender, EventArgs e)
         {
             referenceButton.Enabled = saveButton.Enabled = false;
-            ReferenceForm form = new ReferenceForm();
-            form.FormClosed += ReferenceForm_Closed;
-            form.Show();
+            referenceForm.FormClosed += ReferenceForm_Closed;
+            referenceForm.Show();
         }
         private void ReferenceForm_Closed(object sender, FormClosedEventArgs e)
         {

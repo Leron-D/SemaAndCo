@@ -24,6 +24,7 @@ namespace SemaAndCo
     {
         LoginPresenter presenter;
         bool result;
+        ReferenceForm referenceForm = new ReferenceForm();
 
         public AuthorizationForm()
         {
@@ -210,13 +211,17 @@ namespace SemaAndCo
         private void ReferenceButton_Click(object sender, EventArgs e)
         {
             referenceButton.Enabled = forgotPasswordLabel.Enabled = autoButton.Enabled = toRegistrationButton.Enabled = loginButton.Enabled = administrationButton.Enabled = savingPathButton.Enabled = false;
-            ReferenceForm form = new ReferenceForm();
-            form.FormClosed += ReferenceForm_Closed;
-            form.Show();
+            referenceForm.FormClosed += ReferenceForm_Closed;
+            referenceForm.Show();
         }
         private void ReferenceForm_Closed(object sender, FormClosedEventArgs e)
         {
             referenceButton.Enabled = forgotPasswordLabel.Enabled = autoButton.Enabled = toRegistrationButton.Enabled = loginButton.Enabled = administrationButton.Enabled = savingPathButton.Enabled = true;
+        }
+
+        private void AuthorizationForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            referenceForm.Close(); 
         }
     }
 }

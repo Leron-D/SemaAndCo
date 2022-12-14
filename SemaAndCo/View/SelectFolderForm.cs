@@ -17,6 +17,7 @@ namespace SemaAndCo.View
     public partial class SelectFolderForm : TemplateForm
     {
         string path;
+        ReferenceForm referenceForm = new ReferenceForm();
         public SelectFolderForm()
         {
             IntroForm form = new IntroForm(533);
@@ -29,6 +30,7 @@ namespace SemaAndCo.View
         private void SelectFolderForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Hide();
+            referenceForm.Close();
             AuthorizationForm form = new AuthorizationForm();
             form.ShowDialog();
         }
@@ -105,9 +107,8 @@ namespace SemaAndCo.View
         private void ReferenceButton_Click(object sender, EventArgs e)
         {
             referenceButton.Enabled = saveButton.Enabled = false;
-            ReferenceForm form = new ReferenceForm();
-            form.FormClosed += ReferenceForm_FormClosed;
-            form.Show();
+            referenceForm.FormClosed += ReferenceForm_FormClosed;
+            referenceForm.Show();
         }
 
         private void ReferenceForm_FormClosed(object sender, FormClosedEventArgs e)

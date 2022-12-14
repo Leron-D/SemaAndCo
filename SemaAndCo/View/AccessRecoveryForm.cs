@@ -21,6 +21,7 @@ namespace SemaAndCo.View
     {
         Core context = new Core(Core.StrConnection());
         List<FtpUser.semaandcouser> users;
+        ReferenceForm referenceForm = new ReferenceForm();
         public AccessRecoveryForm()
         {
             InitializeComponent();
@@ -185,6 +186,7 @@ namespace SemaAndCo.View
 
         private void AccessRecoveryForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            referenceForm.Close();
             if(Core.goAdministration)
             {
                 Hide();
@@ -239,9 +241,8 @@ namespace SemaAndCo.View
         private void ReferenceButton1_Click(object sender, EventArgs e)
         {
             referenceButton1.Enabled = enterButton.Enabled = false;
-            ReferenceForm form = new ReferenceForm();
-            form.FormClosed += ReferenceForm1_Closed;
-            form.Show();
+            referenceForm.FormClosed += ReferenceForm1_Closed;
+            referenceForm.Show();
         }
         private void ReferenceForm1_Closed(object sender, FormClosedEventArgs e)
         {
@@ -251,9 +252,8 @@ namespace SemaAndCo.View
         private void ReferenceButton2_Click(object sender, EventArgs e)
         {
             referenceButton1.Enabled = saveNewPasswordButton.Enabled = false;
-            ReferenceForm form = new ReferenceForm();
-            form.FormClosed += ReferenceForm2_Closed;
-            form.Show();
+            referenceForm.FormClosed += ReferenceForm2_Closed;
+            referenceForm.Show();
         }
         private void ReferenceForm2_Closed(object sender, FormClosedEventArgs e)
         {

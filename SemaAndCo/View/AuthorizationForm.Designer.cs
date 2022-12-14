@@ -266,6 +266,7 @@
             this.Name = "AuthorizationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Авторизация";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AuthorizationForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.introPictureBox)).EndInit();
             this.ResumeLayout(false);

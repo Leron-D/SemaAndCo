@@ -31,6 +31,7 @@ namespace SemaAndCo.View
         string autonomFilePath = Path.Combine(Properties.Settings.Default.savingPath, "autonom.zip");
         string ftpUrl = @"ftp://91.122.211.144:50021/";
         ToolTip toolTip = new ToolTip();
+        ReferenceForm referenceForm = new ReferenceForm();
         public MainForm()
         {
             InitializeComponent();
@@ -762,6 +763,7 @@ namespace SemaAndCo.View
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             LocalUser.Automatic = false;
+            referenceForm.Close();
         }
 
         private async void timer_Tick(object sender, EventArgs e)
@@ -799,9 +801,8 @@ namespace SemaAndCo.View
         private void ReferenceButton_Click(object sender, EventArgs e)
         {
             referenceButton.Enabled = exitButton.Enabled = false;
-            ReferenceForm form = new ReferenceForm();
-            form.FormClosed += ReferenceForm_Closed;
-            form.Show();
+            referenceForm.FormClosed += ReferenceForm_Closed;
+            referenceForm.Show();
         }
 
         private void ReferenceForm_Closed(object sender, FormClosedEventArgs e)

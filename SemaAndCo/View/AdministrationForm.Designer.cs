@@ -343,6 +343,7 @@
             this.Name = "AdministrationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Администрирование";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdministrationForm_FormClosed);
             this.SizeChanged += new System.EventHandler(this.AdministrationForm_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.usersGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentPageNumeric)).EndInit();
