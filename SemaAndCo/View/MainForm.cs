@@ -51,6 +51,8 @@ namespace SemaAndCo.View
                 {
                     CreateZip();
                 }
+                if (LocalUser.Automatic)
+                    connectionCheckLabel.Visible = false;
                 LoadData();
                 tool.SetToolTip(connectionCheckLabel, "Подключение к серверному хранилищу присутствует");
                 timer.Start();
@@ -443,6 +445,8 @@ namespace SemaAndCo.View
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
+            if (LocalUser.Automatic)
+                LocalUser.Automatic = false;
             Hide();
             AuthorizationForm form = new AuthorizationForm();
             form.ShowDialog();
@@ -733,7 +737,6 @@ namespace SemaAndCo.View
         {
             try
             {
-                //timer.Enabled = false;
                 IntroForm introForm = new IntroForm();
                 introForm.Show();
                 await CheckConnection();
@@ -743,7 +746,6 @@ namespace SemaAndCo.View
                     selectCloudStorage = true;
                     localRadioButton.Checked = true;
                     LoadData();
-                    //throw new Exception("Отсутствует соединение с сервером");
                 }
                 else
                 {
