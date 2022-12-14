@@ -329,7 +329,7 @@ namespace SemaAndCo.View
         {
             referenceButton.Enabled = addButton.Enabled = changeButton.Enabled = deleteButton.Enabled = false;
             referenceForm.FormClosed += ReferenceForm_Closed;
-            referenceForm.Show();
+            referenceForm.ShowDialog();
         }
         private void ReferenceForm_Closed(object sender, FormClosedEventArgs e)
         {

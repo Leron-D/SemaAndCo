@@ -253,7 +253,7 @@ namespace SemaAndCo.View
         {
             referenceButton1.Enabled = saveNewPasswordButton.Enabled = false;
             referenceForm.FormClosed += ReferenceForm2_Closed;
-            referenceForm.Show();
+            referenceForm.ShowDialog();
         }
         private void ReferenceForm2_Closed(object sender, FormClosedEventArgs e)
         {

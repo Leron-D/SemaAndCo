@@ -108,7 +108,7 @@ namespace SemaAndCo.View
         {
             referenceButton.Enabled = saveButton.Enabled = false;
             referenceForm.FormClosed += ReferenceForm_FormClosed;
-            referenceForm.Show();
+            referenceForm.ShowDialog();
         }
 
         private void ReferenceForm_FormClosed(object sender, FormClosedEventArgs e)

@@ -212,7 +212,7 @@ namespace SemaAndCo
         {
             referenceButton.Enabled = forgotPasswordLabel.Enabled = autoButton.Enabled = toRegistrationButton.Enabled = loginButton.Enabled = administrationButton.Enabled = savingPathButton.Enabled = false;
             referenceForm.FormClosed += ReferenceForm_Closed;
-            referenceForm.Show();
+            referenceForm.ShowDialog();
         }
         private void ReferenceForm_Closed(object sender, FormClosedEventArgs e)
         {

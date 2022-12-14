@@ -210,7 +210,7 @@ namespace SemaAndCo.View
         {
             referenceButton.Enabled = registrationButton.Enabled = false;
             referenceForm.FormClosed += ReferenceForm_Closed;
-            referenceForm.Show();
+            referenceForm.ShowDialog();
         }
         private void ReferenceForm_Closed(object sender, FormClosedEventArgs e)
         {
