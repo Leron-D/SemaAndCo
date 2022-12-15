@@ -116,7 +116,7 @@ namespace SemaAndCo
         {
             try
             {
-                administrationButton.Visible = false;
+                administrationButton.Visible = referenceButton.Visible = false;
                 introPictureBox.Dock = DockStyle.Fill;
                 introPictureBox.Enabled = true;
                 introPictureBox.Visible = true;

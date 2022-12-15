@@ -9,7 +9,9 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,6 +25,7 @@ namespace SemaAndCo.View
         AdministrationPresenter presenter;
         SendMail sendMail = new SendMail();
         ReferenceForm referenceForm = new ReferenceForm();
+        string ftpUrl = @"ftp://91.122.211.144:50021/";
 
         public AdministrationForm()
         {
@@ -35,6 +38,10 @@ namespace SemaAndCo.View
                 presenter.UsersLoad();
                 presenter.Navigation(pageSize, currentPage);
                 Properties.Settings.Default.adminIntro = true;
+                introPictureBox.Width = 236;
+                introPictureBox.Height = 255;
+                introPictureBox.Left = (ClientSize.Width - introPictureBox.Width) / 2;
+                introPictureBox.Top = (ClientSize.Height - introPictureBox.Height) / 2;
             }
             catch (Exception ex)
             {
@@ -254,31 +261,52 @@ namespace SemaAndCo.View
             addButton.Enabled = changeButton.Enabled = deleteButton.Enabled = false;
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private async void DeleteButton_Click(object sender, EventArgs e)
         {
-            DeleteUserMethod();
+            await DeleteUserMethod();
         }
 
-        private void DeleteUserMethod()
+        private async Task DeleteUserMethod()
         {
             try
-            {                
+            {               
+                string loginOfUser = "";  
                 var message = MessageBox.Show($"Удалить выбранного(-ых) пользователя(-ей)?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question);                
                 if (message == DialogResult.Yes)
                 {
-                    Core context = new Core(Core.StrConnection());
-                    string loginOfUser;                    
-                    FtpUser.semaandcouser user = new FtpUser.semaandcouser();
-                    for (int i = 0; i < usersGridView.SelectedRows.Count; i++)
+                    introPictureBox.Visible = true;
+                    await Task.Run(async () =>
                     {
-                        loginOfUser = usersGridView.SelectedRows[i].Cells[0].Value.ToString();
-                        user = context.semaandcouser.Where(u => u.userid == loginOfUser).FirstOrDefault();
-                        context.semaandcouser.Remove(user);
-                        context.SaveChanges();
-                        sendMail.EnterMailWithChangesOfUser(user.email, "Ваш аккаунт был удалён");
-                    }
+                        Core context = new Core(Core.StrConnection());
+                        FtpUser.semaandcouser user = new FtpUser.semaandcouser();
+                        for (int i = 0; i < usersGridView.SelectedRows.Count; i++)
+                        {
+                            Invoke((MethodInvoker)delegate { loginOfUser = usersGridView.SelectedRows[i].Cells[0].Value.ToString(); });
+                            string password = usersGridView.SelectedRows[i].Cells[3].Value.ToString();
+                            if (File.Exists(Path.Combine(Properties.Settings.Default.savingPath, $"{loginOfUser}.zip")))
+                                File.Delete(Path.Combine(Properties.Settings.Default.savingPath, $"{loginOfUser}.zip"));
+                            List<string> filesFromServer = FtpHelper.GetFilesList(ftpUrl, loginOfUser, password);
+                            if (filesFromServer != null)
+                            {
+                                foreach (string file in filesFromServer)
+                                {
+                                    string fileName = $"{ftpUrl}{file}";
+
+                                    if (await Task.Run(() => FtpHelper.DeleteFile(fileName, loginOfUser, password) == FtpStatusCode.ConnectionClosed))
+                                    {
+                                        throw new Exception("Отсутствует соединение с сервером");
+                                    }
+                                }
+                            }
+                            user = context.semaandcouser.Where(u => u.userid == loginOfUser).FirstOrDefault();
+                            context.semaandcouser.Remove(user);
+                            context.SaveChanges();
+                            sendMail.EnterMailWithChangesOfUser(user.email, "Ваш аккаунт был удалён");
+                        }
+                    });
                     MessageBox.Show($"Пользователь(-и) успешно удалён(-ены)", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     presenter.UsersLoad();
+                    introPictureBox.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -286,10 +314,12 @@ namespace SemaAndCo.View
                 if (ex.InnerException is MySqlException)
                 {
                     MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    introPictureBox.Visible = false;
                 }
                 else
                 {
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    introPictureBox.Visible = false;
                     Close();
                 }
             }

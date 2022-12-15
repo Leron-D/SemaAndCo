@@ -50,8 +50,10 @@
             this.deleteButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.referenceButton = new System.Windows.Forms.Button();
+            this.introPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.usersGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentPageNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.introPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // searchTextBox
@@ -284,7 +286,7 @@
             this.deleteButton.TabIndex = 4;
             this.deleteButton.Text = "Удалить";
             this.deleteButton.UseVisualStyleBackColor = false;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // addButton
             // 
@@ -308,7 +310,7 @@
             this.referenceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.referenceButton.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.referenceButton.Image = global::SemaAndCo.Properties.Resources.reference;
-            this.referenceButton.Location = new System.Drawing.Point(1029, 410);
+            this.referenceButton.Location = new System.Drawing.Point(1019, 404);
             this.referenceButton.Margin = new System.Windows.Forms.Padding(5);
             this.referenceButton.Name = "referenceButton";
             this.referenceButton.Size = new System.Drawing.Size(26, 33);
@@ -316,11 +318,23 @@
             this.referenceButton.UseVisualStyleBackColor = false;
             this.referenceButton.Click += new System.EventHandler(this.ReferenceButton_Click);
             // 
+            // introPictureBox
+            // 
+            this.introPictureBox.Image = global::SemaAndCo.Properties.Resources.video__1_;
+            this.introPictureBox.Location = new System.Drawing.Point(1001, 2);
+            this.introPictureBox.Name = "introPictureBox";
+            this.introPictureBox.Size = new System.Drawing.Size(44, 47);
+            this.introPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.introPictureBox.TabIndex = 34;
+            this.introPictureBox.TabStop = false;
+            this.introPictureBox.Visible = false;
+            // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 444);
+            this.Controls.Add(this.introPictureBox);
             this.Controls.Add(this.referenceButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.deleteButton);
@@ -347,6 +361,7 @@
             this.SizeChanged += new System.EventHandler(this.AdministrationForm_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.usersGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentPageNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.introPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -375,5 +390,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn passwordColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneColumn;
         private System.Windows.Forms.Button referenceButton;
+        private System.Windows.Forms.PictureBox introPictureBox;
     }
 }

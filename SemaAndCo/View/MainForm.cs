@@ -42,6 +42,8 @@ namespace SemaAndCo.View
         {
             try
             {
+                pictureBox.Left = (ClientSize.Width - pictureBox.Width) / 2;
+                pictureBox.Top = (ClientSize.Height - pictureBox.Height) / 2;
                 ToolTip tool = new ToolTip();
                 tool.SetToolTip(exitButton, "Выход из аккаунта");
                 if (CurrentUser.FtpUser == null)
@@ -808,6 +810,12 @@ namespace SemaAndCo.View
         private void ReferenceForm_Closed(object sender, FormClosedEventArgs e)
         {
             referenceButton.Enabled = exitButton.Enabled = true;
+        }
+
+        private void MainForm_SizeChanged(object sender, EventArgs e)
+        {
+            pictureBox.Left = (ClientSize.Width - pictureBox.Width) / 2;
+            pictureBox.Top = (ClientSize.Height - pictureBox.Height) / 2;
         }
     }
 }

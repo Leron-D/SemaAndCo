@@ -209,6 +209,7 @@
             // 
             // referenceButton
             // 
+            this.referenceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.referenceButton.BackColor = System.Drawing.Color.Transparent;
             this.referenceButton.FlatAppearance.BorderSize = 0;
             this.referenceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -274,6 +275,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главная";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
