@@ -30,7 +30,7 @@ namespace SemaAndCo.View
                 tabControl.SelectedTab = enterCodePage;
                 this.Text = "Доступ к администрированию";
                 passwordHeaderLabel.Text = "Пароль администратора";
-                passwordHeaderLabel.Location = new Point(80, 15);
+                passwordHeaderLabel.Location = new Point(75, 15);
                 saveNewPasswordButton.Text = "Проверить";
             }
             else

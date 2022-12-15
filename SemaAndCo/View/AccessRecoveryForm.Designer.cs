@@ -166,7 +166,7 @@
             this.referenceButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.referenceButton2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.referenceButton2.Image = global::SemaAndCo.Properties.Resources.reference;
-            this.referenceButton2.Location = new System.Drawing.Point(460, 200);
+            this.referenceButton2.Location = new System.Drawing.Point(460, 0);
             this.referenceButton2.Margin = new System.Windows.Forms.Padding(5);
             this.referenceButton2.Name = "referenceButton2";
             this.referenceButton2.Size = new System.Drawing.Size(26, 33);
@@ -178,7 +178,7 @@
             // 
             this.introPictureBox.Enabled = false;
             this.introPictureBox.Image = global::SemaAndCo.Properties.Resources.video__1_;
-            this.introPictureBox.Location = new System.Drawing.Point(441, 4);
+            this.introPictureBox.Location = new System.Drawing.Point(441, 185);
             this.introPictureBox.Name = "introPictureBox";
             this.introPictureBox.Size = new System.Drawing.Size(47, 50);
             this.introPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
