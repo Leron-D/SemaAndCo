@@ -305,12 +305,13 @@
             // 
             // referenceButton
             // 
+            this.referenceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.referenceButton.BackColor = System.Drawing.Color.Transparent;
             this.referenceButton.FlatAppearance.BorderSize = 0;
             this.referenceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.referenceButton.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.referenceButton.Image = global::SemaAndCo.Properties.Resources.reference;
-            this.referenceButton.Location = new System.Drawing.Point(1019, 408);
+            this.referenceButton.Location = new System.Drawing.Point(1019, 407);
             this.referenceButton.Margin = new System.Windows.Forms.Padding(5);
             this.referenceButton.Name = "referenceButton";
             this.referenceButton.Size = new System.Drawing.Size(26, 33);
@@ -321,7 +322,7 @@
             // introPictureBox
             // 
             this.introPictureBox.Image = global::SemaAndCo.Properties.Resources.video__1_;
-            this.introPictureBox.Location = new System.Drawing.Point(1001, 2);
+            this.introPictureBox.Location = new System.Drawing.Point(967, 2);
             this.introPictureBox.Name = "introPictureBox";
             this.introPictureBox.Size = new System.Drawing.Size(44, 47);
             this.introPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

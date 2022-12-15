@@ -19,6 +19,7 @@ namespace SemaAndCo.View
 {
     public partial class AccessRecoveryForm : TemplateForm
     {
+        bool checkLoad;
         Core context = new Core(Core.StrConnection());
         List<FtpUser.semaandcouser> users;
         ReferenceForm referenceForm = new ReferenceForm();
@@ -120,7 +121,7 @@ namespace SemaAndCo.View
             EnterPassword();
         }
 
-        private void EnterPassword()
+        private async void EnterPassword()
         {
             try
             {
@@ -138,23 +139,17 @@ namespace SemaAndCo.View
                     {
                         AdministrationForm form = new AdministrationForm();
                         form.FormClosed += Form_FormClosed;
-                        //introPictureBox.Dock = DockStyle.Fill;
-                        //introPictureBox.Enabled = true;
-                        //introPictureBox.Visible = true;
-                        if (!UsersLoad())
+                        await UsersLoad();
+                        if (!checkLoad)
                         {
                             MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         else
                         {
                             Core.access = true;
-                            //MessageBox.Show("Вы зашли как администратор", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Hide();
                             form.ShowDialog();
                         }
-                        //introPictureBox.Dock = DockStyle.None;
-                        //introPictureBox.Visible = false;
-                        //introPictureBox.Enabled = false;
                     }
                     else
                     {
@@ -174,16 +169,16 @@ namespace SemaAndCo.View
             Close();
         }
 
-        public bool UsersLoad()
+        public async Task UsersLoad()
         {
             try
             {
-                users = context.semaandcouser.AsNoTracking().ToList();
-                return true;
+                await Task.Run(()=>users = context.semaandcouser.AsNoTracking().ToList());
+                checkLoad = true;
             }
             catch (Exception)
             {
-                return false;
+                checkLoad = false;
             }
         }
 
