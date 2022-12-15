@@ -24,7 +24,7 @@ namespace SemaAndCo.Supporting
             {
                 success = false;
                 // отправитель - устанавливаем адрес и отображаемое в письме имя
-                MailAddress from = new MailAddress("sememshot2@yandex.ru", "СеменШот");
+                MailAddress from = new MailAddress("sememshot2@yandex.ru", "Администрация приложения SaC");
                 // кому отправляем
                 MailAddress to = new MailAddress(loginOrEmail);
                 // создаем объект сообщения
