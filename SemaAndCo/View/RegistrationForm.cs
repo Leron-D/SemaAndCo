@@ -47,6 +47,7 @@ namespace SemaAndCo.View
             try
             {
                 RegistrateMethod();
+                captcha.Renew();
             }
             catch (Exception ex)
             {
