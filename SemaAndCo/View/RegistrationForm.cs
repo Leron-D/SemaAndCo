@@ -38,6 +38,8 @@ namespace SemaAndCo.View
             }
             presenter = new RegistrationPresenter(this);
             captcha.Renew();
+            ToolTip tool = new ToolTip();
+            tool.SetToolTip(referenceButton, "О программе");
         }
 
         private void RegistrationButton_Click(object sender, EventArgs e)

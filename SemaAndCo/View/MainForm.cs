@@ -46,6 +46,7 @@ namespace SemaAndCo.View
                 pictureBox.Top = (ClientSize.Height - pictureBox.Height) / 2;
                 ToolTip tool = new ToolTip();
                 tool.SetToolTip(exitButton, "Выход из аккаунта");
+                tool.SetToolTip(referenceButton, "О программе");
                 if (CurrentUser.FtpUser == null)
                     serverRadioButton.Visible = false;
                 else

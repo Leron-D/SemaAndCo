@@ -25,6 +25,8 @@ namespace SemaAndCo.View
             InitializeComponent();
             folderTextBox.Text = Properties.Settings.Default.savingPath;
             path = Properties.Settings.Default.savingPath;
+            ToolTip tool = new ToolTip();
+            tool.SetToolTip(referenceButton, "О программе");
         }
 
         private void SelectFolderForm_FormClosed(object sender, FormClosedEventArgs e)

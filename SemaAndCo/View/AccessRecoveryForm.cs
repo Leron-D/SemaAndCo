@@ -50,6 +50,9 @@ namespace SemaAndCo.View
             tabControl.ItemSize = new Size(0, 1);
             tabControl.SizeMode = TabSizeMode.Fixed;
             passwordTextBox.UseSystemPasswordChar = true;
+            ToolTip tool = new ToolTip();
+            tool.SetToolTip(referenceButton1, "О программе");
+            tool.SetToolTip(referenceButton2, "О программе");
         }
 
         private void EnterButton_Click(object sender, EventArgs e)

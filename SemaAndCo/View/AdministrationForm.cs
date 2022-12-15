@@ -42,6 +42,8 @@ namespace SemaAndCo.View
                 introPictureBox.Height = 255;
                 introPictureBox.Left = (ClientSize.Width - introPictureBox.Width) / 2;
                 introPictureBox.Top = (ClientSize.Height - introPictureBox.Height) / 2;
+                ToolTip tool = new ToolTip();
+                tool.SetToolTip(referenceButton, "О программе");
             }
             catch (Exception ex)
             {

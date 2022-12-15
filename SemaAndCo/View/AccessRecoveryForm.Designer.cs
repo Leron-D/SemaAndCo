@@ -134,7 +134,7 @@
             this.referenceButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.referenceButton1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.referenceButton1.Image = global::SemaAndCo.Properties.Resources.reference;
-            this.referenceButton1.Location = new System.Drawing.Point(465, 205);
+            this.referenceButton1.Location = new System.Drawing.Point(465, 0);
             this.referenceButton1.Margin = new System.Windows.Forms.Padding(5);
             this.referenceButton1.Name = "referenceButton1";
             this.referenceButton1.Size = new System.Drawing.Size(26, 33);

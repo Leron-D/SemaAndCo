@@ -30,6 +30,8 @@ namespace SemaAndCo.View
         {
             InitializeComponent();
             LoadForm(userid);
+            ToolTip tool = new ToolTip();
+            tool.SetToolTip(referenceButton, "О программе");
         }
 
         private void LoadForm(string userid)

@@ -47,6 +47,7 @@ namespace SemaAndCo
             ToolTip tool = new ToolTip();
             tool.SetToolTip(savingPathButton, "Выбор папки для сохранения");
             tool.SetToolTip(administrationButton, "Администрирование");
+            tool.SetToolTip(referenceButton, "О программе");
             CurrentUser.FtpUser = null;
         }
 

@@ -267,7 +267,7 @@
             // 
             this.resultsAmountLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.resultsAmountLabel.AutoSize = true;
-            this.resultsAmountLabel.Location = new System.Drawing.Point(503, 410);
+            this.resultsAmountLabel.Location = new System.Drawing.Point(503, 412);
             this.resultsAmountLabel.Name = "resultsAmountLabel";
             this.resultsAmountLabel.Size = new System.Drawing.Size(20, 23);
             this.resultsAmountLabel.TabIndex = 14;
@@ -310,7 +310,7 @@
             this.referenceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.referenceButton.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.referenceButton.Image = global::SemaAndCo.Properties.Resources.reference;
-            this.referenceButton.Location = new System.Drawing.Point(1019, 404);
+            this.referenceButton.Location = new System.Drawing.Point(1019, 408);
             this.referenceButton.Margin = new System.Windows.Forms.Padding(5);
             this.referenceButton.Name = "referenceButton";
             this.referenceButton.Size = new System.Drawing.Size(26, 33);

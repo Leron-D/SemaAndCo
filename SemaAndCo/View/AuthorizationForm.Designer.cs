@@ -197,7 +197,7 @@
             // 
             this.introPictureBox.Enabled = false;
             this.introPictureBox.Image = global::SemaAndCo.Properties.Resources.video__1_;
-            this.introPictureBox.Location = new System.Drawing.Point(325, 3);
+            this.introPictureBox.Location = new System.Drawing.Point(334, 465);
             this.introPictureBox.Name = "introPictureBox";
             this.introPictureBox.Size = new System.Drawing.Size(50, 45);
             this.introPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -228,7 +228,7 @@
             this.referenceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.referenceButton.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.referenceButton.Image = global::SemaAndCo.Properties.Resources.reference;
-            this.referenceButton.Location = new System.Drawing.Point(360, 486);
+            this.referenceButton.Location = new System.Drawing.Point(358, 3);
             this.referenceButton.Margin = new System.Windows.Forms.Padding(5);
             this.referenceButton.Name = "referenceButton";
             this.referenceButton.Size = new System.Drawing.Size(26, 33);

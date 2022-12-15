@@ -33,6 +33,8 @@ namespace SemaAndCo.View
             presenter = new RecoveryPresenter(this);
             sendMail = new SendMail();
             captcha.Renew();
+            ToolTip tool = new ToolTip();
+            tool.SetToolTip(referenceButton, "О программе");
         }
 
         private void LoginOrEmailTextBox_Validating(object sender, CancelEventArgs e)
