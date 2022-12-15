@@ -122,6 +122,11 @@ namespace SemaAndCo.View
 
         void CreateZip()
         {
+            if(String.IsNullOrWhiteSpace(Properties.Settings.Default.savingPath))
+            {
+                Properties.Settings.Default.savingPath = Directory.GetCurrentDirectory();
+                Properties.Settings.Default.Save();
+            }
             if (!System.IO.File.Exists(Path.Combine(Properties.Settings.Default.savingPath, $"{CurrentUser.FtpUser.userid}.zip")))
             {
                 DotNetZipHelper.CreateArchive($"{CurrentUser.FtpUser.userid}.zip", CurrentUser.FtpUser.userid.EncryptString());

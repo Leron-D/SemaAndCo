@@ -97,7 +97,6 @@ namespace SemaAndCo.View
         private void OpenAuthorizationFormMethod()
         {
             MessageBox.Show("Путь успешно сохранен", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Hide();
             Close();
         }
 
