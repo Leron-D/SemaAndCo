@@ -153,6 +153,7 @@
             this.imageList.Images.SetKeyName(5, "Archive.png");
             this.imageList.Images.SetKeyName(6, "File.png");
             this.imageList.Images.SetKeyName(7, "pdf.png");
+            this.imageList.Images.SetKeyName(8, "html.png");
             // 
             // renameTextBox
             // 

@@ -102,6 +102,7 @@ namespace SemaAndCo.View
                 case ".jpeg":
                 case ".tiff":
                 case ".gif":
+                case ".ico":
                     return 1;
                 case ".exe":
                 case ".msi":
@@ -115,6 +116,10 @@ namespace SemaAndCo.View
                 case ".rar":
                 case ".7z":
                     return 5;
+                case ".pdf":
+                    return 7;
+                case ".html":
+                    return 8;
                 default:
                     return 6;
             }
