@@ -79,11 +79,11 @@ namespace SemaAndCo.View
                     }
                 }
                 else
-                    throw new Exception();
+                    throw new Exception("Код введён неверно");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

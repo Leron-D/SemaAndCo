@@ -70,11 +70,11 @@ namespace SemaAndCo.Supporting
                 FtpWebResponse response = (FtpWebResponse)request.GetResponse();
                 string size = "";
                 if (response.ContentLength < 1024)
-                    size = $"Размер файла: {response.ContentLength} Б";
+                    size = $"{response.ContentLength} Б";
                 if (response.ContentLength >= 1024)
-                    size = $"Размер файла: {Math.Round(response.ContentLength / 1024d)} КБ";
+                    size = $"{Math.Round(response.ContentLength / 1024d)} КБ";
                 if ((response.ContentLength / 1024) > 1024)
-                    size = $"Размер файла: {Math.Round(response.ContentLength / 1024 / 1024d)} МБ";
+                    size = $"{Math.Round(response.ContentLength / 1024 / 1024d)} МБ";
                 message = $"Название файла: {filename}\nРазмер файла: {size}\n";
                 GetFileLastModificated(address, login, password);
                 MessageBox.Show(message, "Информация о файле", MessageBoxButtons.OK, MessageBoxIcon.Information);
