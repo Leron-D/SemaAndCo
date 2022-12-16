@@ -30,11 +30,6 @@
         {
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.usersGridView = new System.Windows.Forms.DataGridView();
-            this.loginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.passwordColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.changeButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.currentPageNumeric = new System.Windows.Forms.NumericUpDown();
@@ -51,6 +46,10 @@
             this.addButton = new System.Windows.Forms.Button();
             this.referenceButton = new System.Windows.Forms.Button();
             this.introPictureBox = new System.Windows.Forms.PictureBox();
+            this.loginColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.usersGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.currentPageNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.introPictureBox)).BeginInit();
@@ -79,7 +78,6 @@
             this.loginColumn,
             this.emailColumn,
             this.nameColumn,
-            this.passwordColumn,
             this.phoneColumn});
             this.usersGridView.Location = new System.Drawing.Point(12, 55);
             this.usersGridView.Name = "usersGridView";
@@ -90,41 +88,6 @@
             this.usersGridView.Size = new System.Drawing.Size(1033, 347);
             this.usersGridView.TabIndex = 12;
             this.usersGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.UsersGridView_CellMouseClick);
-            // 
-            // loginColumn
-            // 
-            this.loginColumn.DataPropertyName = "userid";
-            this.loginColumn.HeaderText = "Логин";
-            this.loginColumn.Name = "loginColumn";
-            this.loginColumn.ReadOnly = true;
-            // 
-            // emailColumn
-            // 
-            this.emailColumn.DataPropertyName = "email";
-            this.emailColumn.HeaderText = "E-mail";
-            this.emailColumn.Name = "emailColumn";
-            this.emailColumn.ReadOnly = true;
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.DataPropertyName = "username";
-            this.nameColumn.HeaderText = "Имя";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            // 
-            // passwordColumn
-            // 
-            this.passwordColumn.DataPropertyName = "passwd";
-            this.passwordColumn.HeaderText = "Пароль";
-            this.passwordColumn.Name = "passwordColumn";
-            this.passwordColumn.ReadOnly = true;
-            // 
-            // phoneColumn
-            // 
-            this.phoneColumn.DataPropertyName = "phone";
-            this.phoneColumn.HeaderText = "Телефон";
-            this.phoneColumn.Name = "phoneColumn";
-            this.phoneColumn.ReadOnly = true;
             // 
             // changeButton
             // 
@@ -330,6 +293,34 @@
             this.introPictureBox.TabStop = false;
             this.introPictureBox.Visible = false;
             // 
+            // loginColumn
+            // 
+            this.loginColumn.DataPropertyName = "userid";
+            this.loginColumn.HeaderText = "Логин";
+            this.loginColumn.Name = "loginColumn";
+            this.loginColumn.ReadOnly = true;
+            // 
+            // emailColumn
+            // 
+            this.emailColumn.DataPropertyName = "email";
+            this.emailColumn.HeaderText = "E-mail";
+            this.emailColumn.Name = "emailColumn";
+            this.emailColumn.ReadOnly = true;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.DataPropertyName = "username";
+            this.nameColumn.HeaderText = "Имя";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            // 
+            // phoneColumn
+            // 
+            this.phoneColumn.DataPropertyName = "phone";
+            this.phoneColumn.HeaderText = "Телефон";
+            this.phoneColumn.Name = "phoneColumn";
+            this.phoneColumn.ReadOnly = true;
+            // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
@@ -385,12 +376,11 @@
         private System.Windows.Forms.Label resultsAmountLabel;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button referenceButton;
+        private System.Windows.Forms.PictureBox introPictureBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn loginColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn emailColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn passwordColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneColumn;
-        private System.Windows.Forms.Button referenceButton;
-        private System.Windows.Forms.PictureBox introPictureBox;
     }
 }
