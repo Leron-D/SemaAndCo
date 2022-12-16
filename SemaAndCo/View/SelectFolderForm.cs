@@ -123,7 +123,7 @@ namespace SemaAndCo.View
             Size size = TextRenderer.MeasureText(folderTextBox.Text, folderTextBox.Font);
             folderTextBox.Width = size.Width;
             choosePathButton.Left = folderTextBox.Location.X + folderTextBox.Width + 5;
-            Width = folderTextBox.Location.X + folderTextBox.Width + 90;
+            Width = folderTextBox.Location.X + folderTextBox.Width + 80;
         }
 
         private void SelectFolderForm_SizeChanged(object sender, EventArgs e)

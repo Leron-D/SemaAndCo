@@ -42,8 +42,8 @@
             this.folderTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.folderTextBox.Location = new System.Drawing.Point(14, 52);
             this.folderTextBox.Margin = new System.Windows.Forms.Padding(5);
-            this.folderTextBox.MaximumSize = new System.Drawing.Size(1200, 35);
-            this.folderTextBox.MaxLength = 150;
+            this.folderTextBox.MaximumSize = new System.Drawing.Size(1700, 35);
+            this.folderTextBox.MaxLength = 300;
             this.folderTextBox.MinimumSize = new System.Drawing.Size(454, 35);
             this.folderTextBox.Name = "folderTextBox";
             this.folderTextBox.Size = new System.Drawing.Size(454, 35);
@@ -120,7 +120,7 @@
             this.Controls.Add(this.label2);
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1300, 210);
+            this.MaximumSize = new System.Drawing.Size(1800, 210);
             this.MinimumSize = new System.Drawing.Size(541, 210);
             this.Name = "SelectFolderForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
