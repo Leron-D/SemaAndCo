@@ -37,13 +37,18 @@
             // 
             // folderTextBox
             // 
+            this.folderTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.folderTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.folderTextBox.Location = new System.Drawing.Point(14, 52);
             this.folderTextBox.Margin = new System.Windows.Forms.Padding(5);
-            this.folderTextBox.MaxLength = 30;
+            this.folderTextBox.MaximumSize = new System.Drawing.Size(1200, 35);
+            this.folderTextBox.MaxLength = 150;
+            this.folderTextBox.MinimumSize = new System.Drawing.Size(454, 35);
             this.folderTextBox.Name = "folderTextBox";
             this.folderTextBox.Size = new System.Drawing.Size(454, 35);
             this.folderTextBox.TabIndex = 1;
+            this.folderTextBox.TextChanged += new System.EventHandler(this.FolderTextBox_TextChanged);
             // 
             // label2
             // 
@@ -58,6 +63,7 @@
             // 
             // saveButton
             // 
+            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.saveButton.BackColor = System.Drawing.Color.Yellow;
             this.saveButton.FlatAppearance.BorderSize = 0;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -73,6 +79,7 @@
             // 
             // choosePathButton
             // 
+            this.choosePathButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.choosePathButton.BackColor = System.Drawing.Color.Transparent;
             this.choosePathButton.FlatAppearance.BorderSize = 0;
             this.choosePathButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -86,6 +93,7 @@
             // 
             // referenceButton
             // 
+            this.referenceButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.referenceButton.BackColor = System.Drawing.Color.Transparent;
             this.referenceButton.FlatAppearance.BorderSize = 0;
             this.referenceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -103,7 +111,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(525, 171);
             this.Controls.Add(this.referenceButton);
@@ -113,12 +120,14 @@
             this.Controls.Add(this.label2);
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(541, 210);
+            this.MaximumSize = new System.Drawing.Size(1300, 210);
             this.MinimumSize = new System.Drawing.Size(541, 210);
             this.Name = "SelectFolderForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Выбор пути сохранения";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SelectFolderForm_FormClosed);
+            this.SizeChanged += new System.EventHandler(this.SelectFolderForm_SizeChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

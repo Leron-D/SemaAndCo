@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace SemaAndCo.View
@@ -25,7 +26,7 @@ namespace SemaAndCo.View
             InitializeComponent();
             folderTextBox.Text = Properties.Settings.Default.savingPath;
             path = Properties.Settings.Default.savingPath;
-            ToolTip tool = new ToolTip();
+            System.Windows.Forms.ToolTip tool = new System.Windows.Forms.ToolTip();
             tool.SetToolTip(referenceButton, "О программе");
         }
 
@@ -115,6 +116,20 @@ namespace SemaAndCo.View
         private void ReferenceForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             referenceButton.Enabled = saveButton.Enabled = true;
+        }
+
+        private void FolderTextBox_TextChanged(object sender, EventArgs e)
+        {
+            Size size = TextRenderer.MeasureText(folderTextBox.Text, folderTextBox.Font);
+            folderTextBox.Width = size.Width;
+            choosePathButton.Left = folderTextBox.Location.X + folderTextBox.Width + 5;
+            Width = folderTextBox.Location.X + folderTextBox.Width + 90;
+        }
+
+        private void SelectFolderForm_SizeChanged(object sender, EventArgs e)
+        {
+            choosePathButton.Left = folderTextBox.Location.X + folderTextBox.Width + 5;
+            saveButton.Left = (ClientSize.Width - saveButton.Width) / 2;
         }
     }
 }
