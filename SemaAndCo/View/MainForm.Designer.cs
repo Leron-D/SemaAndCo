@@ -271,7 +271,7 @@
             this.Controls.Add(this.listView);
             this.Controls.Add(this.uploadButton);
             this.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
-            this.MinimumSize = new System.Drawing.Size(930, 260);
+            this.MinimumSize = new System.Drawing.Size(978, 260);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главная";
