@@ -501,7 +501,7 @@ namespace SemaAndCo.View
                 renameTextBox.Text = saveText.Remove(saveText.Length - extension.Length - 1);
                 renameTextBox.Location = new Point(x, y);
                 renameTextBox.Focus();
-                renameButton.Enabled = deleteButton.Enabled = infoButton.Enabled = listView.Enabled = false;
+                renameButton.Enabled = deleteButton.Enabled = infoButton.Enabled = listView.Enabled = localRadioButton.Enabled = serverRadioButton.Enabled = uploadButton.Enabled = downloadButton.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -554,9 +554,15 @@ namespace SemaAndCo.View
                 try
                 {
                     if (!LocalUser.Automatic)
+                    {
                         await RenameMethodAsync(renameTextBox.Text, extension, $"{CurrentUser.FtpUser.userid}.zip");
+                        localRadioButton.Enabled = serverRadioButton.Enabled = uploadButton.Enabled = downloadButton.Enabled = true;
+                    }
                     else
+                    {
                         await RenameMethodAsync(renameTextBox.Text, extension, "autonom.zip");
+                        localRadioButton.Enabled = serverRadioButton.Enabled = uploadButton.Enabled = downloadButton.Enabled = true;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -564,10 +570,13 @@ namespace SemaAndCo.View
                     {
                         MessageBox.Show("Отсутствует соединение с сервером", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         renameTextBox.Visible = false;
-                        localRadioButton.Checked = true;
+                        localRadioButton.Checked = localRadioButton.Enabled = serverRadioButton.Enabled = uploadButton.Enabled = downloadButton.Enabled = true;
                     }
                     else
+                    {
                         MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        localRadioButton.Enabled = serverRadioButton.Enabled = uploadButton.Enabled = downloadButton.Enabled = true;
+                    }
                 }
             }
         }
